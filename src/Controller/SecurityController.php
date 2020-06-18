@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Service\CheckTime;
 use App\Service\Mailer;
+use App\Service\Validation;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -12,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
@@ -92,19 +94,54 @@ class SecurityController extends AbstractController
         }
 
         // Update User with code password and time
-        $em->persist($user);
-        $em->flush();
+        $em->persist($user); $em->flush();
 
         return new JsonResponse(['code' => 1, 'message' => 'Un lien de réinitialisation a été envoyé.']);
     }
-
     
     /**
      * @Route("/reinitialisation-mot-de-passe/{token}-{code}", name="app_password_reinit")
      */
-    public function reinit(Request $request, $token, $code)
+    public function reinit(Request $request, $token, $code, CheckTime $checkTime, UserPasswordEncoderInterface $passwordEncoder, Validation $validation)
     {
+        $em = $this->getDoctrine()->getManager();
+        /** @var User $user */
+        $user = $em->getRepository(User::class)->findOneBy(array('token' => $token));
+        if(!$user){ return $this->redirectToRoute('app_login'); }
 
+        // If lien n'est plus valide a cause du temps expiré
+        if($checkTime->moreThirtyMinutes($user->getPasswordTime())){
+            $user->setPasswordCode(null);
+            $user->setPasswordTime(null);
+
+            $em->persist($user);$em->flush();
+            return new JsonResponse(['code' => 0, 'error' => 'Le lien a expiré. Veuillez recommencer la procédure.']);
+        }
+        // If code invalide
+        if($user->getPasswordCode() != $code){
+            return new JsonResponse(['code' => 0, 'error' => 'Le lien n\'est pas valide ou a expiré.']);
+        }
+
+        // Form submitted
+        if($request->isMethod('POST')){
+            $data = json_decode($request->getContent());
+            $password = $data->password->value;
+            $password2 = $data->password2->value;
+
+            // validate password not empty and equal
+            $resultat = $validation->validatePassword($password, $password2);            
+            if($resultat != 1){
+                return new JsonResponse(['code' => 0, 'error' => $resultat]);
+            }
+
+            $user->setPasswordCode(null);
+            $user->setPasswordTime(null);
+            $user->setPassword($passwordEncoder->encodePassword($user, $password));
+            $em->persist($user); $em->flush();
+
+            $url = $this->generateUrl('app_login', array(), UrlGeneratorInterface::ABSOLUTE_URL);
+            return new JsonResponse(['code' => 1, 'message' => 'Le mot de passe a été réinitialisé. <br> La page va se rafraichir automatiquement.', 'url' => $url]);
+        }
         return $this->render('root/app/pages/security/reinit.html.twig');
     }
 }
