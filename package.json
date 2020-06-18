@@ -1,5 +1,6 @@
 {
     "devDependencies": {
+        "@babel/preset-react": "^7.10.1",
         "@symfony/webpack-encore": "^0.30.0",
         "autoprefixer": "^9.8.0",
         "core-js": "^3.0.0",
@@ -24,6 +25,9 @@
         "not dead"
     ],
     "dependencies": {
-        "normalize.css": "^8.0.1"
+        "normalize.css": "^8.0.1",
+        "prop-types": "^15.7.2",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1"
     }
 }

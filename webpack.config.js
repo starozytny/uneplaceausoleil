@@ -41,6 +41,7 @@ Encore
      *
      */
     .addEntry('default_app', './assets/themes/default/front/js/default.jsx')
+    .addEntry('default_homepage', './assets/themes/default/front/js/pages/homepage.jsx')
     .addEntry('default_security', './assets/themes/default/front/js/pages/security.jsx')
 
     .addEntry('default_admin', './assets/themes/default/back/js/default.jsx')
@@ -71,6 +72,9 @@ Encore
     // enables Sass/SCSS support
     .enableSassLoader()
 
+    // enables React
+    .enableReactPreset()
+
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
 
@@ -82,7 +86,7 @@ Encore
     //.autoProvidejQuery()
 
     // uncomment if you use API Platform Admin (composer req api-admin)
-    //.enableReactPreset()
+    
     //.addEntry('admin', './assets/js/admin.js')
 ;
 
