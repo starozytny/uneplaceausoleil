@@ -9,6 +9,7 @@ class FormLost extends React.Component {
 
         this.state = {
             success: '',
+            error: '',
             email: {
                 value: '',
                 error: ''
@@ -41,7 +42,8 @@ class FormLost extends React.Component {
 
             axios.post(this.props.url, this.state)
             .then(function (response) {
-                if(response.data.code === 1){
+                let code = response.data.code;
+                if(code === 1){
                     self.setState({ 
                         success: response.data.message,
                         email : {value: ''}
@@ -59,6 +61,7 @@ class FormLost extends React.Component {
         return (
             <form onSubmit={this.handleSubmit}>
                 {this.state.success ? <div className="alert-success">{this.state.success}</div> : null}
+                {this.state.error ? <div className="alert-error">{this.state.error}</div> : null}
                 <div>
                     <Input value={this.state.email.value} name="email" id="email" onChange={this.handleChange} error={this.state.email.error}>Email</Input>
                 </div>

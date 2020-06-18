@@ -3,12 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Service\Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -42,7 +41,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/lost", name="app_password_lost", methods="POST")
      */
-    public function lost(Request $request, MailerInterface $mailer)
+    public function lost(Request $request, Mailer $mailer)
     {
         $em = $this->getDoctrine()->getManager();
         $data = json_decode($request->getContent());
@@ -54,19 +53,24 @@ class SecurityController extends AbstractController
                 'code' => 0,
                 'errors' => [
                     'success' => '', 
+                    'error' => '', 
                     'email' => ['value' => $data->email->value, 'error' => 'Cette adresse e-mail est invalide.']
                 ]
             ]);
         }
-
-        $email = (new Email())
-            ->from('chanbora@logilink.fr')
-            ->cc($existe->getEmail())
-            ->subject('Mot de passe oublié')
-            ->text('Lien de réinitialisation de mot de passe de Logilink.')
-            ->html('<p>See Twig integration for better HTML integration!</p>');
-
-        $mailer->send($email);
+        
+        if($mailer->sendMail(
+            'Mot de passe oublié',
+            'Lien de réinitialisation de mot de passe',
+            'root/app/email/security/lost.html.twig',
+            ['user' => $existe],
+            $existe->getEmail()
+        ) != true){
+            return new JsonResponse([
+                'code' => 2,
+                'errors' => [ 'error' => 'Le service est indisponible', 'success' => '' ]
+            ]);
+        }
 
         return new JsonResponse(['code' => 1, 'message' => 'Un lien de réinitialisation a été envoyé.']);
     }
