@@ -5,13 +5,13 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AppController extends AbstractController
+class AdminController extends AbstractController
 {
     /**
-     * @Route("/", name="app_homepage")
+     * @Route("/admin", name="admin_dashboard")
      */
     public function index()
     {
-        return $this->render('root/app/index.html.twig');
+        return $this->render('root/admin/index.html.twig');
     }
 }
