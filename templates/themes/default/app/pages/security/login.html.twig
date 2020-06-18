@@ -32,4 +32,10 @@
         Sign in
     </button>
 </form>
+<br><br><br>
+<div id="form-lost" data-url={{ path('app_password_lost') }}></div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('default_security') }}
 {% endblock %}

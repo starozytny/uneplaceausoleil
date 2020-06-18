@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -32,5 +35,28 @@ class SecurityController extends AbstractController
     public function logout()
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+    /**
+     * @Route("/lost", name="app_password_lost", methods="POST")
+     */
+    public function lost(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $data = json_decode($request->getContent());
+
+        $existe = $em->getRepository(User::class)->findOneBy(array('email' => $data->email->value));
+
+        if(!$existe){
+            return new JsonResponse([
+                'code' => 0,
+                'errors' => [
+                    'success' => '', 
+                    'email' => ['value' => $data->email->value, 'error' => 'Cette adresse e-mail est invalide.']
+                ]
+            ]);
+        }
+
+        return new JsonResponse(['code' => 1, 'message' => 'Un lien de réinitialisation a été envoyé.']);
     }
 }
