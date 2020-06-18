@@ -3,6 +3,23 @@ import axios from 'axios/dist/axios';
 import Input from '../../../components/Input';
 import Validateur from '../../../components/validateur/validate_input';
 
+function sendAjax(self, url, data) {
+    axios({ method: 'post', url: url, data: data }).then(function (response) 
+    {
+        let data = response.data;
+        let code = data.code;
+        
+        if(code === 1){
+            self.setState({ 
+                success: data.message,
+                email : {value: ''}
+            });
+        }else{
+            self.setState(data.errors);
+        }
+    });
+}
+
 class FormLost extends React.Component {
     constructor(props) {
         super(props);
@@ -10,10 +27,7 @@ class FormLost extends React.Component {
         this.state = {
             success: '',
             error: '',
-            email: {
-                value: '',
-                error: ''
-            }
+            email: { value: '', error: '' }
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -24,6 +38,7 @@ class FormLost extends React.Component {
         const name = e.target.name;
         const value = e.target.value;
         this.setState({
+            success: '',
             [name]: {value: value}
         });
     } 
@@ -31,29 +46,16 @@ class FormLost extends React.Component {
     handleSubmit(e){
         e.preventDefault();
 
+        //Validation
         let validate = Validateur.validateur([
             {type: "email", id: 'email', value: this.state.email.value}
         ]);
 
+        //Display error if validate != true else call Ajax password lost
         if(!validate.code){
             this.setState(validate.errors);
         }else{
-            let self = this;
-
-            axios.post(this.props.url, this.state)
-            .then(function (response) {
-                let code = response.data.code;
-                if(code === 1){
-                    self.setState({ 
-                        success: response.data.message,
-                        email : {value: ''}
-                    });
-                }else{
-                    self.setState(response.data.errors);
-                }
-                
-            })
-            .catch(function (error) { console.log(error);});
+            sendAjax(this, this.props.url, this.state);
         }
     }
 
