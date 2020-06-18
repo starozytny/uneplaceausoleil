@@ -5,4 +5,14 @@
 
 body {
     background-color: lightgray;
+    @include fontRegular();
+}
+
+h1, h2, h3, h4, p{
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
 }
