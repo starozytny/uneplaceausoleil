@@ -2,7 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Rgpd;
+use App\Service\Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AppController extends AbstractController
@@ -38,8 +42,43 @@ class AppController extends AbstractController
     /**
      * @Route("/legales/demande-rgpd", name="app_rgpd")
      */
-    public function rgpd()
+    public function rgpd(Request $request, Mailer $mailer)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        if($request->isMethod("POST")){
+            $data = json_decode($request->getContent());
+            $firstname = $data->firstname->value;
+            $email = $data->email->value;
+            $subject = $data->subject->value;
+            $message = $data->message->value;
+
+            $demande = (new Rgpd())
+                ->setFirstname($firstname)
+                ->setEmail($email)
+                ->setSubject($subject)
+                ->setMessage($message)
+            ;
+
+            // Send mail       
+            if($mailer->sendMail(
+                'Demande RGPD',
+                'Deamnde RGPD via le site Logilink',
+                'root/app/email/legales/rgpd.html.twig',
+                ['demande' => $demande],
+                'chanbora@logilink.fr'
+            ) != true){
+                return new JsonResponse([
+                    'code' => 2,
+                    'errors' => [ 'error' => 'Le service est indisponible', 'success' => '' ]
+                ]);
+            }
+
+            $em->persist($demande); $em->flush();
+
+            return new JsonResponse(['code' => 1, 'message' => 'La demande a été envoyé.']);
+        }
+
         return $this->render('root/app/pages/legales/rgpd.html.twig');
     }
 }

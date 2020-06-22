@@ -12,9 +12,8 @@ class FormRgpd extends React.Component {
             success: '',
             error: '',
             firstname: { value: '', error: '' },
-            lastname: { value: '', error: '' },
             email: { value: '', error: '' },
-            subject: { value: "2", error: '' },
+            subject: { value: "0", error: '' },
             message: { value: '', error: '' }
         }
 
@@ -38,7 +37,6 @@ class FormRgpd extends React.Component {
         //Validation
         let validate = Validateur.validateur([
             {type: "text", id: 'firstname', value: firstname.value},
-            {type: "text", id: 'lastname', value: lastname.value},
             {type: "email", id: 'email', value: email.value},
             {type: "text", id: 'subject', value: subject.value},
             {type: "text", id: 'message', value: message.value}
@@ -53,7 +51,7 @@ class FormRgpd extends React.Component {
     }
 
     render() {
-        const {success, error, firstname, lastname, email, subject, message} = this.state;
+        const {success, error, firstname, email, subject, message} = this.state;
         const items = [
             {'value': 0, 'libelle': "Droit d'accès sur un traitement de données."},
             {'value': 1, 'libelle': "Droit de rectification sur un traitement de données."},
@@ -68,8 +66,7 @@ class FormRgpd extends React.Component {
                     error={error}
                     inputs={
                         <>
-                            <Input value={firstname.value} name="firstname" id="firstname" onChange={this.handleChange} error={firstname.error}>Nom</Input>
-                            <Input value={lastname.value} name="lastname" id="lastname" onChange={this.handleChange} error={lastname.error}>Prénom</Input>
+                            <Input value={firstname.value} name="firstname" id="firstname" onChange={this.handleChange} error={firstname.error}>Nom / Raison sociale</Input>
                             <Input value={email.value} name="email" id="email" onChange={this.handleChange} error={email.error}>Email</Input>
                             <Select value={subject.value} name="subject" id="subject" onChange={this.handleChange} error={subject.error} items={items}>Objet du message</Select>
                             <TextArea value={message.value} name="message" id="message" onChange={this.handleChange} error={message.error}>Message</TextArea>
