@@ -7,10 +7,11 @@ function Alert({type, elem}){
     );
 }
 
-export function Success({success}) {
-    return ( <> <Alert type="success" elem={success} /> </> );
+export function Success({elem}) {
+    
+    return ( <> <Alert type="success" elem={elem} /> </> );
 }
 
-export function Error({error}) {
-    return ( <> <Alert type="error" elem={error} /> </> );
+export function Error({elem}) {
+    return ( <> <Alert type="error" elem={elem} /> </> );
 }

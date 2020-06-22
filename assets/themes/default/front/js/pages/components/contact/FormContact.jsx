@@ -4,7 +4,8 @@ import {Formulaire} from '../../../components/modules/Formulaire';
 import Validateur from '../../../components/functions/validate_input';
 import AjaxSend from '../../../components/functions/ajax_classique';
 
-class FormRgpd extends React.Component {
+
+class FormContact extends React.Component {
     constructor(props) {
         super(props);
 
@@ -13,7 +14,6 @@ class FormRgpd extends React.Component {
             error: '',
             firstname: { value: '', error: '' },
             email: { value: '', error: '' },
-            subject: { value: "0", error: '' },
             message: { value: '', error: '' }
         }
 
@@ -32,13 +32,12 @@ class FormRgpd extends React.Component {
 
     handleSubmit(e){
         e.preventDefault();
-        const {firstname, email, subject, message} = this.state;
+        const {firstname, email, message} = this.state;
 
         //Validation
         let validate = Validateur.validateur([
             {type: "text", id: 'firstname', value: firstname.value},
             {type: "email", id: 'email', value: email.value},
-            {type: "text", id: 'subject', value: subject.value},
             {type: "text", id: 'message', value: message.value}
         ]);
 
@@ -51,13 +50,7 @@ class FormRgpd extends React.Component {
     }
 
     render() {
-        const {success, error, firstname, email, subject, message} = this.state;
-        const items = [
-            {'value': 0, 'libelle': "Droit d'accès sur un traitement de données."},
-            {'value': 1, 'libelle': "Droit de rectification sur un traitement de données."},
-            {'value': 2, 'libelle': "Droit à l'effacement sur un traitement de données."},
-            {'value': 3, 'libelle': "Autre demande concernant un traitement de données."}
-        ]
+        const {success, error, firstname, email, message} = this.state;
         return (
             <>
                 <Formulaire 
@@ -68,7 +61,6 @@ class FormRgpd extends React.Component {
                         <>
                             <Input value={firstname.value} name="firstname" id="firstname" onChange={this.handleChange} error={firstname.error}>Nom / Raison sociale</Input>
                             <Input value={email.value} name="email" id="email" onChange={this.handleChange} error={email.error}>Email</Input>
-                            <Select value={subject.value} name="subject" id="subject" onChange={this.handleChange} error={subject.error} items={items}>Objet du message</Select>
                             <TextArea value={message.value} name="message" id="message" onChange={this.handleChange} error={message.error}>Message</TextArea>
                         </>
                     }
@@ -79,4 +71,4 @@ class FormRgpd extends React.Component {
     }
 }
 
-export default FormRgpd;
+export default FormContact;

@@ -1,0 +1,17 @@
+{% extends 'themes/default/app/pages/template.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('default_contact') }}
+{% endblock %}
+
+{% block body %}
+    <h1>Demande Contact</h1>
+
+    <div id="form-contact" data-url={{ path('app_contact') }}></div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('default_contact') }}
+{% endblock %}

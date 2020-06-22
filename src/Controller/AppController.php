@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
 use App\Entity\Rgpd;
 use App\Service\Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -80,5 +81,45 @@ class AppController extends AbstractController
         }
 
         return $this->render('root/app/pages/legales/rgpd.html.twig');
+    }
+    /**
+     * @Route("/nous-contacter", name="app_contact")
+     */
+    public function contact(Request $request, Mailer $mailer)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        if($request->isMethod("POST")){
+            $data = json_decode($request->getContent());
+            $firstname = $data->firstname->value;
+            $email = $data->email->value;
+            $message = $data->message->value;
+
+            $demande = (new Contact())
+                ->setFirstname($firstname)
+                ->setEmail($email)
+                ->setMessage($message)
+            ;
+
+            // Send mail       
+            if($mailer->sendMail(
+                'Demande de contact',
+                'Deamnde contact via le site Logilink',
+                'root/app/email/contact/index.html.twig',
+                ['contact' => $demande],
+                'chanbora@logilink.fr'
+            ) != true){
+                return new JsonResponse([
+                    'code' => 2,
+                    'errors' => [ 'error' => 'Le service est indisponible', 'success' => '' ]
+                ]);
+            }
+
+            $em->persist($demande); $em->flush();
+
+            return new JsonResponse(['code' => 1, 'message' => 'La demande a été envoyé.']);
+        }
+
+        return $this->render('root/app/pages/contact/index.html.twig');
     }
 }
