@@ -32,7 +32,7 @@ function validateur(values){
         }
         if(!validate.code){
             errors[element.id] = {
-                value: '',
+                value: element.value,
                 error: validate.message
             };
             code = false;

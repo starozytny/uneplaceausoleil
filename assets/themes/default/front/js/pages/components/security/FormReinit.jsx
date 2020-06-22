@@ -1,7 +1,8 @@
 import React, {Components} from 'react';
-import Input from '../../../components/Input';
-import Validateur from '../../../components/validateur/validate_input';
-import AjaxSend from '../../../components/form/ajax_classique';
+import {Input} from '../../../components/modules/Fields';
+import {Formulaire} from '../../../components/modules/Formulaire';
+import Validateur from '../../../components/functions/validate_input';
+import AjaxSend from '../../../components/functions/ajax_classique';
 
 class FormReinit extends React.Component {
     constructor(props) {
@@ -47,18 +48,21 @@ class FormReinit extends React.Component {
     render() {
         const {password, password2, success, error} = this.state;
         const a = "password", b = "password2";
+
         return (
-            <form onSubmit={this.handleSubmit}>
-                {success ? <div className="alert-success">{success}</div> : null}
-                {error ? <div className="alert-error">{error}</div> : null}
-                <div>
-                    <Input value={password.value} type="password" name={a} id={a} onChange={this.handleChange} error={password.error}>Mot de passe</Input>
-                    <Input value={password2.value} type="password" name={b} id={b} onChange={this.handleChange} error={password2.error}>Confirmer le mot de passe</Input>
-                </div>
-                <div>
-                    <button type="submit">Réinitialiser</button>
-                </div>
-            </form>
+            <>
+                <Formulaire 
+                    onSubmit={this.handleSubmit}
+                    success={success} error={error}
+                    inputs={
+                        <>
+                            <Input value={password.value} type="password" name={a} id={a} onChange={this.handleChange} error={password.error}>Mot de passe</Input>
+                            <Input value={password2.value} type="password" name={b} id={b} onChange={this.handleChange} error={password2.error}>Confirmer le mot de passe</Input>
+                        </>
+                    }
+                    btn="Réinitialiser"
+                />
+            </>
         );
     }
 }

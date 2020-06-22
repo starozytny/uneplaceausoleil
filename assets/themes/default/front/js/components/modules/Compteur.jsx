@@ -1,6 +1,6 @@
-import React, {Components} from 'react';
+import React, {Component} from 'react';
 
-class Compteur extends React.Component {
+export class Compteur extends Component {
     constructor(props) {
         super(props);
 

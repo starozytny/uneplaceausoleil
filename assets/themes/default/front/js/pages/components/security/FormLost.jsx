@@ -1,7 +1,8 @@
 import React, {Components} from 'react';
-import Input from '../../../components/Input';
-import Validateur from '../../../components/validateur/validate_input';
-import AjaxSend from '../../../components/form/ajax_classique';
+import {Input} from '../../../components/modules/Fields';
+import {Formulaire} from '../../../components/modules/Formulaire';
+import Validateur from '../../../components/functions/validate_input';
+import AjaxSend from '../../../components/functions/ajax_classique';
 
 class FormLost extends React.Component {
     constructor(props) {
@@ -45,16 +46,17 @@ class FormLost extends React.Component {
     render() {
         const {success, error, email} = this.state;
         return (
-            <form onSubmit={this.handleSubmit}>
-                {success ? <div className="alert-success">{success}</div> : null}
-                {error ? <div className="alert-error">{error}</div> : null}
-                <div>
-                    <Input value={email.value} name="email" id="email" onChange={this.handleChange} error={email.error}>Email</Input>
-                </div>
-                <div>
-                    <button type="submit">Envoyer</button>
-                </div>
-            </form>
+            <>
+                <Formulaire 
+                    onSubmit={this.handleSubmit}
+                    success={success}
+                    error={error}
+                    inputs={
+                        <Input value={email.value} name="email" id="email" onChange={this.handleChange} error={email.error}>Email</Input>
+                    }
+                    btn="Envoyer"
+                />
+            </>
         );
     }
 }

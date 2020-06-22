@@ -43,6 +43,7 @@ Encore
     .addEntry('default_app', './assets/themes/default/front/js/default.jsx')
     .addEntry('default_homepage', './assets/themes/default/front/js/pages/homepage.jsx')
     .addEntry('default_security', './assets/themes/default/front/js/pages/security.jsx')
+    .addEntry('default_legales', './assets/themes/default/front/js/pages/legales.jsx')
 
     .addEntry('default_admin', './assets/themes/default/back/js/default.jsx')
 

@@ -13,7 +13,7 @@ function formulaireLost(){
     if(form !== null){
         ReactDOM.render(
             <FormLost url={form.dataset.url} />,
-            document.getElementById('form-lost')
+            form
         );
     }
 }
@@ -24,7 +24,7 @@ function formulaireReinit(){
     if(form !== null){
         ReactDOM.render(
             <FormReinit url={form.dataset.url} />,
-            document.getElementById('form-reinit')
+            form
         );
     }
 }
