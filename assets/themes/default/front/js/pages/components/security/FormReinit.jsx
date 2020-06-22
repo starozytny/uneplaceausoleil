@@ -3,14 +3,15 @@ import Input from '../../../components/Input';
 import Validateur from '../../../components/validateur/validate_input';
 import AjaxSend from '../../../components/form/ajax_classique';
 
-class FormLost extends React.Component {
+class FormReinit extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             success: '',
             error: '',
-            email: { value: '', error: '' }
+            password: { value: '', error: '' },
+            password2: { value: '', error: '' }
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -31,7 +32,8 @@ class FormLost extends React.Component {
 
         //Validation
         let validate = Validateur.validateur([
-            {type: "email", id: 'email', value: this.state.email.value}
+            {type: "text", id: 'password', value: this.state.password.value},
+            {type: "text", id: 'password2', value: this.state.password2.value}
         ]);
 
         //Display error if validate != true else call Ajax password lost
@@ -43,20 +45,22 @@ class FormLost extends React.Component {
     }
 
     render() {
-        const {success, error, email} = this.state;
+        const {password, password2, success, error} = this.state;
+        const a = "password", b = "password2";
         return (
             <form onSubmit={this.handleSubmit}>
                 {success ? <div className="alert-success">{success}</div> : null}
                 {error ? <div className="alert-error">{error}</div> : null}
                 <div>
-                    <Input value={email.value} name="email" id="email" onChange={this.handleChange} error={email.error}>Email</Input>
+                    <Input value={password.value} type="password" name={a} id={a} onChange={this.handleChange} error={password.error}>Mot de passe</Input>
+                    <Input value={password2.value} type="password" name={b} id={b} onChange={this.handleChange} error={password2.error}>Confirmer le mot de passe</Input>
                 </div>
                 <div>
-                    <button type="submit">Envoyer</button>
+                    <button type="submit">Réinitialiser</button>
                 </div>
             </form>
         );
     }
 }
 
-export default FormLost;
+export default FormReinit;

@@ -2,15 +2,29 @@ import '../../css/pages/security.scss';
 import React, {Components} from 'react';
 import ReactDOM from 'react-dom';
 import FormLost from './components/security/FormLost';
+import FormReinit from './components/security/FormReinit';
 
 formulaireLost();
+formulaireReinit();
 
 function formulaireLost(){
+    let form = document.querySelector('#form-lost');
 
-    let url = document.querySelector('#form-lost').dataset.url;
+    if(form !== null){
+        ReactDOM.render(
+            <FormLost url={form.dataset.url} />,
+            document.getElementById('form-lost')
+        );
+    }
+}
 
-    ReactDOM.render(
-        <FormLost url={url} />,
-        document.getElementById('form-lost')
-    );
+function formulaireReinit(){
+    let form = document.querySelector('#form-reinit');
+
+    if(form !== null){
+        ReactDOM.render(
+            <FormReinit url={form.dataset.url} />,
+            document.getElementById('form-reinit')
+        );
+    }
 }

@@ -115,11 +115,11 @@ class SecurityController extends AbstractController
             $user->setPasswordTime(null);
 
             $em->persist($user);$em->flush();
-            return new JsonResponse(['code' => 0, 'error' => 'Le lien a expiré. Veuillez recommencer la procédure.']);
+            return $this->render('root/app/pages/security/reinit_expired.html.twig', ['message' => 'Le lien a expiré. Veuillez recommencer la procédure.']);
         }
         // If code invalide
         if($user->getPasswordCode() != $code){
-            return new JsonResponse(['code' => 0, 'error' => 'Le lien n\'est pas valide ou a expiré.']);
+            return $this->render('root/app/pages/security/reinit_expired.html.twig', ['message' => 'Le lien n\'est pas valide ou a expiré.']);
         }
 
         // Form submitted
@@ -129,9 +129,9 @@ class SecurityController extends AbstractController
             $password2 = $data->password2->value;
 
             // validate password not empty and equal
-            $resultat = $validation->validatePassword($password, $password2);            
+            $resultat = $validation->validatePassword($password, $password2);         
             if($resultat != 1){
-                return new JsonResponse(['code' => 0, 'error' => $resultat]);
+                return new JsonResponse(['code' => 2, 'errors' => [ 'error' => $resultat, 'success' => '' ]]);
             }
 
             $user->setPasswordCode(null);
@@ -140,8 +140,8 @@ class SecurityController extends AbstractController
             $em->persist($user); $em->flush();
 
             $url = $this->generateUrl('app_login', array(), UrlGeneratorInterface::ABSOLUTE_URL);
-            return new JsonResponse(['code' => 1, 'message' => 'Le mot de passe a été réinitialisé. <br> La page va se rafraichir automatiquement.', 'url' => $url]);
+            return new JsonResponse(['code' => 1, 'message' => 'Le mot de passe a été réinitialisé. La page va se rafraichir automatiquement.', 'url' => $url]);
         }
-        return $this->render('root/app/pages/security/reinit.html.twig');
+        return $this->render('root/app/pages/security/reinit.html.twig', ['token' => $token, 'code' => $code]);
     }
 }

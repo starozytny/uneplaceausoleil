@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-    <div id="form-reinit" data-url={{ path('app_password_reinit', {'token': token, 'code': code}) }}></div>
+    {{message}}
 {% endblock %}
 
 {% block javascripts %}
