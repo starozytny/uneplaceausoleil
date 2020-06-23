@@ -2,7 +2,7 @@ import React, {Components} from 'react';
 import {Success, Error} from './Alert';
 import {ButtonPrimary} from './Button';
 
-export function Formulaire({onSubmit, inputs, success, error, btn}) {
+export function Formulaire({onSubmit, inputs, success, error, btn, children}) {
     return ( 
         <form onSubmit={onSubmit}> 
             <div>
@@ -11,6 +11,9 @@ export function Formulaire({onSubmit, inputs, success, error, btn}) {
             </div>
             <div>
                 {inputs}
+            </div>
+            <div>
+                {children}
             </div>
             <div>
                 <ButtonPrimary>{btn}</ButtonPrimary>

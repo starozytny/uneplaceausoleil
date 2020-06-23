@@ -50,6 +50,7 @@ class FormContact extends React.Component {
     }
 
     render() {
+        const {children} = this.props;
         const {success, error, firstname, email, message} = this.state;
         return (
             <>
@@ -65,6 +66,7 @@ class FormContact extends React.Component {
                         </>
                     }
                     btn="Envoyer"
+                    children={children}
                 />
             </>
         );

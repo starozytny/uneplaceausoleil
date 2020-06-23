@@ -51,6 +51,7 @@ class FormRgpd extends React.Component {
     }
 
     render() {
+        const {children} = this.props;
         const {success, error, firstname, email, subject, message} = this.state;
         const items = [
             {'value': 0, 'libelle': "Droit d'accès sur un traitement de données."},
@@ -73,6 +74,7 @@ class FormRgpd extends React.Component {
                         </>
                     }
                     btn="Envoyer"
+                    children={children}
                 />
             </>
         );

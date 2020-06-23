@@ -9,10 +9,16 @@ formulaire('form-rgpd');
 
 function formulaire(elem){
     let form = document.querySelector('#' + elem);
+    let urlPolitique = document.querySelector('#urlPolitique').dataset.url;
 
     if(form !== null){
         ReactDOM.render(
-            <FormRgpd url={form.dataset.url} />,
+            <FormRgpd url={form.dataset.url} >
+                Les informations recueillies à partir de ce formulaire sont 
+                transmises au service de communication de Logilink pour traiter vos demandes.
+                <br />
+                Pour plus d'informations, veuillez consulter <a href={urlPolitique}>notre politique de confidentialité</a>.
+            </FormRgpd>,
             form
         );
     }
