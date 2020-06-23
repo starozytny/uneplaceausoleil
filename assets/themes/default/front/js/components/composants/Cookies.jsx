@@ -3,7 +3,7 @@ import Analytics from '../functions/analytics';
 import Cookies from 'js-cookie/src/js.cookie';
 
 // Nom cookie pour Google analytics
-const consentGlobal = 'hasConsentAllLocal';
+const consentGlobal = 'hasConsentGlobalLocal';
 const consentAnalytics = 'hasConsentLocal';
 
 /**
@@ -28,10 +28,21 @@ function cookiesClick(type, action){
             console.log(type);
             break;
     }
+
+    // consent all accepte passe to false if action = refuser
+    if(action === 0){
+        Cookies.set(consentGlobal, false, { expires: 395 });
+    }
 }
 
-function cookiesAll(){
+function cookiesAcceptAll(){
     Analytics.startAnalytics(consentAnalytics);
+    Cookies.set(consentGlobal, true, { expires: 395 });
+}
+
+function cookiesRefuseAll(){
+    Analytics.stopAnalytics(consentAnalytics);
+    Cookies.set(consentGlobal, false, { expires: 395 });
 }
 
 /**
@@ -112,7 +123,7 @@ export class BulleCookies extends Component {
         super(props);
 
         this.state = {
-            banner : false
+            hideBanner : false
         }
 
         this.handleClickAccept = this.handleClickAccept.bind(this);
@@ -121,6 +132,7 @@ export class BulleCookies extends Component {
 
     //Set active si le cookie existe + true ou existe + false
     componentDidMount () {
+        let hide = false;
         // 1. On récupère l'éventuel cookie indiquant le choix passé de l'utilisateur
         const consentCookie = Cookies.getJSON(consentGlobal);
         // 2. On récupère la valeur "doNotTrack" du navigateur
@@ -128,42 +140,46 @@ export class BulleCookies extends Component {
         
         // 3. Si le cookie existe et qu'il vaut explicitement "false" ou que le "doNotTrack" est défini à "OUI"
         //    l'utilisateur s'oppose à l'utilisation des cookies. On exécute une fonction spécifique pour ce cas.
-        if (doNotTrack === 'yes' || doNotTrack === '1' || consentCookie === false) {
-            // Refuser 
-            return;
+        if (doNotTrack === 'yes' || doNotTrack === '1') {
+            cookiesRefuseAll();
+            hide = true;
         }
 
         // 4. Si le cookie existe et qu'il vaut explicitement "true", on démarre juste Google Analytics
         // 5. Si le cookie n'existe pas ou que le "doNotTrack" est défini à "NON", on crée le cookie "hasConsent" avec pour
         //    valeur "true" pour une durée de 13 mois (la durée maximum autorisée) puis on démarre Google Analytics
         if (doNotTrack === 'no' || doNotTrack === '0' || consentCookie === true) {
-            // accepter
-            return;
+            cookiesAcceptAll();
+            hide = true;
         }
 
         // 6. Si dans la page de gestion on affiche pas le bandeau
-        if(this.props.urlGestion === window.location.pathname){
-            this.setState({banner: false});
+        if(this.props.urlGestion === window.location.pathname || consentCookie === false){
+            hide = true;
+        }
+
+        if(hide){
+            this.setState({hideBanner: true});
             return;
         }
 
         // 7. Si le cookie n'existe pas et que le "doNotTrack" n'est pas défini, alors on affiche le bandeau et on crée les listeners
-        this.setState({banner: true});
+        this.setState({hideBanner: false});
     }
 
     handleClickAccept (e){
-        cookiesAll();
-        this.setState({banner: false});
+        cookiesAcceptAll();
+        this.setState({hideBanner: true});
     }
 
     handleClickParametre (e){
-        this.setState({banner: false});
+        this.setState({hideBanner: true});
     }
 
     render () {
         const {urlPolitique, urlGestion} = this.props;
-        const {banner} = this.state;
-        let className = banner ? 'param-cookies active' : 'param-cookies';
+        const {hideBanner} = this.state;
+        let className = hideBanner ? 'param-cookies' : 'param-cookies active';
 
         return (
             <div className={className}>

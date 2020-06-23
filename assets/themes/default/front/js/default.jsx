@@ -1,7 +1,7 @@
 import '../css/default.scss';
 import React, {Components} from 'react';
 import ReactDOM from 'react-dom';
-import {BulleCookies} from './components/modules/Cookies';
+import {BulleCookies} from './components/composants/Cookies';
 
 cookies();
 

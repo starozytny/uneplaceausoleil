@@ -1,6 +1,6 @@
 import React, {Components} from 'react';
-import {Input} from '../../../components/modules/Fields';
-import {Formulaire} from '../../../components/modules/Formulaire';
+import {Input} from '../../../components/composants/Fields';
+import {Formulaire} from '../../../components/composants/Formulaire';
 import Validateur from '../../../components/functions/validate_input';
 import AjaxSend from '../../../components/functions/ajax_classique';
 

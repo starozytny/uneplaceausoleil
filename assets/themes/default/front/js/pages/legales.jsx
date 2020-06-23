@@ -2,7 +2,7 @@ import '../../css/pages/legales.scss';
 import React, {Components} from 'react';
 import ReactDOM from 'react-dom';
 import FormRgpd from './components/legales/FormRgpd';
-import {ActionCookies} from '../components/modules/Cookies';
+import {ActionCookies} from '../components/composants/Cookies';
 
 cookies();
 formulaire('form-rgpd');

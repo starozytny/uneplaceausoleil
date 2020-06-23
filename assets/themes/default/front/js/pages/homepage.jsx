@@ -1,7 +1,7 @@
 import '../../css/pages/security.scss';
 import React, {Components} from 'react';
 import ReactDOM from 'react-dom';
-import Compteur from '../components/modules/Compteur';
+import Compteur from '../components/composants/Compteur';
 
 experience();
 
