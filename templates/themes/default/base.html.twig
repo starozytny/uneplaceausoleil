@@ -13,12 +13,14 @@
 	{% block stylesheets %}{% endblock %}
     </head>
     <body>
+		{# --------------- VARIABLES ---------------- #}
+		{% set path_images = "build/themes/default/front/images/" %}
 
-		<div id="param-cookies-container" data-url-politique={{ path('app_politique') }} data-url-gestion={{ path('app_cookies') }}></div>
+		{# --------------- COOKIES ---------------- #}
+		<div id="param-cookies-container"></div>
 
+		{# --------------- BODY ---------------- #}
 		{% block body %}{% endblock %}
-
-		<div id="urlPolitique" data-url={{ path('app_politique') }}></div>
 		
         {{ encore_entry_script_tags('default_app') }}
 		{% block javascripts %}{% endblock %}
