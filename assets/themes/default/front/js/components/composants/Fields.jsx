@@ -21,18 +21,15 @@ export function TextArea({name, id, value, onChange, error, children}) {
 }
 
 export function Select({name, id, value, onChange, error, children, items}) {
-
-    let test = items.map((item) => 
-        <option value={item.value}>{item.libelle}</option>
+    let choices = items.map((item) => 
+        <option key={item.value} value={item.value}>{item.libelle}</option>
     )
-
-
     return (
         <div className={'form-group' + (error ? " form-group-error" : "")}>
             <label>
                 {children}
                 <select value={value} id={id} name={name} onChange={onChange}>
-                    {test}
+                    {choices}
                 </select>
             </label>
             <div className="error">{error ? error : null}</div>            
