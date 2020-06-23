@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,600,700&display=swap');
+
+@mixin fontLight() { font-family: 'Poppins', sans-serif; font-weight: 300; }
+@mixin fontRegular() { font-family: 'Poppins', sans-serif; font-weight: 400; }
+@mixin fontSemibold() { font-family: 'Poppins', sans-serif; font-weight: 600; }
+@mixin fontBold() { font-family: 'Poppins', sans-serif; font-weight: 700; }
+
+@mixin flex($direction: row, $align: center, $justify: center) {
+  display: flex;flex-direction: $direction;
+  align-items: $align;justify-content: $justify;
+}
+
+@mixin boxshadow($size: 10, $color: $alpha, $opacity: 0.8) {
+  box-shadow: 0 0 #{$direction}px transparentize($color, $opacity);
+}
+
+$error: #d40d0e;
+$errorBg: #ffb9b9;
+$success: #169f50;
+$successBg: #83ffc5;
+$info: #405fb5;
+$infoBg: #9ff0ff;
+
+$alpha: #FFF;
