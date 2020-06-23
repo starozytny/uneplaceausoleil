@@ -5,8 +5,6 @@ import Validateur from '../../../components/functions/validate_input';
 import AjaxSend from '../../../components/functions/ajax_classique';
 import ReCAPTCHA from "react-google-recaptcha";
 
-const recaptchaRef = React.createRef();
-
 class FormContact extends React.Component {
     constructor(props) {
         super(props);
@@ -19,6 +17,8 @@ class FormContact extends React.Component {
             message: { value: '', error: '' }
         }
 
+        this.recaptchaRef = React.createRef();
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -30,13 +30,11 @@ class FormContact extends React.Component {
             success: '',
             [name]: {value: value}
         });
-    } 
+    }
 
     handleSubmit (e) {
         e.preventDefault();
         const {firstname, email, message} = this.state;
-
-        recaptchaRef.current.execute();
 
         //Validation
         let validate = Validateur.validateur([
@@ -45,12 +43,17 @@ class FormContact extends React.Component {
             {type: "text", id: 'message', value: message.value}
         ]);
 
-        //Display error if validate != true else call Ajax password lost
-        if(!validate.code){
-            this.setState(validate.errors);
-        }else{
-            AjaxSend.sendAjax(this, this.props.url, this.state);
-        }
+        //Recaptcha
+        this.recaptchaRef.current.executeAsync().then(value => {
+            if(value !== null){
+                if(!validate.code){
+                    this.setState(validate.errors);
+                }else{
+                    AjaxSend.sendAjax(this, this.props.url, this.state);
+                }
+                this.recaptchaRef.current.reset();
+            }
+        })        
     }
 
     render() {
@@ -67,11 +70,7 @@ class FormContact extends React.Component {
                             <Input value={firstname.value} name="firstname" id="firstname" onChange={this.handleChange} error={firstname.error}>Nom / Raison sociale</Input>
                             <Input value={email.value} name="email" id="email" onChange={this.handleChange} error={email.error}>Email</Input>
                             <TextArea value={message.value} name="message" id="message" onChange={this.handleChange} error={message.error}>Message</TextArea>
-                            <ReCAPTCHA
-                                ref={recaptchaRef}
-                                size="invisible"
-                                sitekey="6LeJXdUUAAAAABW3t8yl9tkJ5PpSFdhKqvOpgGyY"
-                            />
+                            <ReCAPTCHA ref={this.recaptchaRef} size={"invisible"} sitekey="6LeJXdUUAAAAABW3t8yl9tkJ5PpSFdhKqvOpgGyY" />
                         </>
                     }
                     btn="Envoyer"
