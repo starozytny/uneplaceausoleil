@@ -46,6 +46,7 @@ class FormContact extends React.Component {
         //Recaptcha
         this.recaptchaRef.current.executeAsync().then(value => {
             if(value !== null){
+                //Suite
                 if(!validate.code){
                     this.setState(validate.errors);
                 }else{
