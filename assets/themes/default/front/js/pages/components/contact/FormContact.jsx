@@ -3,7 +3,9 @@ import {Input, TextArea, Select} from '../../../components/composants/Fields';
 import {Formulaire} from '../../../components/composants/Formulaire';
 import Validateur from '../../../components/functions/validate_input';
 import AjaxSend from '../../../components/functions/ajax_classique';
+import ReCAPTCHA from "react-google-recaptcha";
 
+const recaptchaRef = React.createRef();
 
 class FormContact extends React.Component {
     constructor(props) {
@@ -21,7 +23,7 @@ class FormContact extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(e){
+    handleChange (e) {
         const name = e.target.name;
         const value = e.target.value;
         this.setState({
@@ -30,9 +32,11 @@ class FormContact extends React.Component {
         });
     } 
 
-    handleSubmit(e){
+    handleSubmit (e) {
         e.preventDefault();
         const {firstname, email, message} = this.state;
+
+        recaptchaRef.current.execute();
 
         //Validation
         let validate = Validateur.validateur([
@@ -63,6 +67,11 @@ class FormContact extends React.Component {
                             <Input value={firstname.value} name="firstname" id="firstname" onChange={this.handleChange} error={firstname.error}>Nom / Raison sociale</Input>
                             <Input value={email.value} name="email" id="email" onChange={this.handleChange} error={email.error}>Email</Input>
                             <TextArea value={message.value} name="message" id="message" onChange={this.handleChange} error={message.error}>Message</TextArea>
+                            <ReCAPTCHA
+                                ref={recaptchaRef}
+                                size="invisible"
+                                sitekey="6LeJXdUUAAAAABW3t8yl9tkJ5PpSFdhKqvOpgGyY"
+                            />
                         </>
                     }
                     btn="Envoyer"

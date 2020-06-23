@@ -3,6 +3,9 @@ import {Input, TextArea, Select} from '../../../components/composants/Fields';
 import {Formulaire} from '../../../components/composants/Formulaire';
 import Validateur from '../../../components/functions/validate_input';
 import AjaxSend from '../../../components/functions/ajax_classique';
+import ReCAPTCHA from "react-google-recaptcha";
+
+const recaptchaRef = React.createRef();
 
 class FormRgpd extends React.Component {
     constructor(props) {
@@ -33,6 +36,8 @@ class FormRgpd extends React.Component {
     handleSubmit(e){
         e.preventDefault();
         const {firstname, email, subject, message} = this.state;
+
+        recaptchaRef.current.execute();
 
         //Validation
         let validate = Validateur.validateur([
@@ -71,6 +76,11 @@ class FormRgpd extends React.Component {
                             <Input value={email.value} name="email" id="email" onChange={this.handleChange} error={email.error}>Email</Input>
                             <Select value={subject.value} name="subject" id="subject" onChange={this.handleChange} error={subject.error} items={items}>Objet du message</Select>
                             <TextArea value={message.value} name="message" id="message" onChange={this.handleChange} error={message.error}>Message</TextArea>
+                            <ReCAPTCHA
+                                ref={recaptchaRef}
+                                size="invisible"
+                                sitekey="6LeJXdUUAAAAABW3t8yl9tkJ5PpSFdhKqvOpgGyY"
+                            />
                         </>
                     }
                     btn="Envoyer"
