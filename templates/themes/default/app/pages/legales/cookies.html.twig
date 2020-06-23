@@ -1,0 +1,72 @@
+{% extends 'themes/default/app/pages/legales/template.html.twig' %}
+
+{% block title %}Gestion des cookies{% endblock %}
+
+{% block body %}
+    <h1>Gestion des cookies</h1>
+
+    <section class="legales">
+        <div>
+            <h2>Qu'est ce qu'un cookie ?</h2>
+            <p>
+                Un "cookie" est une suite d'informations, généralement de petite taille et 
+                identifié par un nom, qui peut être transmis à votre navigateur par un site 
+                web sur lequel vous vous connectez. Votre navigateur web le conservera pendant 
+                une certaine durée, et le renverra au serveur web chaque fois que vous vous
+                 y re-connecterez. Les cookies ont de multiples usages : ils peuvent servir à 
+                 mémoriser votre identifiant client auprès d'un site marchand, le contenu courant 
+                 de votre panier d'achat, un identifiant permettant de tracer votre navigation 
+                 pour des finalités statistiques ou publicitaires, etc.
+            </p>
+        </div>
+
+        <div>
+            <h2>Cookies obligatoires</h2>
+            <p>
+                Des cookies sont déposés afin de mémoriser vos choix d'activation ou refus de cookies.
+            </p>
+        </div>
+
+        <div>
+            <h2>Cookies tiers</h2>
+            <p>
+                <b>Google Analytics</b> <br>
+                Nous utilisons les cookies de Google Analytics dans le but de mesurer l'audience et réaliser des statistiques de visites.
+                <br>
+                Vos données de navigations sur ce site sont envoyées à Google Inc.
+            </p>
+            <div id="cookies-analytics-actions"></div>
+            <p>
+                Nous avons suivi la documentation de Google afin de vérouiller les cookies lorsque vous 
+                refusez l'utilisateur de leurs cookies.
+                <br>
+                Il existe un module complémentaire de navigateur fourni par Google pour la désactivation de Google Analytics.
+                <br>
+                <a href="https://tools.google.com/dlpage/gaoptout/" target="_blank">Lien vers le module complémentaire de Google</a>
+            </p>
+        </div>
+
+        <div>
+            <h2>Cookies internes</h2>
+
+            <div id="cookies-interne-actions"></div>
+        </div>
+
+        <div>
+            <h2>Configurer son navigateur pour bloquer les cookies</h2>
+            <p>
+                Les cookies sont stockés dans votre navigateur. Vous avez la possibilité de configurer 
+                les paramètre de votre navigateur pour vous opposer directement à l'enregistrement des cookies.
+                <br>
+                Toutefois, Certaines fonctionnalités du site pourraient en être affectées. <br>
+                <br>
+                Voici les procédures à suivre pour bloquer les cookies selon le navigateur que vous utilisez.
+            </p>
+            <ul>
+                <li><a target="_blank" href="https://support.google.com/accounts/answer/61416?hl=fr">Désactivation des cookies sur Google Chrome</a></li>
+                <li><a target="_blank" href="https://support.mozilla.org/fr/kb/activer-desactiver-cookies">Désactivation des cookies sur Mozilla Firefox</a></li>
+                <li><a target="_blank" href="https://support.microsoft.com/hub/4338813/windows-help">Désactivation des cookies sur Internet Explorer</a></li>
+            </ul>
+        </div>
+    </section>
+{% endblock %}

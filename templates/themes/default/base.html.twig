@@ -13,6 +13,9 @@
 	{% block stylesheets %}{% endblock %}
     </head>
     <body>
+
+		<div id="param-cookies-container" data-url-politique={{ path('app_politique') }} data-url-gestion={{ path('app_cookies') }}></div>
+
 		{% block body %}{% endblock %}
 	
         {{ encore_entry_script_tags('default_app') }}

@@ -11,8 +11,18 @@
 }
 
 @mixin boxshadow($size: 10, $color: $alpha, $opacity: 0.8) {
-  box-shadow: 0 0 #{$direction}px transparentize($color, $opacity);
+  box-shadow: 0 0 #{$size}px transparentize($color, $opacity);
 }
+
+$color0: #2B96D6;
+$color1: #FEC61F;
+$color2: #103044;
+$color3: #15120D;
+$color4: #F1ECEC;
+$color5: #FDFCFC;
+$color6: #676767;
+$color7: #C6C3C3;
+$color8: #DFDDDD;
 
 $error: #d40d0e;
 $errorBg: #ffb9b9;

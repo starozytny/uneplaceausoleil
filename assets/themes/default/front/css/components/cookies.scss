@@ -1,0 +1,74 @@
+@import "../vars/vars";
+
+.param-cookies{
+  position: fixed;
+  background: $color3;
+  color: $color5;
+  padding: 10px 15px;
+  width: calc(100% - 30px);
+  z-index: 5000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  top: 0;
+  font-size: 0.8em;
+  @include boxshadow();
+
+  & > *:not(:last-child){
+    margin-right: 50px;
+  }
+
+  p > a{
+    display: inline-block;
+    margin-top: 5px;
+    color: $color5;
+    transition: all 0.3s ease-in-out;
+
+    &:hover{
+      color: $color1;
+    }
+  }
+}
+.param-cookies-actions{
+  margin-bottom: 20px;
+}
+.btn-cookies{
+  border: 1px solid $color1;
+  border-radius: 5px;
+  background-color: $color5;
+  padding: 5px 15px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &:hover{
+    background-color: $color1;
+  }
+}
+.btn-cookies.active{
+  background-color: $color1;
+  border: 1px solid $color1;
+  color: $alpha;
+
+}
+.param-cookies.active{
+  display: flex;
+}
+//                      __   _ ____  ___   ___    __
+//                     | _| / |___ \( _ ) / _ \  |_ |
+//    _____ _____ _____| |  | | __) / _ \| | | |  | |_____ _____ _____
+//   |_____|_____|_____| |  | |/ __/ (_) | |_| |  | |_____|_____|_____|
+//                     | |  |_|_____\___/ \___/   | |
+//                     |__|                      |__|
+@media (min-width:1280px) {
+  .param-cookies{
+    flex-direction: row;
+  }
+  .param-cookies-actions{
+    display: flex;
+
+    &>:not(:last-child){
+      margin-right: 10px;
+    }
+  }
+}

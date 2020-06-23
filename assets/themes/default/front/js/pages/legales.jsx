@@ -2,7 +2,9 @@ import '../../css/pages/legales.scss';
 import React, {Components} from 'react';
 import ReactDOM from 'react-dom';
 import FormRgpd from './components/legales/FormRgpd';
+import {ActionCookies} from '../components/modules/Cookies';
 
+cookies();
 formulaire('form-rgpd');
 
 function formulaire(elem){
@@ -13,5 +15,21 @@ function formulaire(elem){
             <FormRgpd url={form.dataset.url} />,
             form
         );
+    }
+}
+
+
+
+function cookies(){
+    renderBtn('analytics', document.getElementById('cookies-analytics-actions'));
+    renderBtn('interne', document.getElementById('cookies-interne-actions'));
+
+    function renderBtn(type, elem){
+        if(elem !== null){
+            ReactDOM.render(
+                <ActionCookies type={type}/>,
+                elem
+            );
+        }
     }
 }
