@@ -1,0 +1,56 @@
+@import "../vars/vars";
+
+.dropdown{
+    position: relative;
+    cursor: pointer;
+    @include transition();
+
+    &:hover{
+	color: $color5;
+    }
+}
+
+.dropdown-btn{
+    display: flex;
+    align-items: center; justify-content: flex-end;
+
+    .avatar{
+	margin-right: 10px;
+    }
+}
+
+.dropdown-elements{
+    opacity: 0;
+    z-index: -10;
+    position: absolute;
+    padding-top: 40px;
+    top:0; right: 0;
+    text-align: right;
+    transform: scale(0);
+    @include transition;
+
+    .items{
+	background: $color3;
+	border-radius: 5px;
+	@include boxshadow;
+    }
+
+    .item{
+	display: block;
+	padding: 5px 10px 5px 20px;
+	color: $color6;
+	&:hover{
+	    color: $color5;
+	}
+    }
+    .item.active{
+	color: $color1;
+    }
+    .item:first-child{padding-top: 10px;}
+    .item:last-child{padding-bottom: 10px;}
+}
+
+.dropdown:hover > .dropdown-elements, .dropdown-elements:hover{
+    opacity: 1; z-index: 5;
+    transform: scale(1);
+}

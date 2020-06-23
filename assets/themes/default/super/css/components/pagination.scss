@@ -1,0 +1,104 @@
+@import "../vars/vars";
+
+.pagination-bloc{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 10px;
+
+  .count{
+    margin-right: 25px;
+    font-size: 0.7em;
+  }
+
+  .pagination, .pagination-numbers{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & > *:not(:last-child){
+      margin-right: 10px;
+    }
+  }
+
+  .pagination-numbers{
+    background-color: $color3;
+    border-radius: 50px;
+  }
+
+  .pagination-page, .pagination-circle{
+    padding: 2px;
+    transition: all 0.2s ease-in-out;
+    
+    a{
+	color: $color6;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 25px;
+	height: 25px;
+	&:hover{color: $color5;}
+    }
+
+    &:hover{
+      background-color: $color7;
+      border-radius: 50%;
+      color: $color5;
+      @include boxshadow();
+    }
+  }
+
+  .pagination-circle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    background-color: $color3;
+    color: $color6;
+    border-radius: 50%;
+  }
+
+  .pagination-circle.current{
+    background-color: $color1;
+    color: $alpha;
+    border-radius: 50%;
+    @include boxshadow();
+  }
+}
+
+.pagination-go-to{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 10px;
+  font-size: 0.7em;
+  color: $color6;
+
+  & > *:first-child{
+    margin-right: 15px;
+  }
+
+  input[name="page"]{
+    border: none;
+    padding: 5px 10px;
+    color: $color6;
+  }
+}
+
+//                      __   _____ __    ___    __
+//                     | _| |___  / /_  ( _ )  |_ |
+//    _____ _____ _____| |     / / '_ \ / _ \   | |_____ _____ _____
+//   |_____|_____|_____| |    / /| (_) | (_) |  | |_____|_____|_____|
+//                     | |   /_/  \___/ \___/   | |
+//                     |__|                    |__|
+@media (min-width:768px) {
+  .pagination-bloc{
+    justify-content: flex-end;
+    margin-top: 0;
+  }
+  .pagination-go-to{
+    justify-content: flex-end;
+    margin-right: 130px;
+  }
+}

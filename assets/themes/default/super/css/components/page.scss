@@ -1,0 +1,10 @@
+@import "../vars/vars";
+
+.content{
+    position: relative;
+    margin-top: 30px;
+}
+
+.content.behind{
+    z-index: -1;
+}

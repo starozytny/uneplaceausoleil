@@ -1,1 +1,12 @@
 {% extends 'themes/default/base_super.html.twig' %}
+
+{% block body %}
+    {% include 'themes/default/super/layout/components/deco.html.twig' %}
+    {% include 'themes/default/super/layout/components/menu.html.twig' %}
+
+    <main>
+        {% include 'themes/default/super/layout/components/header.html.twig' %}
+        
+        {% block main_content %}{% endblock %}
+    </main>
+{% endblock %}

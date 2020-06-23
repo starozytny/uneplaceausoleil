@@ -1,0 +1,21 @@
+@import "../vars/vars";
+
+header{
+    display: flex;
+    align-items: flex-start; justify-content: flex-end;
+}
+
+.header-menu{
+    @include displayCenter;
+  
+    .bell{
+	margin-right: 15px;
+	color: $color6;
+	@include transition();
+	
+	&:hover{
+	    color: $color5;
+	}
+    }
+}
+

@@ -30,6 +30,14 @@ Encore
         from: './assets/themes/default/back/images',
         to: 'themes/default/back/images/[path][name].[ext]',
     })
+    .copyFiles({
+        from: './assets/themes/default/super/fonts',
+        to: 'themes/default/super/fonts/[path][name].[ext]',
+    })
+    .copyFiles({
+        from: './assets/themes/default/super/images',
+        to: 'themes/default/super/images/[path][name].[ext]',
+    })
 
     .configureFilenames({
         css: 'css/[name].css',

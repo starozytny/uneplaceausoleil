@@ -2,16 +2,107 @@
 @import "vars/fonts.scss";
 @import "vars/vars.scss";
 
+@import "components/deco";
+@import "components/menu";
+@import "components/header";
+@import "components/dropdown";
+@import "components/button";
+@import "components/toolbar";
+@import "components/page";
+@import "components/card";
+@import "components/form";
+@import "components/pagination";
+
 body {
-    background-color: lightgray;
+    background-color: $color4;
     @include fontRegular();
 }
 
 h1, h2, h3, h4, p{
     margin: 0;
+    color: $color5;
+    @include transition();
 }
 
 a{
     text-decoration: none;
+    color: $color0;
     transition: all 0.2s ease-in-out;
+    
+    &:hover{
+	    color: $color5;
+    }
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: $color3;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: $color7;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: $color7;
+}
+
+main{
+    width: calc(100% - 70px);
+    margin-left: 50px;
+    padding: 10px;
+    @include transition();
+}
+
+.txt-discret{
+    font-size: 0.85em;
+}
+
+.avatar{
+    width: 32px; height: 32px;
+    overflow: hidden;
+    border-radius: 50%;
+    @include boxshadow;
+
+    img{
+	    width: 32px; height: 32px;
+    }
+}
+
+//                      __   _ ____  ___   ___    __
+//                     | _| / |___ \( _ ) / _ \  |_ |
+//    _____ _____ _____| |  | | __) / _ \| | | |  | |_____ _____ _____
+//   |_____|_____|_____| |  | |/ __/ (_) | |_| |  | |_____|_____|_____|
+//                     | |  |_|_____\___/ \___/   | |
+//                     |__|                      |__|
+@media (min-width:1280px) {
+    main{
+        width: calc(100% - 170px - 80px);
+        margin-left: 150px;
+        padding: 15px 50px;
+    }
+}
+
+//                      __   _  ___ ____   ___    __
+//                     | _| / |/ _ \___ \ / _ \  |_ |
+//    _____ _____ _____| |  | | (_) |__) | | | |  | |_____ _____ _____
+//   |_____|_____|_____| |  | |\__, / __/| |_| |  | |_____|_____|_____|
+//                     | |  |_|  /_/_____|\___/   | |
+//                     |__|                      |__|
+@media (min-width: 1920px){
+    main{
+        width: calc(100% - 240px - 280px);
+        margin-left: 220px;
+	    padding: 30px 150px;
+    }
+    h1{
+	    font-size: 2.5em;
+    }
 }

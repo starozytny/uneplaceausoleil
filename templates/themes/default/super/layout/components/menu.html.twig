@@ -1,0 +1,52 @@
+{% set primaryMenu = [
+    {
+	'path': '',
+	'icon': 'home',
+	'label': 'Dashboard',
+	'name': 'dashboard'
+    },
+    {
+	'path': '',
+	'icon': 'users',
+	'label': 'Utilisateurs',
+	'name': 'utilisateurs'
+    }
+] %}
+
+{% set secondaryMenu = [
+    {
+	'path': '',
+	'icon': 'settings',
+	'label': 'Paramètres',
+	'name': 'parametres'
+    }
+] %}
+<nav>
+    <div class="logo">
+	<a href=""><span>D</span></a>
+    </div>
+    <div class="separator"></div>
+    <div class="menu">
+	{#	 ------------- PRIMARY MENU ------------   #}
+	<div class="primary-menu">
+	    {% for item in primaryMenu %}
+		<a href="{{ item.path }}" class="item" data-name="{{ item.name }}">
+		    <span class="icon-{{ item.icon }}"></span>
+		    <span class="label">{{ item.label }}</span>
+		</a>
+	    {% endfor %}
+	</div>
+	{#	 ------------- SECONDARY MENU ------------   #}
+	<div class="secondary-menu">
+	   {% for item in secondaryMenu %}
+		<a href="{{ item.path }}" class="item" data-name="{{ item.name }}">
+		    <span class="icon-{{ item.icon }}"></span>
+		    <span class="label">{{ item.label }}</span>
+		</a>
+	    {% endfor %}
+	    <div class="copyright">
+		<p>Copyright 2020 <br> <a href="https://logilink.fr" target="_blank">Logilink Marseille</a></p>
+	    </div>
+	</div>
+    </div>
+</nav>
