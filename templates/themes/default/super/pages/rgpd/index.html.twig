@@ -1,0 +1,35 @@
+{% extends 'themes/default/super/layout/layout.html.twig' %}
+
+{% block title %}Liste des demandes RGPD {{ parent() }}{% endblock %}
+
+{% block main_content %}
+    <h1>Demandes RGPD</h1>
+        
+    <section class="toolbar">
+    <div class="toolbar-left"></div>
+    <div class="toolbar-right">
+        <div class="items item-filtre">
+            <div class="dropdown">
+                <div class="dropdown-btn">
+                <a href="#" class="btn btn-icon">
+                    <span class="icon-filter"></span>
+                </a>
+                </div>
+                <div class="dropdown-elements">
+                    <div class="items">
+                        <a class="item active" href="">Aucun filtre</a>
+                        <a class="item" href="">Nouveaux</a>
+                        <a class="item" href="">Anciens</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+        
+    <section class="content">
+        <div class="liste">
+                
+        </div>
+    </section>
+{% endblock %}
