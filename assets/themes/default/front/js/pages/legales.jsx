@@ -1,4 +1,5 @@
 import '../../css/pages/legales.scss';
+import Routing from '../../../../../../public/bundles/fosjsrouting/js/router.min.js';
 import React, {Components} from 'react';
 import ReactDOM from 'react-dom';
 import FormRgpd from './components/legales/FormRgpd';
@@ -9,15 +10,14 @@ formulaire('form-rgpd');
 
 function formulaire(elem){
     let form = document.querySelector('#' + elem);
-    let urlPolitique = document.querySelector('#urlPolitique').dataset.url;
 
     if(form !== null){
         ReactDOM.render(
-            <FormRgpd url={form.dataset.url} >
+            <FormRgpd url={Routing.generate('app_rgpd')} >
                 Les informations recueillies à partir de ce formulaire sont 
                 transmises au service de communication de Logilink pour traiter vos demandes.
                 <br />
-                Pour plus d'informations, veuillez consulter <a href={urlPolitique}>notre politique de confidentialité</a>.
+                Pour plus d'informations, veuillez consulter <a href={Routing.generate('app_politique')}>notre politique de confidentialité</a>.
             </FormRgpd>,
             form
         );

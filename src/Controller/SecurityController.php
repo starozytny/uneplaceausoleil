@@ -44,7 +44,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/lost/{user}", name="app_password_lost")
+     * @Route("/lost/{user}", options={"expose"=true}, name="app_password_lost")
      */
     public function lost(Request $request, Mailer $mailer, CheckTime $checkTime, User $user = null)
     {

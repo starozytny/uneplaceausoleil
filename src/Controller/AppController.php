@@ -27,21 +27,21 @@ class AppController extends AbstractController
         return $this->render('root/app/pages/legales/mentions.html.twig');
     }
     /**
-     * @Route("/legales/politique-confidentialite", name="app_politique")
+     * @Route("/legales/politique-confidentialite", options={"expose"=true}, name="app_politique")
      */
     public function politique()
     {
         return $this->render('root/app/pages/legales/politique.html.twig');
     }
     /**
-     * @Route("/legales/gestion-cookies", name="app_cookies")
+     * @Route("/legales/gestion-cookies", options={"expose"=true}, name="app_cookies")
      */
     public function cookies()
     {
         return $this->render('root/app/pages/legales/cookies.html.twig');
     }
     /**
-     * @Route("/legales/demande-rgpd", name="app_rgpd")
+     * @Route("/legales/demande-rgpd", options={"expose"=true}, name="app_rgpd")
      */
     public function rgpd(Request $request, Mailer $mailer)
     {
@@ -83,7 +83,7 @@ class AppController extends AbstractController
         return $this->render('root/app/pages/legales/rgpd.html.twig');
     }
     /**
-     * @Route("/nous-contacter", name="app_contact")
+     * @Route("/nous-contacter", options={"expose"=true}, name="app_contact")
      */
     public function contact(Request $request, Mailer $mailer)
     {
