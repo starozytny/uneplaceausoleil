@@ -50,7 +50,11 @@ class FormContact extends React.Component {
                 if(!validate.code){
                     this.setState(validate.errors);
                 }else{
-                    AjaxSend.sendAjax(this, this.props.url, this.state);
+                    AjaxSend.sendAjax(this, this.props.url, this.state, {
+                        firstname: { value: '', error: '' },
+                        email: { value: '', error: '' },
+                        message: { value: '', error: '' }
+                    })
                 }
                 this.recaptchaRef.current.reset();
             }

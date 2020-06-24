@@ -39,7 +39,9 @@ class FormLost extends React.Component {
         if(!validate.code){
             this.setState(validate.errors);
         }else{
-            AjaxSend.sendAjax(this, this.props.url, this.state);
+            AjaxSend.sendAjax(this, this.props.url, this.state, {
+                email: { value: '', error: '' }
+            });
         }
     }
 
