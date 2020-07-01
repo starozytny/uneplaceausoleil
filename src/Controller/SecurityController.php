@@ -95,8 +95,9 @@ class SecurityController extends AbstractController
 
         // Update User with code password and time
         $em->persist($user); $em->flush();
-
-        return new JsonResponse(['code' => 1, 'message' => 'Un lien de réinitialisation a été envoyé.']);
+        
+        $url = $this->generateUrl('app_login', array(), UrlGeneratorInterface::ABSOLUTE_URL);
+        return new JsonResponse(['code' => 1, 'message' => 'Un lien de réinitialisation a été envoyé. La page va se rafraichir automatiquement.', 'url' => $url]);
     }
     
     /**

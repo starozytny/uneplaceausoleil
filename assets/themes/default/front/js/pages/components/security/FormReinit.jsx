@@ -54,6 +54,16 @@ class FormReinit extends React.Component {
 
         return (
             <>
+                <div className="password-rules">
+                    <span>Règles de création de mot de passe</span>
+                    <ul>
+                        <li>12 caractères minimum</li>
+                        <li>au moins 1 majuscule</li>
+                        <li>au moins 1 minuscule</li>
+                        <li>au moins 1 chiffre</li>
+                        <li>au moins 1 caractère spécial</li>
+                    </ul>
+                </div>
                 <Formulaire 
                     onSubmit={this.handleSubmit}
                     success={success} error={error}
