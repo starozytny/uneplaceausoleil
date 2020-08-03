@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,600,700&display=swap');
-
 @mixin fontLight() { font-family: 'Poppins', sans-serif; font-weight: 300; }
 @mixin fontRegular() { font-family: 'Poppins', sans-serif; font-weight: 400; }
 @mixin fontSemibold() { font-family: 'Poppins', sans-serif; font-weight: 600; }
@@ -9,52 +7,3 @@
   display: flex;flex-direction: $direction;
   align-items: $align;justify-content: $justify;
 }
-
-@mixin displayBetween() {
-  display: flex;flex-direction: row;
-  align-items: center;justify-content: space-between;
-}
-@mixin displayCenter($direction: row) {
-  display: flex;flex-direction: $direction;
-  align-items: center;justify-content: center;
-}
-
-@mixin hide() { position: absolute; opacity: 0; z-index: -10; }
-@mixin show() { position: relative; opacity: 1; z-index: 0; }
-@mixin transition($temps: 0.2s) { transition: all $temps ease-in-out; }
-
-@mixin boxshadow($size: 10, $color: $alpha, $opacity: 0.8) {
-  box-shadow: 0 0 #{$size}px transparentize($color, $opacity);
-}
-
-
-$color0: #2B96D6;
-$color1: #377EAB;
-$color2: #103044;
-$color3: #272327;
-$color3-light: #2E292E;
-$color4: #171a1d;
-$color5: #F6F6F6;
-$color6: #8B8B8B;
-$color7: #131517;
-$color8: #A3D62B;
-
-$red: #f01e0d;
-$redStrong: #ac170a;
-$yellow: #ffd106;
-$yellowStrong: #d6ae05;
-$green: #1dba3c;
-$greenStrong: #4b8d53;
-$blue: #b1a2ff;
-$blueStrong: #8c80c9;
-
-$border: #E3E3E3;
-
-$error: #D62B42;
-$errorBg: #ffb9b9;
-$success: #169f50;
-$successBg: #83ffc5;
-$info: #405fb5;
-$infoBg: #9ff0ff;
-
-$alpha: #FFF;
