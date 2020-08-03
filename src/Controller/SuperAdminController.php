@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SuperAdminController extends AbstractController
 {
     /**
-     * @Route("/administrator", name="super_admin")
+     * @Route("/administrator/dashboard", options={"expose"=true}, name="super_dashboard")
      */
     public function index()
     {

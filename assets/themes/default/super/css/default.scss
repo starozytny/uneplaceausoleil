@@ -2,8 +2,11 @@
 @import "vars/fonts.scss";
 @import "vars/vars.scss";
 
+@import "components/menu.scss";
+
 body {
     @include fontRegular();
+    background-color: $colorFond;
 }
 
 h1, h2, h3, h4, p{

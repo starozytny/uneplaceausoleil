@@ -1,12 +1,25 @@
 {% extends 'themes/default/base_super.html.twig' %}
 
 {% block body %}
-    {% include 'themes/default/super/layout/components/deco.html.twig' %}
-    {% include 'themes/default/super/layout/components/menu.html.twig' %}
 
-    <main>
-        {% include 'themes/default/super/layout/components/header.html.twig' %}
-        
+    {% set menu = [
+        {
+            'path': path('super_dashboard'),
+            'icon': 'home',
+            'label': 'Dashboard',
+            'name': 'dashboard'
+        },
+        {
+            'path': path('super_users_index'),
+            'icon': 'user',
+            'label': 'Utilisateurs',
+            'name': 'utilisateurs'
+        }
+    ] %}
+
+    <div id="default" data-menu="{{ menu | json_encode() }}"></div>
+
+    <main>        
         {% block main_content %}{% endblock %}
     </main>
 {% endblock %}

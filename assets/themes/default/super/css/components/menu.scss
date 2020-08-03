@@ -1,0 +1,49 @@
+@import "../vars/vars.scss";
+
+nav{
+    width: 85%;
+    background-color: $alpha;
+    height: 100vh;
+}
+
+.nav-header{
+    padding: 25px;
+    @include flex(row, center, space-between);
+
+    a{
+        @include fontBold();
+        color: $color3;
+        font-size: 24px;
+    }
+
+    [class^="icon-"]{
+        font-weight: bold;
+        color: $color3;
+    }
+}
+
+.nav-body{
+    padding: 25px 15px;
+}
+
+.nav-item{
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+
+    a {
+        font-size: 18px;
+        color: $color0;
+    }
+    a > span:first-child{
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    &.active{
+        background-color: $color1;
+        a{
+            color: $color0;
+        }
+    }
+}
