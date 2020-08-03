@@ -3,6 +3,7 @@
 @import "vars/vars.scss";
 
 @import "components/menu.scss";
+@import "components/header.scss";
 
 body {
     @include fontRegular();
@@ -16,4 +17,19 @@ h1, h2, h3, h4, p{
 a{
     text-decoration: none;
     transition: all 0.2s ease-in-out;
+}
+
+.overlay{
+    background-color: transparentize($color: $color0, $amount: 0.7);
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+
+    &.active{
+        z-index: 5;
+        opacity: 1;
+    }
 }

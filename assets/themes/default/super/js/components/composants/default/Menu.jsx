@@ -26,6 +26,7 @@ export class Menu extends Component {
     }
 
     render () {
+        const {menuOpened, onCloseMenu} = this.props;
         const {menu, active} = this.state;
 
         let menuItems = menu.map((elem, index) => {
@@ -37,10 +38,10 @@ export class Menu extends Component {
             </div>
         })
 
-        return <nav>
+        return <nav className={menuOpened}>
             <div className="nav-header">
                 <a href={Routing.generate('super_dashboard')}><span>SuperAdmin</span></a>
-                <span className="icon-cancel"></span>
+                <span className="icon-cancel" onClick={onCloseMenu}></span>
             </div>
             <div className="nav-body">
                 <div className="nav-items">

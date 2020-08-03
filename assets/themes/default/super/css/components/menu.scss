@@ -4,6 +4,18 @@ nav{
     width: 85%;
     background-color: $alpha;
     height: 100vh;
+    position: fixed;
+    top: 0; left: 0;
+    transform: translateX(-150%);
+    opacity: 0;
+    z-index: -1;
+    transition: all 0.3s ease-in-out;
+
+    &.active{
+        transform: translateX(0);
+        opacity: 1;
+        z-index: 10;
+    }
 }
 
 .nav-header{
@@ -12,7 +24,7 @@ nav{
 
     a{
         @include fontBold();
-        color: $color3;
+        color: $color4;
         font-size: 24px;
     }
 

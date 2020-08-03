@@ -1,6 +1,7 @@
 {
     "devDependencies": {
-        "@babel/preset-react": "^7.10.1",
+        "@babel/plugin-proposal-class-properties": "^7.10.4",
+        "@babel/preset-react": "^7.10.4",
         "@symfony/webpack-encore": "^0.30.0",
         "autoprefixer": "^9.8.0",
         "core-js": "^3.0.0",

@@ -12,6 +12,6 @@ Routing.setRoutingData(routes);
 let def = document.getElementById("default");
 if(def){
     ReactDOM.render(
-        <Default menu={def.dataset.menu}/>, def
+        <Default menu={def.dataset.menu} username={def.dataset.username} avatar={def.dataset.avatar} />, def
     )
 }

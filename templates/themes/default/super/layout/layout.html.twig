@@ -17,7 +17,11 @@
         }
     ] %}
 
-    <div id="default" data-menu="{{ menu | json_encode() }}"></div>
+    <div id="default" 
+        data-menu="{{ menu | json_encode() }}" 
+        data-username="{{ app.user.username | capitalize }}" 
+        data-avatar="{{ app.user.avatar }}"
+    ></div>
 
     <main>        
         {% block main_content %}{% endblock %}
