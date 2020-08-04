@@ -1,7 +1,9 @@
-{% extends 'themes/default/super/layout/layout.html.twig' %}
+{% extends 'themes/default/super/pages/user/template.html.twig' %}
 
 {% block title %}Liste des utilisateurs {{ parent() }}{% endblock %}
 
 {% block main_content %}
     <h1>Liste des utilisateurs</h1>
+
+    <div id="users" data-users="{{ users | json_encode() }}"></div>
 {% endblock %}

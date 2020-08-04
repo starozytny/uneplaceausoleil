@@ -87,6 +87,7 @@ class User implements UserInterface
         $this->setCreateAt(new DateTime());
         $this->setRenouvTime(new DateTime());
         $this->setIsNew(true);
+        $this->setAvatar('profil.jpg');
         try {
             $this->setToken(bin2hex(random_bytes(32)));
         } catch (Exception $e) {
@@ -133,6 +134,33 @@ class User implements UserInterface
         $this->roles = $roles;
 
         return $this;
+    }
+
+    public function getHighRole(){
+        $rolesSortedByImportance = ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_USER'];
+        $rolesLabel = ['Super admin', 'Administrateur', 'Utilisateur'];
+        $i = 0;
+        foreach ($rolesSortedByImportance as $role)
+        {
+            if (in_array($role, $this->roles))
+            {
+                return $rolesLabel[$i];
+            }
+            $i++;
+        }
+        
+        return "Utilisateur";
+    }
+
+    public function getHighRoleCode(){
+        switch($this->getHighRole()){
+            case 'Super admin':
+                return 1;
+            case 'Administrateur':
+                return 2;
+            default:
+                return 0;
+        }
     }
 
     /**

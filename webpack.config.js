@@ -57,6 +57,7 @@ Encore
     .addEntry('default_admin', './assets/themes/default/back/js/default.jsx')
 
     .addEntry('default_super', './assets/themes/default/super/js/default.jsx')
+    .addEntry('default_super_users', './assets/themes/default/super/js/pages/users.jsx')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
