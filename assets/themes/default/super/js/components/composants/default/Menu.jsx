@@ -30,12 +30,10 @@ export class Menu extends Component {
         const {menu, active} = this.state;
 
         let menuItems = menu.map((elem, index) => {
-            return <div className={(active == elem.name) ? "nav-item active" : "nav-item"} key={index}>
-                <a href={elem.path}>
-                    <span className={"icon-" + elem.icon}></span>
-                    <span>{elem.label}</span>
-                </a>
-            </div>
+            return <a href={elem.path} className={(active == elem.name) ? "nav-item active" : "nav-item"} key={index}>
+                <span className={"icon-" + elem.icon}></span>
+                <span>{elem.label}</span>
+            </a>
         })
 
         return <nav className={menuOpened}>
