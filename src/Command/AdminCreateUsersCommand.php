@@ -7,6 +7,7 @@ use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -29,6 +30,7 @@ class AdminCreateUsersCommand extends Command
     {
         $this
             ->setDescription('Create an user and an admin.')
+            ->addOption('option', null, InputOption::VALUE_NONE, 'Option shit values')
         ;
     }
 
@@ -64,6 +66,7 @@ class AdminCreateUsersCommand extends Command
                 ->setEmail($user['email'])
                 ->setRoles($user['roles'])
                 ->setIsNew(false)
+                ->setAvatar('profil.jpg')
             ;
 
             $new->setPassword($this->passwordEncoder->encodePassword(
@@ -73,6 +76,31 @@ class AdminCreateUsersCommand extends Command
             $this->em->persist($new);
             $io->text('USER : ' . $user['username'] . ' créé' );
         }
+
+        if ($input->getOption('option')) {
+            $io->title('Création des utilisateurs lambdas');
+            for($i=0; $i<100 ; $i++) {
+                $new = (new User())
+                    ->setUsername("Utilisateur " . $i)
+                    ->setEmail("utilisateur".$i."@utilisateur.fr")
+                    ->setRoles(['ROLE_USER'])
+                    ->setIsNew(false)
+                ;
+
+                if ($i<5) {
+                    $new->setIsNew(true);
+                }
+
+                $new->setPassword($this->passwordEncoder->encodePassword(
+                    $new, 'azerty'
+                ));
+
+                $this->em->persist($new);
+                $io->text('USER : ' . "Utilisateur " . $i . ' créé' );
+            }
+        }
+
+        
         $this->em->flush();
 
         $io->comment('--- [FIN DE LA COMMANDE] ---');
