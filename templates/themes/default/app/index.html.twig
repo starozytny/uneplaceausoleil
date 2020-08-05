@@ -4,12 +4,13 @@
 {% block meta_keywords %}{% endblock %}
 
 {% block stylesheets %}
+    {{ parent() }}
     {{ encore_entry_link_tags('default_homepage') }}
 {% endblock %}
 
 {% block title %}Home{% endblock %}
 
-{% block body %}
+{% block main_content %}
     Hello world 
 
     <div id="r-compteur" class="compteur" data-count="1946">0</div>
@@ -29,5 +30,6 @@
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
     {{ encore_entry_script_tags('default_homepage') }}
 {% endblock %}

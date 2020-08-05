@@ -1,7 +1,12 @@
-{% extends 'themes/default/base_super.html.twig' %}
+{% extends 'themes/default/base.html.twig' %}
+
+{% block title %}| Administrator{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('default_super') }}
+{% endblock %}
 
 {% block body %}
-
     {% set menu = [
         {
             'path': path('super_dashboard'),
@@ -26,4 +31,9 @@
     <main>        
         {% block main_content %}{% endblock %}
     </main>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('default_super') }}
 {% endblock %}

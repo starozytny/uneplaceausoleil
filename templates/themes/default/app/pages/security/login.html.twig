@@ -3,10 +3,11 @@
 {% block title %}Log in!{% endblock %}
 
 {% block stylesheets %}
+    {{ parent() }}
     {{ encore_entry_link_tags('default_security') }}
 {% endblock %}
 
-{% block body %}
+{% block main_content %}
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -38,5 +39,6 @@
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
     {{ encore_entry_script_tags('default_security') }}
 {% endblock %}

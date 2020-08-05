@@ -3,15 +3,17 @@
 {% block title %}Contact{% endblock %}
 
 {% block stylesheets %}
+    {{ parent() }}
     {{ encore_entry_link_tags('default_contact') }}
 {% endblock %}
 
-{% block body %}
+{% block main_content %}
     <h1>Demande Contact</h1>
 
     <div id="form-contact"></div>
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
     {{ encore_entry_script_tags('default_contact') }}
 {% endblock %}

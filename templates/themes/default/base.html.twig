@@ -7,17 +7,13 @@
 	<meta name="keywords" content="{% block meta_keywords %}{% endblock %}" />
 	{% block openGraph %}{% endblock %}
 	<link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/png">
-	<title>{% block title %}| {% endblock %}</title>
+	<title>{% block title %}{% endblock %}</title>
 
-	{{ encore_entry_link_tags('default_app') }}
 	{% block stylesheets %}{% endblock %}
     </head>
     <body>
 		{# --------------- LOADER ---------------- #}
 		{% include "themes/default/components/loader.html.twig" %}
-		
-		{# --------------- VARIABLES ---------------- #}
-		{% set path_images = "build/themes/default/front/images/" %}
 
 		{# --------------- COOKIES ---------------- #}
 		<div id="param-cookies-container"></div>
@@ -25,7 +21,6 @@
 		{# --------------- BODY ---------------- #}
 		{% block body %}{% endblock %}
 		
-        {{ encore_entry_script_tags('default_app') }}
 		{% block javascripts %}{% endblock %}
     </body>
 </html>
