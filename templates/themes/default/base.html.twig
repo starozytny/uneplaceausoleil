@@ -13,7 +13,9 @@
 	{% block stylesheets %}{% endblock %}
     </head>
     <body>
-		<div id="loader"><span>Chargement...</span></div>
+		{# --------------- LOADER ---------------- #}
+		{% include "themes/default/components/loader.html.twig" %}
+		
 		{# --------------- VARIABLES ---------------- #}
 		{% set path_images = "build/themes/default/front/images/" %}
 
