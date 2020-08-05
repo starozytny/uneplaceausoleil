@@ -1,0 +1,19 @@
+@import "../vars/vars.scss";
+
+.toolbar{
+    padding-bottom: 25px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid $color5;
+}
+
+.toolbar{
+    input[type="search"]{
+        border: 1px solid $color5;
+        padding: 8px 10px;
+        border-radius: 3px;
+        font-size: 14px;
+        width: 100%;
+        outline-color: $alpha;
+    }
+}

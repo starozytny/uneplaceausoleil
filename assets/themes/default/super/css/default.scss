@@ -4,7 +4,9 @@
 
 @import "components/menu.scss";
 @import "components/header.scss";
+@import "components/loader.scss";
 @import "components/pagination.scss";
+@import "components/toolbar.scss";
 
 body {
     @include fontRegular();
