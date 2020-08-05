@@ -5,11 +5,10 @@ export class Pagination extends Component {
     constructor (props) {
         super(props)
 
-        let perPage = props.perPage != undefined ? props.perPage : 20;
         this.state = {
             offset: 0,
             currentPage: 0,
-            pageCount: Math.ceil(props.taille/ perPage),
+            perPage: props.perPage != undefined ? props.perPage : 20
         }
 
         this.handleClick = this.handleClick.bind(this);
@@ -25,7 +24,8 @@ export class Pagination extends Component {
     }
 
     render () {
-        const {pageCount} = this.state
+        const {taille} = this.props
+        const {perPage} = this.state
 
         return <>
             <ReactPaginate
@@ -33,7 +33,7 @@ export class Pagination extends Component {
                 nextLabel={<span className="icon-right-arrow"></span>}
                 breakLabel={'...'}
                 breakClassName={'break-me'}
-                pageCount={pageCount}
+                pageCount={Math.ceil(taille / perPage)}
                 marginPagesDisplayed={1}
                 pageRangeDisplayed={3}
                 onPageChange={this.handleClick}

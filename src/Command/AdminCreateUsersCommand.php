@@ -79,7 +79,7 @@ class AdminCreateUsersCommand extends Command
 
         if ($input->getOption('option')) {
             $io->title('Création des utilisateurs lambdas');
-            for($i=0; $i<100 ; $i++) {
+            for($i=0; $i<110 ; $i++) {
                 $new = (new User())
                     ->setUsername("Utilisateur " . $i)
                     ->setEmail("utilisateur".$i."@utilisateur.fr")

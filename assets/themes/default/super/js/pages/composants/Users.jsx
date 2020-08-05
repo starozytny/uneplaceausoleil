@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Page} from '../../components/composants/default/Page';
+import {Page} from '../../components/composants/page/Page';
 
 export class UsersList extends Component {
     render () {
@@ -31,34 +31,35 @@ export class Users extends Component {
         let usersList = users.slice(0, 12);
 
         this.state = {
+            usersImmuable: users,
             users: users,
             usersList: usersList,
+            tailleList: users.length
         }
 
-        this.updateList = this.updateList.bind(this)
+        this.handleUpdateList = this.handleUpdateList.bind(this)
+        this.handleSearch = this.handleSearch.bind(this)
     }
 
-    updateList = (usersList) => { this.setState({ usersList: usersList })  }
+    handleUpdateList = (usersList) => { this.setState({ usersList: usersList })  }
+    handleSearch = (value) => { 
+        let newItems = this.state.usersImmuable.filter(v => v.username.toLowerCase().includes(value))
+        let newList = newItems.slice(0, 12)
+        this.setState({ usersList: newList, users: newItems, tailleList: newItems.length })  
+    }
 
     render () {
-        const {users, usersList} = this.state;
+        const {users, usersList, tailleList} = this.state;
 
-        let content = <>
-        <div className="toolbar">
-                <div className="toolbar-left"></div>
-                <div className="toolbar-right">
-                    <div className="toolbar-item">
-                        <input type="search" placeholder="Rechercher"/>
-                    </div>
-                </div>
-            </div>
-        <div className="liste liste-user">
+        let content = <div className="liste liste-user">
             <UsersList users={usersList} />
         </div>
-        </>
 
         return <>
-            <Page content={content} havePagination="true" taille={users.length} itemsPagination={users} perPage="12" onUpdate={this.updateList}/>
+            <Page content={content} 
+                  havePagination="true" taille={tailleList} itemsPagination={users} perPage="12" onUpdate={this.handleUpdateList}
+                  haveSearch="true" onSearch={this.handleSearch}
+                  />
         </>
     }
 }
