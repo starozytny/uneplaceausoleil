@@ -43,7 +43,9 @@ export class Users extends Component {
 
     handleUpdateList = (usersList) => { this.setState({ usersList: usersList })  }
     handleSearch = (value) => { 
-        let newItems = this.state.usersImmuable.filter(v => v.username.toLowerCase().includes(value))
+        let newItems = this.state.usersImmuable.filter(function(v) {
+            if(v.username.toLowerCase().includes(value) || v.email.toLowerCase().includes(value)){ return v; }
+        })
         let newList = newItems.slice(0, 12)
         this.setState({ usersList: newList, users: newItems, tailleList: newItems.length })  
     }

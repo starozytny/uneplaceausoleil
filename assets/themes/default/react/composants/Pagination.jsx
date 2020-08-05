@@ -15,7 +15,6 @@ export class Pagination extends Component {
     }
 
     handleClick = (e) => {
-        console.log(e)
         const selectedPage = e.selected;
         const offset = selectedPage * this.props.perPage;
 
