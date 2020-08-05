@@ -5,7 +5,7 @@ export class UsersList extends Component {
     render () {
         const {users} = this.props
 
-        let items = users.map((elem, index) => {
+        let items = users.map(elem => {
             return <div className="item-user" key={elem.id}>
                 <div className="item-user-roles"><div className={"user-badge user-badge-" + elem.highRoleCode}>{elem.highRole}</div></div>
                 <div className="item-user-avatar">
@@ -28,7 +28,7 @@ export class Users extends Component {
         super(props)
 
         let users = JSON.parse(JSON.parse(props.users));
-        let usersList = users.slice(0, 20);
+        let usersList = users.slice(0, 12);
 
         this.state = {
             users: users,
@@ -43,12 +43,22 @@ export class Users extends Component {
     render () {
         const {users, usersList} = this.state;
 
-        let content = <div className="liste liste-user">
+        let content = <>
+        <div className="toolbar">
+                <div className="toolbar-left"></div>
+                <div className="toolbar-right">
+                    <div className="toolbar-item">
+                        <input type="search" placeholder="Rechercher"/>
+                    </div>
+                </div>
+            </div>
+        <div className="liste liste-user">
             <UsersList users={usersList} />
         </div>
+        </>
 
         return <>
-            <Page content={content} havePagination="true" taille={users.length} itemsPagination={users} perPage="20" onUpdate={this.updateList}/>
+            <Page content={content} havePagination="true" taille={users.length} itemsPagination={users} perPage="12" onUpdate={this.updateList}/>
         </>
     }
 }
