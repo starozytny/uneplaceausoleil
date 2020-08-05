@@ -16,6 +16,7 @@ export class Pagination extends Component {
     }
 
     handleClick = (e) => {
+        console.log(e)
         const selectedPage = e.selected;
         const offset = selectedPage * this.props.perPage;
 
@@ -33,8 +34,8 @@ export class Pagination extends Component {
                 breakLabel={'...'}
                 breakClassName={'break-me'}
                 pageCount={pageCount}
-                marginPagesDisplayed={2}
-                pageRangeDisplayed={5}
+                marginPagesDisplayed={1}
+                pageRangeDisplayed={3}
                 onPageChange={this.handleClick}
                 containerClassName={'pagination'}
                 subContainerClassName={'pages pagination'}
