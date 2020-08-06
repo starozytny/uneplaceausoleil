@@ -7,13 +7,22 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.4s ease-in-out;
+    outline: none;
+
+    span{
+        display: inline-block;
+        transition: transform 0.2s ease-in-out;
+    }
 }
 
 .btn-primary{
     background-color: $nuanceColor4;
     background-image: linear-gradient(127deg,rgba(255,255,255,0), $color4);
 
-    &:hover{
+    &:hover, &:focus{
         background-color: $color4;
+        span{
+            transform: scale(0.97);
+        }
     }
 }

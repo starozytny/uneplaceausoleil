@@ -152,7 +152,7 @@ export class AsideUser extends Component {
                     <Input type="email" identifiant="email" valeur={email} onChange={this.handleChange}>Adresse e-mail</Input>
                 </div>
                 <div className="form-button">
-                    <button type="submit" className="btn btn-primary">Mettre à jour</button>
+                    <button type="submit" className="btn btn-primary"><span>Mettre à jour</span></button>
                 </div>
             </form>
         </>
