@@ -13,16 +13,20 @@ export function Input({type="text", identifiant, valeur, onChange, children, pla
 export function Checkbox({items, name, valeur, onChange, children}) {
 
     let itemsInputs = items.map(elem => {
-        return <label htmlFor={elem.id} key={elem.value}>
-            {elem.label}
-            <input type="checkbox" name={name} id={elem.id} value={elem.role} checked={elem.checked ? 'checked' : ''} onChange={onChange}/>
-        </label>
+        return <div className={"checkbox-item " + (elem.checked ? 'checked' : '')} key={elem.value}>
+            <label htmlFor={elem.id}>
+                {elem.label}
+                <input type="checkbox" name={name} id={elem.id} value={elem.role} checked={elem.checked ? 'checked' : ''} onChange={onChange}/>
+            </label>
+        </div>
     })
 
     return (
         <div className={'form-group form-group-checbox' + (valeur.error ? " form-group-error" : "")}>
             <label>{children}</label>
-            {itemsInputs}
+            <div className="checkbox-items">
+                {itemsInputs}
+            </div>
             <div className="error">{valeur.error ? <>{valeur.error}<span className='icon-warning'></span></> : null}</div>
         </div>
     );

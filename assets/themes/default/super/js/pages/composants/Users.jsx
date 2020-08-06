@@ -222,9 +222,10 @@ export class AsideUser extends Component {
         const {user, error, username, email, roles} = this.state
 
         let rolesItems = [
-            { 'value': 0, 'role': 'ROLE_USER',  'label': 'Utilisateur', 'id': 'utilisateur', 'checked': false },
             { 'value': 1, 'role': 'ROLE_SUPER_ADMIN', 'label': 'Super admin', 'id': 'superamdin', 'checked': false },
-            { 'value': 2, 'role': 'ROLE_ADMIN', 'label': 'Admin', 'id': 'admin', 'checked': false }
+            { 'value': 2, 'role': 'ROLE_ADMIN', 'label': 'Admin', 'id': 'admin', 'checked': false },
+            { 'value': 0, 'role': 'ROLE_USER',  'label': 'Utilisateur', 'id': 'utilisateur', 'checked': false },
+            
         ]
 
         if(user != undefined){

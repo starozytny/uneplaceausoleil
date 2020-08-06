@@ -38,6 +38,40 @@ input{
         border: 1px solid transparentize($color: $color0, $amount: .7);
     }
 }
+.checkbox-items{
+    @include flex(row, stretch, flex-start);
+    & > .checkbox-item:not(:last-child){
+        margin-right: 10px;
+    }
+}
+.checkbox-item{
+    &.checked > label{
+        border: 1px solid $color6;
+        color: $color6;
+
+        &:hover{
+            background-color: $colorFond;
+        }
+    }
+
+    label{
+        padding: 5px 10px;
+        text-transform: capitalize;
+        border: 1px dashed $color5;
+        color: $color5;
+        cursor: pointer;
+        border-radius: 3px;
+        transition: all 0.2s ease-in-out;
+
+        &:hover{
+            color: $color6;
+        }
+    }
+
+    input{
+        display: none;
+    }
+}
 
 .form-group-error{
     label{
