@@ -8,6 +8,7 @@ import {Page} from '../../components/composants/page/Page';
 import {Aside} from '../../components/composants/page/Aside';
 import {Input, Checkbox} from '../../../../react/composants/Fields';
 import {Alert} from '../../../../react/composants/Alert';
+import {Drop} from '../../../../react/composants/Drop';
 
 export class UsersList extends Component {
     constructor (props) {
@@ -242,7 +243,7 @@ export class AsideUser extends Component {
                 <div>Renouvellement du mot de passe le {user.renouvTimeString}</div>
             </div>}
             
-            <form onSubmit={this.handleSubmit}>
+            <form className="aside-user-form" onSubmit={this.handleSubmit}>
                 <span className="form-title">Modification</span>
                 {error != '' ? <Alert type="danger" message={error} active="true" /> : null}
                 <div className="line line-2">
@@ -251,6 +252,14 @@ export class AsideUser extends Component {
                 </div>
                 <div className="line">
                     <Checkbox items={rolesItems} name="roles" valeur={roles} onChange={this.handleChange}>Roles</Checkbox>
+                </div>
+                <div className="line">
+                    <div className="form-files">
+                        <div className="form-avatar">
+                            {user === undefined ? null : <img src={'/admin/avatar/' + user.avatar} alt="Avatar actuel de l'utilisateur"/>}
+                        </div>
+                        <Drop label="Téléverser un nouvel avatar" />
+                    </div>
                 </div>
                 <div className="form-button">
                     <button type="submit" className="btn btn-primary"><span>Mettre à jour</span></button>

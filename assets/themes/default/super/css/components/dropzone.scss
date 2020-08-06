@@ -1,0 +1,17 @@
+@import "../vars/vars.scss";
+
+.form-files{
+    .dzu-dropzone{
+        overflow: hidden;
+        border: 1px dashed $color5;
+        width: 100% !important;
+        height: auto !important;
+    
+        .dzu-inputLabel{
+            @include flex(column, center, center);
+            color: $color6;
+            text-align: center;
+            font-weight: inherit;
+        }
+    }
+}
