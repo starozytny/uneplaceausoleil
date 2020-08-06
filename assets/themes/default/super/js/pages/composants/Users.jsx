@@ -53,6 +53,15 @@ export class UsersList extends Component {
     }
 }
 
+function updateInArray(array, user){
+    let arr = []
+    array.map(elem => {
+        if(elem.id == user.id){ elem = user }
+        arr.push(elem)
+    })
+    return arr;
+}
+
 export class Users extends Component {
     constructor (props) {
         super(props)
@@ -97,12 +106,12 @@ export class Users extends Component {
         this.refs.asideuser.handleUpdate(user)
         this.refs.aside.handleUpdate(user.username) 
 
-        let arr = []
-        this.state.usersList.map(elem => {
-            if(elem.id == user.id){ elem = user }
-            arr.push(elem)
+        
+        this.setState({
+            usersList: updateInArray(this.state.usersList, user), 
+            users: updateInArray(this.state.users, user),
+            usersImmuable: updateInArray(this.state.usersImmuable, user)
         })
-        this.setState({usersList: arr})
     }
 
     render () {
@@ -141,6 +150,7 @@ export class AsideUser extends Component {
     handleUpdate = (user) => {
         this.setState({
             user: user,
+            users: this.props.users,
             username: {value: user.username, error:''},
             email: {value: user.email, error:''},
         })
@@ -152,14 +162,14 @@ export class AsideUser extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
 
-        const {user, username, email} = this.state
+        const {user, users, username, email} = this.state
 
         let validate = Validateur.validateur([
             {type: "text", id: 'username', value: username.value},
             {type: "email", id: 'email', value: email.value},
         ]);
 
-        if(this.props.users.filter(v => v.username.toLowerCase() == username.value && v.id != user.id).length != 0){
+        if(users.filter(v => v.username.toLowerCase() == username.value.toLowerCase() && v.id != user.id).length != 0){
             validate.code = false;
             validate.errors = {...validate.errors, ...{username: {value: username.value, error: 'Ce nom d\'utilisateur est déjà pris.'}}};
         }
@@ -179,7 +189,10 @@ export class AsideUser extends Component {
                 if(code === 1){
                     user.username = username.value;
                     user.email = email.value;
+                    
+                    self.setState({users: updateInArray(self.state.users, user),})
                     self.props.onUpdate(user)
+
                     toastr.info('Mise à jour effectuée.')
                 }else{
                     self.setState({error: data.message})
