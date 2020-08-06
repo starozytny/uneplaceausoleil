@@ -44,6 +44,11 @@
     .icon-cancel{
         font-size: 14px;
         cursor: pointer;
+        transition: transform 0.4s ease-in-out;
+
+        &:hover{
+            transform: rotate(360deg);
+        }
     }
 }
 
