@@ -18,6 +18,16 @@ function validateEmail($value){
     };
 }
 
+function validateArray($value){
+    if($value.length <= 0){
+        return {
+            'code': false,
+            'message': 'Ce champ doit être renseigné.'
+        };
+    }
+    return {'code': true};
+}
+
 function validateur(values){
     let validate; let code = true;
     let errors = {};
@@ -28,6 +38,9 @@ function validateur(values){
                 break;
             case 'email':
                 validate = validateEmail(element.value);
+                break;
+            case 'array':
+                validate = validateArray(element.value);
                 break;
         }
         if(!validate.code){

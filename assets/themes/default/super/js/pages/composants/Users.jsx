@@ -6,7 +6,7 @@ import Loader from '../../../../react/functions/loader';
 import Validateur from '../../../../react/functions/validateur';
 import {Page} from '../../components/composants/page/Page';
 import {Aside} from '../../components/composants/page/Aside';
-import {Input} from '../../../../react/composants/Fields';
+import {Input, Checkbox} from '../../../../react/composants/Fields';
 import {Alert} from '../../../../react/composants/Alert';
 
 export class UsersList extends Component {
@@ -140,7 +140,8 @@ export class AsideUser extends Component {
         this.state = {
             error: '',
             username: {value: '', error: ''},
-            email: {value: '', error: ''}
+            email: {value: '', error: ''},
+            roles: {value: '', error:''}
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -153,20 +154,32 @@ export class AsideUser extends Component {
             users: this.props.users,
             username: {value: user.username, error:''},
             email: {value: user.email, error:''},
+            roles: {value: user.roles, error:''},
         })
         document.getElementById("username").focus();
     }
 
-    handleChange = (e) => { this.setState({[e.currentTarget.name]: {value: e.currentTarget.value}}) }
+    handleChange = (e) => { 
+        let name = e.currentTarget.name;
+        let value = e.currentTarget.value;
+
+        const {roles} = this.state
+        if(name === "roles"){
+            value = (e.currentTarget.checked) ? [...roles.value, ...[value]] :  roles.value.filter(v => v != value)
+        }        
+
+        this.setState({[name]: {value: value}}) 
+    }
 
     handleSubmit = (e) => {
         e.preventDefault()
 
-        const {user, users, username, email} = this.state
+        const {user, users, username, email, roles} = this.state
 
         let validate = Validateur.validateur([
             {type: "text", id: 'username', value: username.value},
             {type: "email", id: 'email', value: email.value},
+            {type: "array", id: 'roles', value: roles.value}
         ]);
 
         if(users.filter(v => v.username.toLowerCase() == username.value.toLowerCase() && v.id != user.id).length != 0){
@@ -189,7 +202,10 @@ export class AsideUser extends Component {
                 if(code === 1){
                     user.username = username.value;
                     user.email = email.value;
-                    
+                    user.roles = roles.value;
+                    user.highRoleCode = data.highRoleCode;
+                    user.highRole = data.highRole;
+
                     self.setState({users: updateInArray(self.state.users, user),})
                     self.props.onUpdate(user)
 
@@ -203,7 +219,21 @@ export class AsideUser extends Component {
     }
 
     render () {
-        const {user, error, username, email} = this.state
+        const {user, error, username, email, roles} = this.state
+
+        let rolesItems = [
+            { 'value': 0, 'role': 'ROLE_USER',  'label': 'Utilisateur', 'id': 'utilisateur', 'checked': false },
+            { 'value': 1, 'role': 'ROLE_SUPER_ADMIN', 'label': 'Super admin', 'id': 'superamdin', 'checked': false },
+            { 'value': 2, 'role': 'ROLE_ADMIN', 'label': 'Admin', 'id': 'admin', 'checked': false }
+        ]
+
+        if(user != undefined){
+            rolesItems.map(el => {
+                roles.value.map(elem => {
+                    if (elem == el.role){ el.checked = true }
+                })
+            })
+        }
 
         return <>
             {user === undefined ? null : <div className="aside-user-informations">
@@ -217,6 +247,9 @@ export class AsideUser extends Component {
                 <div className="line line-2">
                     <Input identifiant="username" valeur={username} onChange={this.handleChange}>Nom d'utilisateur</Input>
                     <Input type="email" identifiant="email" valeur={email} onChange={this.handleChange}>Adresse e-mail</Input>
+                </div>
+                <div className="line">
+                    <Checkbox items={rolesItems} name="roles" valeur={roles} onChange={this.handleChange}>Roles</Checkbox>
                 </div>
                 <div className="form-button">
                     <button type="submit" className="btn btn-primary"><span>Mettre à jour</span></button>

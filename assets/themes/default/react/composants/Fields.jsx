@@ -10,6 +10,24 @@ export function Input({type="text", identifiant, valeur, onChange, children, pla
     );
 }
 
+export function Checkbox({items, name, valeur, onChange, children}) {
+
+    let itemsInputs = items.map(elem => {
+        return <label htmlFor={elem.id} key={elem.value}>
+            {elem.label}
+            <input type="checkbox" name={name} id={elem.id} value={elem.role} checked={elem.checked ? 'checked' : ''} onChange={onChange}/>
+        </label>
+    })
+
+    return (
+        <div className={'form-group form-group-checbox' + (valeur.error ? " form-group-error" : "")}>
+            <label>{children}</label>
+            {itemsInputs}
+            <div className="error">{valeur.error ? <>{valeur.error}<span className='icon-warning'></span></> : null}</div>
+        </div>
+    );
+}
+
 export function TextArea({name, identifiant, onChange, error, children}) {
     return (
         <div className={'form-group' + (error ? " form-group-error" : "")}>

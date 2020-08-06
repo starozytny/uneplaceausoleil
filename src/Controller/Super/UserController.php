@@ -44,8 +44,9 @@ class UserController extends AbstractController
 
         $user->setUsername($data->username->value);
         $user->setEmail($data->email->value);
+        $user->setRoles($data->roles->value);
 
         $em->persist($user); $em->flush();
-        return new JsonResponse(['code' => 1]);
+        return new JsonResponse(['code' => 1, 'highRoleCode' => $user->getHighRoleCode(), 'highRole' => $user->getHighRole()]);
     }
 }
