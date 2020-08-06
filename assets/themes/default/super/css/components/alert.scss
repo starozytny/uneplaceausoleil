@@ -1,0 +1,17 @@
+@import "../vars/vars.scss";
+
+.alert{
+    margin: 15px 0;
+    padding: 10px;
+    font-size: 14px;
+
+    [class^="icon-"]{
+        display: inline-block;
+        margin-right: 10px;
+    }
+}
+
+.alert-danger{
+    background-color: transparentize($color: $error, $amount: 0.89);
+    color: $error;
+}

@@ -4,7 +4,7 @@
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background-color: transparentize($color: $color3, $amount: 0.6);
+    background-color: transparentize($color: $color0, $amount: 0.6);
     z-index: 10000;
     @include flex(column, center, center);
     display: none;
