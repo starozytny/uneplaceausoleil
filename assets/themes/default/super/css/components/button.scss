@@ -1,0 +1,19 @@
+@import '../vars/vars.scss';
+
+.btn{
+    border: 1px solid $color5;
+    text-transform: uppercase;
+    padding: 10px 22px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.4s ease-in-out;
+}
+
+.btn-primary{
+    background-color: $nuanceColor4;
+    background-image: linear-gradient(127deg,rgba(255,255,255,0), $color4);
+
+    &:hover{
+        background-color: $color4;
+    }
+}

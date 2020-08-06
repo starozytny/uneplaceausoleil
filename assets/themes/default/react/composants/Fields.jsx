@@ -1,11 +1,11 @@
 import React from 'react';
 
-export function Input({type, identifiant, value, onChange, error, children, placeholder}) {
+export function Input({type="text", identifiant, valeur, onChange, children, placeholder}) {
     return (
-        <div className={'form-group' + (error ? " form-group-error" : "")}>
+        <div className={'form-group' + (valeur.error ? " form-group-error" : "")}>
             <label htmlFor={identifiant}>{children}</label>
-            <input type={type} name={identifiant} id={identifiant} placeholder={placeholder} value={value} onChange={onChange}/>
-            <div className="error">{error ? error : null}</div>
+            <input type={type} name={identifiant} id={identifiant} placeholder={placeholder} value={valeur.value} onChange={onChange}/>
+            <div className="error">{valeur.error ? <>{valeur.error}<span className='icon-warning'></span></> : null}</div>
         </div>
     );
 }

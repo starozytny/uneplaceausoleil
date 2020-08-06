@@ -116,6 +116,20 @@
     }
 }
 
+#users .aside-title{
+    .title{
+        text-transform: capitalize;
+    }
+}
+
+.aside-user-informations{
+    font-size: 14px;
+    margin-bottom: 25px;
+    color: $color6;
+    padding-bottom: 25px;
+    border-bottom: 1px solid $color5;
+}
+
 //                      __   _____ __    ___    __
 //                     | _| |___  / /_  ( _ )  |_ |
 //    _____ _____ _____| |     / / '_ \ / _ \   | |_____ _____ _____

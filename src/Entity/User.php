@@ -231,6 +231,11 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getCreateAtString() 
+    {
+        return date_format($this->getCreateAt(), 'd/m/Y \à H:i');
+    }
+
     public function getPasswordCode(): ?string
     {
         return $this->password_code;
@@ -265,6 +270,11 @@ class User implements UserInterface
         $this->renouv_time = $renouv_time;
 
         return $this;
+    }
+
+    public function getRenouvTimeString()
+    {
+        return date_format($this->getRenouvTime(), 'd/m/Y');
     }
 
     public function getRenouvCode(): ?string

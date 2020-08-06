@@ -21,7 +21,7 @@ export class Search extends Component {
     render () {
         const {search} = this.state;
         return <>
-            <Input type="search" identifiant="search" value={search.value} error={search.error} onChange={this.handleChange} placeholder="Recherche" />
+            <Input type="search" identifiant="search" valeur={search} onChange={this.handleChange} placeholder="Recherche" />
         </>
     }
 }
