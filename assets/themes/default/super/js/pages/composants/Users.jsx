@@ -4,7 +4,7 @@ import {Aside} from '../../components/composants/page/Aside';
 
 export class UsersList extends Component {
     render () {
-        const {users} = this.props
+        const {users, onOpenAside} = this.props
 
         let items = users.map(elem => {
             return <div className="item-user" key={elem.id}>
@@ -16,7 +16,7 @@ export class UsersList extends Component {
                         <span className="icon-more"></span>
                         <div className="user-actions-drop">
                             <div className="drop-items">
-                                <span className="drop-item">Modifier</span>
+                                <span className="drop-item" onClick={onOpenAside}>Modifier</span>
                                 <span className="drop-item">Supprimer</span>
                             </div>
                         </div>
@@ -47,15 +47,12 @@ export class Users extends Component {
             usersImmuable: users,
             users: users,
             usersList: usersList,
-            tailleList: users.length
+            tailleList: users.length,
         }
 
         this.handleUpdateList = this.handleUpdateList.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
-    }
-
-    componentDidMount = () => {
-        this.setState({asideContent: this.generateAside})
+        this.handleOpenAside = this.handleOpenAside.bind(this)
     }
 
     handleUpdateList = (usersList) => { this.setState({ usersList: usersList })  }
@@ -67,14 +64,15 @@ export class Users extends Component {
         this.setState({ usersList: newList, users: newItems, tailleList: newItems.length })  
     }
 
+    handleOpenAside = (e) => { this.refs.aside.handleUpdate() }
+
     render () {
         const {users, usersList, tailleList} = this.state;
 
         let asideContent = <div>Hello</div>
 
         let content = <div className="liste liste-user">
-            <UsersList users={usersList} />
-            
+            <UsersList users={usersList} onOpenAside={this.handleOpenAside} />
         </div>
 
         return <>
@@ -82,7 +80,7 @@ export class Users extends Component {
                   havePagination="true" taille={tailleList} itemsPagination={users} perPage="12" onUpdate={this.handleUpdateList}
                   haveSearch="true" onSearch={this.handleSearch}
                   />
-            <Aside content={asideContent} title="Détails" />
+            <Aside content={asideContent} title="Détails" ref="aside"/>
         </>
     }
 }
