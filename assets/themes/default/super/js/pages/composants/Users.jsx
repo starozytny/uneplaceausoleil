@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Page} from '../../components/composants/page/Page';
+import {Aside} from '../../components/composants/page/Aside';
 
 export class UsersList extends Component {
     render () {
@@ -7,15 +8,27 @@ export class UsersList extends Component {
 
         let items = users.map(elem => {
             return <div className="item-user" key={elem.id}>
-                <div className="item-user-roles"><div className={"user-badge user-badge-" + elem.highRoleCode}>{elem.highRole}</div></div>
+                <div className="item-user-actions">
+                    <div className="user-selector">
+                        <label><input type="checkbox" name="user-selector" /></label>
+                    </div>
+                    <div className="user-actions">
+                        <span className="icon-more"></span>
+                        <div className="user-actions-drop">
+                            <div className="drop-items">
+                                <span className="drop-item">Modifier</span>
+                                <span className="drop-item">Supprimer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div className="item-user-avatar">
                     <img src={"../../admin/avatar/" + elem.avatar} alt={"avatar de " + elem.username} />
                 </div>
                 <div className="item-user-username">{elem.username}</div>
                 <div className="item-user-email">{elem.email}</div>   
-                <div className="item-user-status">
-                    {elem.isNew ? <div className="user-new"><span className="icon-certificate"></span></div> : null}    
-                </div>             
+                {elem.highRoleCode != 0 ? <div className="item-user-roles"><div className={"user-badge user-badge-" + elem.highRoleCode}>{elem.highRole}</div></div> : null}
+                {elem.isNew ? <div className="item-user-status"><div className="user-new"><span className="icon-certificate"></span></div></div> : null}          
             </div>
         })
 
@@ -41,6 +54,10 @@ export class Users extends Component {
         this.handleSearch = this.handleSearch.bind(this)
     }
 
+    componentDidMount = () => {
+        this.setState({asideContent: this.generateAside})
+    }
+
     handleUpdateList = (usersList) => { this.setState({ usersList: usersList })  }
     handleSearch = (value) => { 
         let newItems = this.state.usersImmuable.filter(function(v) {
@@ -53,8 +70,11 @@ export class Users extends Component {
     render () {
         const {users, usersList, tailleList} = this.state;
 
+        let asideContent = <div>Hello</div>
+
         let content = <div className="liste liste-user">
             <UsersList users={usersList} />
+            
         </div>
 
         return <>
@@ -62,6 +82,7 @@ export class Users extends Component {
                   havePagination="true" taille={tailleList} itemsPagination={users} perPage="12" onUpdate={this.handleUpdateList}
                   haveSearch="true" onSearch={this.handleSearch}
                   />
+            <Aside content={asideContent} title="Détails" />
         </>
     }
 }

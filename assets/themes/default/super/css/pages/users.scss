@@ -2,23 +2,77 @@
 
 .item-user{
     background-color: $alpha;
-    padding: 25px 10px;
+    padding: 10px 10px 25px 10px;
     @include flex(column, center, flex-start);
-    box-shadow: 0 0 10px transparentize($color: $color0, $amount: 0.9);
+    @include boxshadow();
     margin-bottom: 30px;
 }
 
-.item-user-roles{
-    margin-bottom: 10px;
+.item-user-actions{
+    @include flex(row, center, space-between);
+    width: 100%;
+    margin-bottom: 15px;
 
-    .user-badge{
-        padding: 4px 8px;
+    input{
+        cursor: pointer;
+    }
+
+    .user-actions{
+        position: relative;
+        @include flex(row, center, center);
         border-radius: 5px;
-        font-size: 14px;
+        width: 26px; height: 26px;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
 
-        &.user-badge-0{ background-color: $nuance0; }
-        &.user-badge-1{ background-color: $nuance1; }
-        &.user-badge-2{ background-color: $nuance2; }
+        &:hover{
+            background-color: $colorFond;
+            .icon-more{
+                color: $color0;
+            }
+            .user-actions-drop{
+                z-index: 1; opacity: 1;
+            }
+        }
+
+        .icon-more{
+            display: inline-block;
+            transform: rotate(90deg);
+            font-weight: bold;
+            color: $colorDisabled;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .user-actions-drop{
+            position: absolute;
+            top: 0; right: 0;
+            padding: 30px 0 0 0;
+            z-index: -1; opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+
+            &:hover{
+                z-index: 1; opacity: 1;
+            }
+
+            .drop-items{
+                background-color: $alpha;
+                border-radius: 5px;
+                @include boxshadow();
+                @include flex(column, stretch, flex-end);
+                font-size: 14px;
+                text-align: right;
+                overflow: hidden;
+            }
+            .drop-item{
+                padding: 5px 10px;
+                opacity: 0.6;
+                transition: opacity 0.2s ease-in-out;
+
+                &:hover{
+                    opacity: 1;
+                }
+            }
+        }
     }
 }
 
@@ -42,6 +96,18 @@
 .item-user-email{
     font-size: 14px;
     margin-bottom: 10px;
+}
+
+.item-user-roles{
+    .user-badge{
+        padding: 4px 8px;
+        border-radius: 5px;
+        font-size: 14px;
+
+        &.user-badge-0{ background-color: $nuance0; }
+        &.user-badge-1{ background-color: $nuance1; }
+        &.user-badge-2{ background-color: $nuance2; }
+    }
 }
 
 .item-user-status{

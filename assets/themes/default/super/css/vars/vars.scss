@@ -8,6 +8,10 @@
   align-items: $align;justify-content: $justify;
 }
 
+@mixin boxshadow(){
+  box-shadow: 0 0 10px transparentize($color: $color0, $amount: 0.9);
+}
+
 $color0: #1A535C;
 $color1: #4ECDC4;
 $color2: #F7FFF7;
