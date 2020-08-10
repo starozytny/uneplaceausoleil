@@ -4,6 +4,7 @@
 
 @import "toastr";
 
+@import "components/cookies.scss";
 @import "components/menu.scss";
 @import "components/header.scss";
 @import "components/loader.scss";
@@ -20,6 +21,7 @@
 body {
     @include fontRegular();
     background-color: $colorFond;
+    line-height: 1.37;
 }
 
 h1, h2, h3, h4, p{

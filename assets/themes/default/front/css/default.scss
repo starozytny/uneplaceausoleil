@@ -8,6 +8,7 @@
 body {
     background-color: lightgray;
     @include fontRegular();
+    line-height: 1.37;
 }
 
 h1, h2, h3, h4, p{
