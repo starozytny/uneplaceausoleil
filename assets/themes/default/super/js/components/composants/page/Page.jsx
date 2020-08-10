@@ -13,14 +13,14 @@ export class Page extends Component {
             havePagination, perPage, taille, itemsPagination, 
             haveSearch, onSearch,
             haveAdd, onAdd,
-            haveExport
+            haveExport, urlExportExcel, nameExport
         } = this.props
 
         return <>
             <Toolbar haveSearch={haveSearch} onSearch={onSearch} haveAdd={haveAdd} onAdd={onAdd}/>
             {content}
             {havePagination ? <Pagination perPage={perPage} taille={taille} items={itemsPagination} onUpdate={(items) => this.props.onUpdate(items)}/> : null}
-            <Others haveExport={haveExport} />
+            <Others haveExport={haveExport} urlExportExcel={urlExportExcel} nameExport={nameExport}/>
         </>
     }
 }

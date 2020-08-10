@@ -3,8 +3,10 @@
 namespace App\Controller\Super;
 
 use App\Entity\User;
+use App\Service\Export;
 use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -121,5 +123,35 @@ class UserController extends AbstractController
 
         $em->remove($user); $em->flush();
         return new JsonResponse(['code' => 1]);
+    }
+
+    /**
+    * @Route("/export/utilisateurs", options={"expose"=true}, name="export")
+    */
+    public function export(Export $export)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository(User::class)->findBy(array(), array('username' => 'ASC'));
+        $data = array();
+
+        foreach ($users as $user) {
+            $tmp = array(
+                $user->getId(),
+                $user->getUsername(),
+                $user->getHighRole(),
+                $user->getEmail(),
+                date_format($user->getCreateAt(), 'd/m/Y'),
+            );
+            if(!in_array($tmp, $data)){
+                array_push($data, $tmp);
+            }
+        }
+
+        $fileName = 'utilisateurs.xlsx';
+
+        $header = array(array('ID', 'Nom utilisateur', 'Role', 'Email', 'Date de creation'));
+        $json = $export->createFile('excel', 'Liste des utilisateurs', $fileName , $header, $data, 5, null);
+        
+        return new BinaryFileResponse($this->getParameter('private_directory'). 'export/' . $fileName);
     }
 }
