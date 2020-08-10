@@ -39,7 +39,7 @@ export class UsersList extends Component {
             return <div className="item-user" key={elem.id}>
                 <div className="item-user-actions">
                     <div className="user-selector">
-                        {elem.highRoleCode != 1 ? <label><input type="checkbox" name="user-selector" /></label> : null}
+                        {/* {elem.highRoleCode != 1 ? <label><input type="checkbox" name="user-selector" /></label> : null} */}
                     </div>
                     <div className="user-actions">
                         <span className="icon-more"></span>
