@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Routing from '../../../../../../../../public/bundles/fosjsrouting/js/router.min.js';
 
 export class Header extends Component {
     render () {
@@ -6,7 +7,8 @@ export class Header extends Component {
 
         return <header>
             <div className="header-user">
-                <span className="header-user-username">{username}</span>
+                <div className="header-user-username">{username}</div>
+                <a href={Routing.generate('app_logout')} title="Se déconnecter"><span className="icon-logout"></span></a>
             </div>
             <span className="icon-menu" onClick={onOpenMenu}></span>
         </header>

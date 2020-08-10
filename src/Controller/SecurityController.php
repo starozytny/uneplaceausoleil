@@ -36,7 +36,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="app_logout")
+     * @Route("/logout", options={"expose"=true}, name="app_logout")
      */
     public function logout()
     {
