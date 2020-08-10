@@ -1,0 +1,23 @@
+@import "../vars/vars.scss";
+
+.others{
+    padding-top: 15px;
+    margin-top: 30px;
+    border-top: 1px solid $color5;
+
+    .others-left + .others-right{
+        margin-top: 10px;
+    }
+}
+
+//                      __   _____ __    ___    __
+//                     | _| |___  / /_  ( _ )  |_ |
+//    _____ _____ _____| |     / / '_ \ / _ \   | |_____ _____ _____
+//   |_____|_____|_____| |    / /| (_) | (_) |  | |_____|_____|_____|
+//                     | |   /_/  \___/ \___/   | |
+//                     |__|                    |__|
+@media (min-width:768px) {
+    .others{
+        @include flex(row, center, space-between);
+    }
+}

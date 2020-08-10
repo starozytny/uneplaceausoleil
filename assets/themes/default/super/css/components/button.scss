@@ -13,6 +13,13 @@
         display: inline-block;
         transition: transform 0.2s ease-in-out;
     }
+
+    &:hover, &:focus{
+        background-color: $alpha;;
+        span{
+            transform: scale(0.97);
+        }
+    }
 }
 
 .btn-primary{
@@ -21,8 +28,5 @@
 
     &:hover, &:focus{
         background-color: $color4;
-        span{
-            transform: scale(0.97);
-        }
     }
 }
