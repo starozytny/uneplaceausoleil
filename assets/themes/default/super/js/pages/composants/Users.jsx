@@ -265,7 +265,8 @@ export class AsideUser extends Component {
                         <div className="form-avatar">
                             {user === undefined ? null : <img src={'/admin/avatar/' + user.avatar} alt="Avatar actuel de l'utilisateur"/>}
                         </div>
-                        <Drop label="Téléverser un nouvel avatar" onGetFile={this.handleGetFile}/>
+                        <Drop label="Téléverser un nouvel avatar" labelError="Seul les images sont acceptées."
+                              accept={"image/*"} onGetFile={this.handleGetFile}/>
                     </div>
                 </div>
                 <div className="form-button">

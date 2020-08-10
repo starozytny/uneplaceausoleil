@@ -40,15 +40,11 @@ export class Drop extends Component {
             <Dropzone
                 getUploadParams={this.getUploadParams}
                 onChangeStatus={this.handleChangeStatus}
-                accept="image/*"
-                maxFiles={1}
-                multiple={false}
+                accept={this.props.accept}
+                maxFiles={this.props.maxFiles}
+                multiple={this.props.maxFiles > 1 ? true : false}
                 canCancel={false}
-                inputContent={(files, extra) => (extra.reject ? 'Seul les images sont acceptées.' : this.props.label)}
-                styles={{
-                    dropzone: { width: 400, height: 200 },
-                    dropzoneActive: { borderColor: 'green' },
-                }}
+                inputContent={(files, extra) => (extra.reject ? this.props.labelError : this.props.label)}
             />
         </>
     }
