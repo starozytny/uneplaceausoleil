@@ -87,7 +87,7 @@ class User implements UserInterface
         $this->setCreateAt(new DateTime());
         $this->setRenouvTime(new DateTime());
         $this->setIsNew(true);
-        $this->setAvatar('avatar-'.rand(0,10).'.jpg');
+        $this->setAvatar('avatar/avatar-'.rand(0,10).'.jpg');
         try {
             $this->setToken(bin2hex(random_bytes(32)));
         } catch (Exception $e) {

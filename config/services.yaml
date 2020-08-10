@@ -4,6 +4,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    public_directory: '%kernel.project_dir%/public/uploads/'
+    private_directory: '%kernel.project_dir%/documents/'
 
 services:
     # default configuration for services in *this* file
@@ -23,5 +25,10 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    App\Service\FileUploader:
+        arguments:
+            $publicDirectory: '%public_directory%'
+            $privateDirectory: '%private_directory%'
+            
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

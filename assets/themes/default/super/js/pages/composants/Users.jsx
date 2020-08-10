@@ -41,7 +41,7 @@ export class UsersList extends Component {
                     </div>
                 </div>
                 <div className="item-user-avatar">
-                    <img src={"../../admin/avatar/" + elem.avatar} alt={"avatar de " + elem.username} />
+                    <img src={"../../uploads/" + elem.avatar} alt={"avatar de " + elem.username} />
                 </div>
                 <div className="item-user-username">{elem.username}</div>
                 <div className="item-user-email">{elem.email}</div>   
@@ -214,6 +214,7 @@ export class AsideUser extends Component {
                     user.roles = roles.value;
                     user.highRoleCode = data.highRoleCode;
                     user.highRole = data.highRole;
+                    user.avatar = data.avatar;
 
                     self.setState({users: updateInArray(self.state.users, user)})
                     self.props.onUpdate(user)
@@ -263,10 +264,10 @@ export class AsideUser extends Component {
                 <div className="line">
                     <div className="form-files">
                         <div className="form-avatar">
-                            {user === undefined ? null : <img src={'/admin/avatar/' + user.avatar} alt="Avatar actuel de l'utilisateur"/>}
+                            {user === undefined ? null : <img src={'../../uploads/' + user.avatar} alt="Avatar actuel de l'utilisateur"/>}
                         </div>
                         <Drop label="Téléverser un nouvel avatar" labelError="Seul les images sont acceptées."
-                              accept={"image/*"} onGetFile={this.handleGetFile}/>
+                              accept={"image/*"} maxFiles={1} onGetFile={this.handleGetFile}/>
                     </div>
                 </div>
                 <div className="form-button">

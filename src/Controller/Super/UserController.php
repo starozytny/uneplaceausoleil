@@ -3,6 +3,7 @@
 namespace App\Controller\Super;
 
 use App\Entity\User;
+use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,7 +33,7 @@ class UserController extends AbstractController
     /**
      * @Route("/update/utilisateur/{user}", options={"expose"=true}, name="user_update")
      */
-    public function update(Request $request, $user)
+    public function update(Request $request, $user, FileUploader $fileUploader)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->find($user);
@@ -41,14 +42,18 @@ class UserController extends AbstractController
         }
 
         $data = json_decode($request->get('data'));
+        $file = $request->files->get('file');
 
-        dump($request->files->get('file'));
+        if($file){
+            $filename = $fileUploader->upload($file, 'avatar/', true);
+            $user->setAvatar($filename);
+        }
 
         $user->setUsername($data->username->value);
         $user->setEmail($data->email->value);
         $user->setRoles($data->roles->value);
 
         $em->persist($user); $em->flush();
-        return new JsonResponse(['code' => 1, 'highRoleCode' => $user->getHighRoleCode(), 'highRole' => $user->getHighRole()]);
+        return new JsonResponse(['code' => 1, 'highRoleCode' => $user->getHighRoleCode(), 'highRole' => $user->getHighRole(), 'avatar' => $user->getAvatar()]);
     }
 }

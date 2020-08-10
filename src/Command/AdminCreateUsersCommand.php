@@ -66,7 +66,7 @@ class AdminCreateUsersCommand extends Command
                 ->setEmail($user['email'])
                 ->setRoles($user['roles'])
                 ->setIsNew(false)
-                ->setAvatar('profil.jpg')
+                ->setAvatar('avatar/profil.jpg')
             ;
 
             $new->setPassword($this->passwordEncoder->encodePassword(
