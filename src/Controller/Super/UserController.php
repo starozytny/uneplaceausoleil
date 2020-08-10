@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
@@ -53,6 +54,35 @@ class UserController extends AbstractController
         $user->setUsername($data->username->value);
         $user->setEmail($data->email->value);
         $user->setRoles($data->roles->value);
+
+        $em->persist($user); $em->flush();
+        return new JsonResponse(['code' => 1, 'highRoleCode' => $user->getHighRoleCode(), 'highRole' => $user->getHighRole(), 'avatar' => $user->getAvatar()]);
+    }
+
+    /**
+     * @Route("/add/utilisateur", options={"expose"=true}, name="user_add")
+     */
+    public function add(Request $request, FileUploader $fileUploader, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $data = json_decode($request->get('data'));
+        $file = $request->files->get('file');
+
+        $user = (new User())
+            ->setUsername($data->username->value)
+            ->setEmail($data->email->value)
+            ->setRoles($data->roles->value)
+        ;
+
+        $user->setPassword($passwordEncoder->encodePassword(
+            $user, 'azerty'
+        ));
+
+        if($file){
+            $filename = $fileUploader->upload($file, 'avatar/', true);
+            $user->setAvatar($filename);
+        }
 
         $em->persist($user); $em->flush();
         return new JsonResponse(['code' => 1, 'highRoleCode' => $user->getHighRoleCode(), 'highRole' => $user->getHighRole(), 'avatar' => $user->getAvatar()]);

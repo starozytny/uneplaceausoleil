@@ -188,7 +188,8 @@ export class Users extends Component {
     }
 
     handleAdd = () => {
-
+        this.refs.asideuser.handleOpenAdd()
+        this.refs.aside.handleUpdate("Ajouter un utilisateur") 
     }
 
     render () {
@@ -216,20 +217,25 @@ export class AsideUser extends Component {
         super(props)
 
         this.state = {
+            type: 'edit',
             error: '',
             username: {value: '', error: ''},
             email: {value: '', error: ''},
-            roles: {value: '', error:''},
+            roles: {value: [], error:''},
             file: ''
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        
         this.handleUpdate = this.handleUpdate.bind(this)
         this.handleGetFile = this.handleGetFile.bind(this)
+
+        this.handleOpenAdd = this.handleOpenAdd.bind(this)
     }
 
     handleUpdate = (user) => {
         this.setState({
+            type: 'edit',
             user: user,
             users: this.props.users,
             username: {value: user.username, error:''},
@@ -238,6 +244,15 @@ export class AsideUser extends Component {
         })
         document.getElementById("username").focus();
     }
+
+    handleOpenAdd = () => { this.setState({
+        type: 'add',
+        user: undefined,
+        users: this.props.users,
+        username: {value: "", error:''},
+        email: {value: "", error:''},
+        roles: {value: [], error:''},
+    }) }
 
     handleChange = (e) => { 
         let name = e.currentTarget.name;
@@ -259,7 +274,7 @@ export class AsideUser extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
 
-        const {user, users, username, email, roles} = this.state
+        const {type, user, users, username, email, roles} = this.state
 
         let validate = Validateur.validateur([
             {type: "text", id: 'username', value: username.value},
@@ -267,7 +282,8 @@ export class AsideUser extends Component {
             {type: "array", id: 'roles', value: roles.value}
         ]);
 
-        if(users.filter(v => v.username.toLowerCase() == username.value.toLowerCase() && v.id != user.id).length != 0){
+        let id = (user != undefined) ? user.id : null
+        if(users.filter(v => v.username.toLowerCase() == username.value.toLowerCase() && v.id != id).length != 0){
             validate.code = false;
             validate.errors = {...validate.errors, ...{username: {value: username.value, error: 'Ce nom d\'utilisateur est déjà pris.'}}};
         }
@@ -276,36 +292,43 @@ export class AsideUser extends Component {
             this.setState(validate.errors);
         }else{
             Loader.loader(true)
-            
+
             let fd = new FormData();
             fd.append('data', JSON.stringify(this.state));
             fd.append('file', this.state.file);
+            
+            let url = (type === 'edit') ? Routing.generate('super_users_user_update', {'user': user.id}) : Routing.generate('super_users_user_add');
 
             let self = this
-            axios({ method: 'post', url: Routing.generate('super_users_user_update', {'user': user.id}), data: fd, headers: {'Content-Type': 'multipart/form-data'} }).then(function (response) {
+            axios({ method: 'post', url: url, data: fd, headers: {'Content-Type': 'multipart/form-data'} }).then(function (response) {
                 let data = response.data; let code = data.code; Loader.loader(false)
 
                 if(code === 1){
-                    user.username = username.value;
-                    user.email = email.value;
-                    user.roles = roles.value;
-                    user.highRoleCode = data.highRoleCode;
-                    user.highRole = data.highRole;
-                    user.avatar = data.avatar;
-
-                    self.setState({users: updateInArray(self.state.users, user)})
-                    self.props.onUpdate(user)
-
-                    toastr.info('Mise à jour effectuée.')
+                    if(type === "edit"){
+                        user.username = username.value;
+                        user.email = email.value;
+                        user.roles = roles.value;
+                        user.highRoleCode = data.highRoleCode;
+                        user.highRole = data.highRole;
+                        user.avatar = data.avatar;
+    
+                        self.setState({users: updateInArray(self.state.users, user)})
+                        self.props.onUpdate(user)
+    
+                        toastr.info('Mise à jour effectuée.')
+                    }else{
+                        location.reload()
+                    }
                 }else{
                     self.setState({error: data.message})
                 }
             });
         }
+
     }
 
     render () {
-        const {user, error, username, email, roles} = this.state
+        const {type, user, error, username, email, roles} = this.state
 
         let rolesItems = [
             { 'value': 1, 'role': 'ROLE_SUPER_ADMIN', 'label': 'Super admin', 'id': 'superamdin', 'checked': false },
@@ -314,7 +337,7 @@ export class AsideUser extends Component {
             
         ]
 
-        if(user != undefined){
+        if(roles.length != 0){
             rolesItems.map(el => {
                 roles.value.map(elem => {
                     if (elem == el.role){ el.checked = true }
@@ -322,14 +345,23 @@ export class AsideUser extends Component {
             })
         }
 
-        return <>
-            {user === undefined ? null : <div className="aside-user-informations">
+        let infos = null, title = null, btnText = null;
+
+        if(type === 'edit'){
+            btnText = "Mettre à jour"
+            title = "Modification"
+            infos = user === undefined ? null : <div className="aside-user-informations">
                 <div>Créé le {user.createAtString}</div>
                 <div>Renouvellement du mot de passe le {user.renouvTimeString}</div>
-            </div>}
-            
-            <form className="aside-user-form" onSubmit={this.handleSubmit}>
-                <span className="form-title">Modification</span>
+            </div>
+        }else{
+            btnText = "Ajouter"
+        }
+
+        return <>
+            {infos}
+            <form className={"aside-user-form aside-user-form-" + type} onSubmit={this.handleSubmit}>
+                <span className="form-title">{title}</span>
                 {error != '' ? <Alert type="danger" message={error} active="true" /> : null}
                 <div className="line line-2">
                     <Input identifiant="username" valeur={username} onChange={this.handleChange}>Nom d'utilisateur</Input>
@@ -340,15 +372,13 @@ export class AsideUser extends Component {
                 </div>
                 <div className="line">
                     <div className="form-files">
-                        <div className="form-avatar">
-                            {user === undefined ? null : <img src={'../../uploads/' + user.avatar} alt="Avatar actuel de l'utilisateur"/>}
-                        </div>
+                        {user === undefined ? null : <div className="form-avatar"><img src={'../../uploads/' + user.avatar} alt="Avatar actuel de l'utilisateur"/></div>}
                         <Drop label="Téléverser un nouvel avatar" labelError="Seul les images sont acceptées."
                               accept={"image/*"} maxFiles={1} onGetFile={this.handleGetFile}/>
                     </div>
                 </div>
                 <div className="form-button">
-                    <button type="submit" className="btn btn-primary"><span>Mettre à jour</span></button>
+                    <button type="submit" className="btn btn-primary"><span>{btnText}</span></button>
                 </div>
             </form>
         </>
