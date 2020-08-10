@@ -30,6 +30,7 @@ class UserController extends AbstractController
             'users' => $users
         ]);
     }
+
     /**
      * @Route("/update/utilisateur/{user}", options={"expose"=true}, name="user_update")
      */
@@ -55,5 +56,22 @@ class UserController extends AbstractController
 
         $em->persist($user); $em->flush();
         return new JsonResponse(['code' => 1, 'highRoleCode' => $user->getHighRoleCode(), 'highRole' => $user->getHighRole(), 'avatar' => $user->getAvatar()]);
+    }
+
+    /**
+     * @Route("/convert-is-new/utilisateur/{user}", options={"expose"=true}, name="user_convert_is_new")
+     */
+    public function convertIsNew($user)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($user);
+        if(!$user){
+            return new JsonResponse(['code' => 0, 'message' => '[ERREUR] Cet utilisateur n\'existe pas.']);
+        }
+
+        $user->setIsNew(false);
+        $em->persist($user); $em->flush();
+
+        return new JsonResponse(['code' => 1]);
     }
 }

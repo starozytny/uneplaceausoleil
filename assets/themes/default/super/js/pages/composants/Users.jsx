@@ -15,14 +15,19 @@ export class UsersList extends Component {
         super(props)
         
         this.handleOpenAside = this.handleOpenAside.bind(this)
+        this.handleConvert = this.handleConvert.bind(this)
     }
 
     handleOpenAside = (e) => {
         this.props.onOpenAside(e.currentTarget.dataset.id)
     }
 
+    handleConvert = (e) => {
+        this.props.onConvertIsNew(e.currentTarget.dataset.id)
+    }
+
     render () {
-        const {users} = this.props
+        const {users, onConvertIsNew} = this.props
 
         let items = users.map(elem => {
             return <div className="item-user" key={elem.id}>
@@ -46,7 +51,7 @@ export class UsersList extends Component {
                 <div className="item-user-username">{elem.username}</div>
                 <div className="item-user-email">{elem.email}</div>   
                 {elem.highRoleCode != 0 ? <div className="item-user-roles"><div className={"user-badge user-badge-" + elem.highRoleCode}>{elem.highRole}</div></div> : null}
-                {elem.isNew ? <div className="item-user-status"><div className="user-new"><span className="icon-certificate"></span></div></div> : null}          
+                {elem.isNew ? <div className="item-user-status"><div className="user-new" onClick={this.handleConvert} data-id={elem.id}><span className="icon-certificate"></span></div></div> : null}          
             </div>
         })
 
@@ -81,6 +86,7 @@ export class Users extends Component {
         this.handleUpdateUser = this.handleUpdateUser.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
         this.handleOpenAside = this.handleOpenAside.bind(this)
+        this.handleConvertIsNew = this.handleConvertIsNew.bind(this)
     }
 
     handleUpdateList = (usersList) => { this.setState({ usersList: usersList })  }
@@ -106,7 +112,6 @@ export class Users extends Component {
     handleUpdateUser = (user) => { 
         this.refs.asideuser.handleUpdate(user)
         this.refs.aside.handleUpdate(user.username) 
-
         
         this.setState({
             usersList: updateInArray(this.state.usersList, user), 
@@ -115,11 +120,28 @@ export class Users extends Component {
         })
     }
 
+    handleConvertIsNew = (id) => {
+        let self = this
+        axios({ method: 'post', url: Routing.generate('super_users_user_convert_is_new', {'user': id}) }).then(function (response) {
+            let data = response.data; let code = data.code; Loader.loader(false)
+
+            if(code === 1){
+                let user = self.state.usersImmuable.filter(v => v.id == id)
+                user[0].isNew = false;
+
+                self.setState({users: updateInArray(self.state.users, user[0])})
+                toastr.info('Mise à jour effectuée.')
+            }else{
+                toastr.error(data.message)
+            }
+        });
+    }
+
     render () {
         const {users, usersImmuable, usersList, tailleList} = this.state;
 
         let content = <div className="liste liste-user">
-            <UsersList users={usersList} onOpenAside={this.handleOpenAside} />
+            <UsersList users={usersList} onOpenAside={this.handleOpenAside} onConvertIsNew={this.handleConvertIsNew} />
         </div>
 
         let asideContent = <AsideUser users={usersImmuable} onUpdate={this.handleUpdateUser} ref="asideuser" />
