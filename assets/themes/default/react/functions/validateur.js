@@ -33,7 +33,6 @@ function validatePassword($value){
             'message': 'Le mot de passe doit contenir 1 majuscule, 1 minuscule, 1 chiffre et au moins 12 caractères.'
         };
     }
-    return {'code': true};
 }
 
 function validateArray($value){
