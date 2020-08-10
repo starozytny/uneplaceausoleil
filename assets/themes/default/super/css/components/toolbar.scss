@@ -5,11 +5,27 @@
     margin-top: 25px;
     margin-bottom: 25px;
     border-bottom: 1px solid $color5;
+
+    .toolbar-left + .toolbar-right{
+        margin-top: 10px;
+    }
 }
 
 .toolbar{
     input[type="search"]{
         width: 100%;
         outline-color: $alpha;
+    }
+}
+
+//                      __   _____ __    ___    __
+//                     | _| |___  / /_  ( _ )  |_ |
+//    _____ _____ _____| |     / / '_ \ / _ \   | |_____ _____ _____
+//   |_____|_____|_____| |    / /| (_) | (_) |  | |_____|_____|_____|
+//                     | |   /_/  \___/ \___/   | |
+//                     |__|                    |__|
+@media (min-width:768px) {
+    .toolbar{
+        @include flex(row, center, space-between);
     }
 }

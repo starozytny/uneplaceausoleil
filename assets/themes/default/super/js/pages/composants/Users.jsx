@@ -102,6 +102,7 @@ export class Users extends Component {
         this.handleOpenAside = this.handleOpenAside.bind(this)
         this.handleConvertIsNew = this.handleConvertIsNew.bind(this)
         this.handleDelete = this.handleDelete.bind(this)
+        this.handleAdd = this.handleAdd.bind(this)
     }
 
     handleUpdateList = (usersList) => { this.setState({ usersList: usersList })  }
@@ -186,6 +187,10 @@ export class Users extends Component {
           })
     }
 
+    handleAdd = () => {
+
+    }
+
     render () {
         const {users, usersImmuable, usersList, tailleList} = this.state;
 
@@ -199,6 +204,7 @@ export class Users extends Component {
             <Page content={content} 
                   havePagination="true" taille={tailleList} itemsPagination={users} perPage="12" onUpdate={this.handleUpdateList}
                   haveSearch="true" onSearch={this.handleSearch}
+                  haveAdd="true" onAdd={this.handleAdd}
                   />
             <Aside content={asideContent} ref="aside"/>
         </>

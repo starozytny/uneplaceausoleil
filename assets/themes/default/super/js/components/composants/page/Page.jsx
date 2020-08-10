@@ -8,10 +8,14 @@ export class Page extends Component {
     }
 
     render () {
-        const {content, havePagination, perPage, taille, itemsPagination, haveSearch, onSearch} = this.props
+        const {content, 
+            havePagination, perPage, taille, itemsPagination, 
+            haveSearch, onSearch,
+            haveAdd, onAdd
+        } = this.props
 
         return <>
-            <Toolbar haveSearch={haveSearch} onSearch={onSearch} />
+            <Toolbar haveSearch={haveSearch} onSearch={onSearch} haveAdd={haveAdd} onAdd={onAdd}/>
             {content}
             {havePagination ? <Pagination perPage={perPage} taille={taille} items={itemsPagination} onUpdate={(items) => this.props.onUpdate(items)}/> : null}
         </>
