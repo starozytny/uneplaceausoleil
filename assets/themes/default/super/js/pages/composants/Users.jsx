@@ -9,6 +9,7 @@ import {Aside} from '../../components/composants/page/Aside';
 import {Input, Checkbox} from '../../../../react/composants/Fields';
 import {Alert} from '../../../../react/composants/Alert';
 import {Drop} from '../../../../react/composants/Drop';
+import Swal from 'sweetalert2'
 
 export class UsersList extends Component {
     constructor (props) {
@@ -16,6 +17,7 @@ export class UsersList extends Component {
         
         this.handleOpenAside = this.handleOpenAside.bind(this)
         this.handleConvert = this.handleConvert.bind(this)
+        this.handleDelete = this.handleDelete.bind(this)
     }
 
     handleOpenAside = (e) => {
@@ -26,8 +28,12 @@ export class UsersList extends Component {
         this.props.onConvertIsNew(e.currentTarget.dataset.id)
     }
 
+    handleDelete = (e) => {
+        this.props.onDelete(e.currentTarget.dataset.id)
+    }
+
     render () {
-        const {users, onConvertIsNew} = this.props
+        const {users} = this.props
 
         let items = users.map(elem => {
             return <div className="item-user" key={elem.id}>
@@ -40,7 +46,7 @@ export class UsersList extends Component {
                         <div className="user-actions-drop">
                             <div className="drop-items">
                                 <span className="drop-item" onClick={this.handleOpenAside} data-id={elem.id}>Modifier</span>
-                                {elem.highRoleCode != 1 ? <span className="drop-item">Supprimer</span> : null}
+                                {elem.highRoleCode != 1 ? <span className="drop-item" onClick={this.handleDelete} data-id={elem.id}>Supprimer</span> : null}
                             </div>
                         </div>
                     </div>
@@ -68,6 +74,14 @@ function updateInArray(array, user){
     return arr;
 }
 
+function deleteInArray(array, user){
+    let arr = []
+    array.map(elem => {
+        if(elem.id != user.id){ arr.push(elem) }
+    })
+    return arr;
+}
+
 export class Users extends Component {
     constructor (props) {
         super(props)
@@ -87,6 +101,7 @@ export class Users extends Component {
         this.handleSearch = this.handleSearch.bind(this)
         this.handleOpenAside = this.handleOpenAside.bind(this)
         this.handleConvertIsNew = this.handleConvertIsNew.bind(this)
+        this.handleDelete = this.handleDelete.bind(this)
     }
 
     handleUpdateList = (usersList) => { this.setState({ usersList: usersList })  }
@@ -137,11 +152,45 @@ export class Users extends Component {
         });
     }
 
+    handleDelete = (id) => {
+        Swal.fire({
+            title: 'Etes-vous sûr ?',
+            text: "La suppression est définitive.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oui, je confirme',
+            cancelButtonText: 'Annuler'
+          }).then((result) => {
+            if (result.value) {
+
+                let self = this
+                axios({ method: 'post', url: Routing.generate('super_users_user_delete', {'user': id}) }).then(function (response) {
+                    let data = response.data; let code = data.code; Loader.loader(false)
+
+                    if(code === 1){
+                        let user = self.state.usersImmuable.filter(v => v.id == id)
+                        self.setState({
+                            usersList: deleteInArray(self.state.usersList, user[0]), 
+                            users: deleteInArray(self.state.users, user[0]),
+                            usersImmuable: deleteInArray(self.state.usersImmuable, user[0]),
+                            tailleList: parseInt(self.state.tailleList) - 1,
+                        })
+                        toastr.info('Suppression réussie.')
+                    }else{
+                        toastr.error(data.message)
+                    }
+                });
+            }
+          })
+    }
+
     render () {
         const {users, usersImmuable, usersList, tailleList} = this.state;
 
         let content = <div className="liste liste-user">
-            <UsersList users={usersList} onOpenAside={this.handleOpenAside} onConvertIsNew={this.handleConvertIsNew} />
+            <UsersList users={usersList} onOpenAside={this.handleOpenAside} onConvertIsNew={this.handleConvertIsNew} onDelete={this.handleDelete} />
         </div>
 
         let asideContent = <AsideUser users={usersImmuable} onUpdate={this.handleUpdateUser} ref="asideuser" />

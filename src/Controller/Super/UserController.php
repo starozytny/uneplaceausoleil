@@ -71,7 +71,25 @@ class UserController extends AbstractController
 
         $user->setIsNew(false);
         $em->persist($user); $em->flush();
+        return new JsonResponse(['code' => 1]);
+    }
 
+    /**
+     * @Route("/delete/utilisateur/{user}", options={"expose"=true}, name="user_delete")
+     */
+    public function delete($user)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($user);
+        if(!$user){
+            return new JsonResponse(['code' => 0, 'message' => '[ERREUR] Cet utilisateur n\'existe pas.']);
+        }
+
+        if($user->getHighRoleCode() == User::CODE_ROLE_SUPER_ADMIN){
+            return new JsonResponse(['code' => 0, 'message' => '[ERREUR] Cet utilisateur ne peut pas être supprimé.']);
+        }
+
+        $em->remove($user); $em->flush();
         return new JsonResponse(['code' => 1]);
     }
 }

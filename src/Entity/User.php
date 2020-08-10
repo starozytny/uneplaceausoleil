@@ -13,6 +13,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
+    const CODE_ROLE_USER = 0;
+    const CODE_ROLE_SUPER_ADMIN = 1;
+    const CODE_ROLE_ADMIN = 2;
+   
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -155,11 +159,11 @@ class User implements UserInterface
     public function getHighRoleCode(){
         switch($this->getHighRole()){
             case 'Super admin':
-                return 1;
+                return self::CODE_ROLE_SUPER_ADMIN;
             case 'Administrateur':
-                return 2;
+                return self::CODE_ROLE_ADMIN;
             default:
-                return 0;
+                return self::CODE_ROLE_USER;
         }
     }
 
