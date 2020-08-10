@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Analytics from '../functions/analytics';
 import Cookies from 'js-cookie/src/js.cookie';
+import Swal from 'sweetalert2'
 
 // Nom cookie pour Google analytics
 const consentGlobal = 'hasConsentGlobalLocal';
@@ -92,11 +93,21 @@ export class ActionCookies extends Component {
     handleClickAccept (e){
         this.setState({accepter: true, refuser: false})
         cookiesClick(this.props.type, 1)
+        Swal.fire(
+            'Choix validé !',
+            'Vous avez accepté ces cookies',
+            'success'
+            )
     }
 
     handleClickRefuse (e){
         this.setState({accepter: false, refuser: true})
         cookiesClick(this.props.type, 0)
+        Swal.fire(
+            'Choix validé!',
+            'Vous avez refusé ces cookies',
+            'success'
+            )
     }
 
     render () {

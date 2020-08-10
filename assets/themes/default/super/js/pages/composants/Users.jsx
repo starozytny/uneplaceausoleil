@@ -9,7 +9,7 @@ import {Aside} from '../../components/composants/page/Aside';
 import {Input, Checkbox} from '../../../../react/composants/Fields';
 import {Alert} from '../../../../react/composants/Alert';
 import {Drop} from '../../../../react/composants/Drop';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 export class UsersList extends Component {
     constructor (props) {
