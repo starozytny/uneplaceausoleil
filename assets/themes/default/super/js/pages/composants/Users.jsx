@@ -142,11 +142,13 @@ export class AsideUser extends Component {
             error: '',
             username: {value: '', error: ''},
             email: {value: '', error: ''},
-            roles: {value: '', error:''}
+            roles: {value: '', error:''},
+            file: ''
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleUpdate = this.handleUpdate.bind(this)
+        this.handleGetFile = this.handleGetFile.bind(this)
     }
 
     handleUpdate = (user) => {
@@ -172,6 +174,11 @@ export class AsideUser extends Component {
         this.setState({[name]: {value: value}}) 
     }
 
+    handleGetFile = (e) => {
+        this.setState({file: e.file})
+        
+    }
+
     handleSubmit = (e) => {
         e.preventDefault()
 
@@ -195,9 +202,10 @@ export class AsideUser extends Component {
             
             let fd = new FormData();
             fd.append('data', JSON.stringify(this.state));
+            fd.append('file', this.state.file);
 
             let self = this
-            axios({ method: 'post', url: Routing.generate('super_users_user_update', {'user': user.id}), data: fd }).then(function (response) {
+            axios({ method: 'post', url: Routing.generate('super_users_user_update', {'user': user.id}), data: fd, headers: {'Content-Type': 'multipart/form-data'} }).then(function (response) {
                 let data = response.data; let code = data.code; Loader.loader(false)
 
                 if(code === 1){
@@ -207,7 +215,7 @@ export class AsideUser extends Component {
                     user.highRoleCode = data.highRoleCode;
                     user.highRole = data.highRole;
 
-                    self.setState({users: updateInArray(self.state.users, user),})
+                    self.setState({users: updateInArray(self.state.users, user)})
                     self.props.onUpdate(user)
 
                     toastr.info('Mise à jour effectuée.')
@@ -216,7 +224,6 @@ export class AsideUser extends Component {
                 }
             });
         }
-
     }
 
     render () {
@@ -258,7 +265,7 @@ export class AsideUser extends Component {
                         <div className="form-avatar">
                             {user === undefined ? null : <img src={'/admin/avatar/' + user.avatar} alt="Avatar actuel de l'utilisateur"/>}
                         </div>
-                        <Drop label="Téléverser un nouvel avatar" />
+                        <Drop label="Téléverser un nouvel avatar" onGetFile={this.handleGetFile}/>
                     </div>
                 </div>
                 <div className="form-button">

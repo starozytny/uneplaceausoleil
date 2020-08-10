@@ -42,6 +42,8 @@ class UserController extends AbstractController
 
         $data = json_decode($request->get('data'));
 
+        dump($request->files->get('file'));
+
         $user->setUsername($data->username->value);
         $user->setEmail($data->email->value);
         $user->setRoles($data->roles->value);
