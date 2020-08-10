@@ -1,11 +1,11 @@
-import React, {Components} from 'react';
-import {Input, TextArea, Select} from '../../../components/composants/Fields';
-import {Formulaire} from '../../../components/composants/Formulaire';
-import Validateur from '../../../components/functions/validate_input';
-import AjaxSend from '../../../components/functions/ajax_classique';
+import React, {Component} from 'react';
+import {Input, TextArea} from '../../../../../react/composants/Fields';
+import {Formulaire} from '../../../../../react/composants/Formulaire';
+import Validateur from '../../../../../react/functions/validateur';
+import AjaxSend from '../../../../../react/functions/ajax_classique';
 import ReCAPTCHA from "react-google-recaptcha";
 
-class FormContact extends React.Component {
+class FormContact extends Component {
     constructor(props) {
         super(props);
 
@@ -72,9 +72,9 @@ class FormContact extends React.Component {
                     error={error}
                     inputs={
                         <>
-                            <Input value={firstname.value} name="firstname" id="firstname" onChange={this.handleChange} error={firstname.error}>Nom / Raison sociale</Input>
-                            <Input value={email.value} name="email" id="email" onChange={this.handleChange} error={email.error}>Email</Input>
-                            <TextArea value={message.value} name="message" id="message" onChange={this.handleChange} error={message.error}>Message</TextArea>
+                            <Input valeur={firstname} identifiant="firstname" onChange={this.handleChange}>Nom / Raison sociale</Input>
+                            <Input type="email" valeur={email} identifiant="email" onChange={this.handleChange}>Email</Input>
+                            <TextArea valeur={message} identifiant="message" onChange={this.handleChange}>Message</TextArea>
                             <ReCAPTCHA ref={this.recaptchaRef} size={"invisible"} sitekey="6LeJXdUUAAAAABW3t8yl9tkJ5PpSFdhKqvOpgGyY" />
                         </>
                     }

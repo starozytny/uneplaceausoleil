@@ -1,13 +1,12 @@
-import React, {Components} from 'react';
-import {Success, Error} from './Alert';
-import {ButtonPrimary} from './Button';
+import React, {Component} from 'react';
+import {Alert} from './Alert';
 
 export function Formulaire({onSubmit, inputs, success, error, btn, children}) {
     return ( 
         <form onSubmit={onSubmit}> 
             <div>
-                <Success elem={success}/>
-                <Error elem={error}/>
+                <Alert type="success" message={success} active="active" />
+                <Alert type="danger" message={error} active="active" />
             </div>
             <div>
                 {inputs}
@@ -16,7 +15,7 @@ export function Formulaire({onSubmit, inputs, success, error, btn, children}) {
                 {children}
             </div>
             <div>
-                <ButtonPrimary>{btn}</ButtonPrimary>
+                <button type="submit" className="btn btn-primary">{btn}</button>
             </div>
         </form> 
     );

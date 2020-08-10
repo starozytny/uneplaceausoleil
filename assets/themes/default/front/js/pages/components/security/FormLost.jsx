@@ -1,8 +1,8 @@
 import React, {Components} from 'react';
-import {Input} from '../../../components/composants/Fields';
-import {Formulaire} from '../../../components/composants/Formulaire';
-import Validateur from '../../../components/functions/validate_input';
-import AjaxSend from '../../../components/functions/ajax_classique';
+import {Input} from '../../../../../react/composants/Fields';
+import {Formulaire} from '../../../../../react/composants/Formulaire';
+import Validateur from '../../../../../react/functions/validateur';
+import AjaxSend from '../../../../../react/functions/ajax_classique';
 
 class FormLost extends React.Component {
     constructor(props) {
@@ -54,7 +54,7 @@ class FormLost extends React.Component {
                     success={success}
                     error={error}
                     inputs={
-                        <Input value={email.value} name="email" id="email" onChange={this.handleChange} error={email.error}>Email</Input>
+                        <Input type="email" valeur={email} identifiant="email" onChange={this.handleChange}>Email</Input>
                     }
                     btn="Envoyer"
                 />

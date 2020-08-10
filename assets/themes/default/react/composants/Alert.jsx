@@ -6,6 +6,9 @@ export function Alert({type, message, active}) {
         case "danger":
             icon = 'warning'
             break;
+        case "success":
+            icon = 'information'
+            break;
         default:
             icon = 'question'
             return <div></div>

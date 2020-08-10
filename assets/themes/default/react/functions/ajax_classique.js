@@ -1,17 +1,14 @@
 const axios = require('axios/dist/axios');
+const Loader = require('./loader');
 
 function sendAjax(self, url, data, suite) {
-    let loader = document.querySelector('#loader');
-
-    axios.interceptors.request.use(function (config) {
-        loader.style.display = "flex"; return config;
-    }, function (error) { return Promise.reject(error); });
+    Loader.loader(true);
 
     axios({ method: 'post', url: url, data: data }).then(function (response) 
     {
         let data = response.data;
         let code = data.code;
-        loader.style.display = "none";
+        Loader.loader(false);
         
         if(code === 1){
             let state = { error: '', success: data.message }

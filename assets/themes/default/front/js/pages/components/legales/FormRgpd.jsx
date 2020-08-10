@@ -1,11 +1,11 @@
-import React, {Components} from 'react';
-import {Input, TextArea, Select} from '../../../components/composants/Fields';
-import {Formulaire} from '../../../components/composants/Formulaire';
-import Validateur from '../../../components/functions/validate_input';
-import AjaxSend from '../../../components/functions/ajax_classique';
+import React, {Component} from 'react';
+import {Input, TextArea, Select} from '../../../../../react/composants/Fields';
+import {Formulaire} from '../../../../../react/composants/Formulaire';
+import Validateur from '../../../../../react/functions/validateur';
+import AjaxSend from '../../../../../react/functions/ajax_classique';
 import ReCAPTCHA from "react-google-recaptcha";
 
-class FormRgpd extends React.Component {
+class FormRgpd extends Component {
     constructor(props) {
         super(props);
 
@@ -81,10 +81,10 @@ class FormRgpd extends React.Component {
                     error={error}
                     inputs={
                         <>
-                            <Input value={firstname.value} name="firstname" id="firstname" onChange={this.handleChange} error={firstname.error}>Nom / Raison sociale</Input>
-                            <Input value={email.value} name="email" id="email" onChange={this.handleChange} error={email.error}>Email</Input>
-                            <Select value={subject.value} name="subject" id="subject" onChange={this.handleChange} error={subject.error} items={items}>Objet du message</Select>
-                            <TextArea value={message.value} name="message" id="message" onChange={this.handleChange} error={message.error}>Message</TextArea>
+                            <Input valeur={firstname} identifiant="firstname" onChange={this.handleChange}>Nom / Raison sociale</Input>
+                            <Input valeur={email} identifiant="email" onChange={this.handleChange}>Email</Input>
+                            <Select valeur={subject} identifiant="subject" onChange={this.handleChange} items={items}>Objet du message</Select>
+                            <TextArea valeur={message} identifiant="message" onChange={this.handleChange}>Message</TextArea>
                             <ReCAPTCHA ref={this.recaptchaRef} size={"invisible"} sitekey="6LeJXdUUAAAAABW3t8yl9tkJ5PpSFdhKqvOpgGyY" />
                         </>
                     }
