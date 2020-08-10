@@ -76,7 +76,7 @@ class UserController extends AbstractController
         ;
 
         $user->setPassword($passwordEncoder->encodePassword(
-            $user, 'azerty'
+            $user, $data->password->value
         ));
 
         if($file){

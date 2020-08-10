@@ -18,6 +18,24 @@ function validateEmail($value){
     };
 }
 
+function validatePassword($value){
+    if($value === ""){
+        return {
+            'code': false,
+            'message': 'Ce champ doit être renseigné.'
+        };
+    }
+    if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{12,}$/.test($value)){
+        return {'code': true};
+    }else{
+        return {
+            'code': false,
+            'message': 'Le mot de passe doit contenir 1 majuscule, 1 minuscule, 1 chiffre et au moins 12 caractères.'
+        };
+    }
+    return {'code': true};
+}
+
 function validateArray($value){
     if($value.length <= 0){
         return {
@@ -41,6 +59,9 @@ function validateur(values){
                 break;
             case 'array':
                 validate = validateArray(element.value);
+                break;
+            case 'password':
+                validate = validatePassword(element.value);
                 break;
         }
         if(!validate.code){
