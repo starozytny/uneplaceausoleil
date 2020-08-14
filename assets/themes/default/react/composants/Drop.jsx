@@ -24,8 +24,9 @@ export class Drop extends Component {
             toastr.info(`${meta.name} téléchargé !`)
             if(this.props.remove){
                 remove()
+            }else{
+                Loader.loaderWithoutAjax(false)
             }
-            Loader.loaderWithoutAjax(false)
         } else if (status === 'aborted') {
             toastr.error(`${meta.name}, n'a pas pu être téléchargé..`)
             Loader.loaderWithoutAjax(false)
