@@ -24,7 +24,7 @@ nav{
 
     a{
         @include fontBold();
-        color: $color4;
+        color: $color0;
         font-size: 24px;
     }
 
@@ -58,7 +58,7 @@ a.nav-item{
     }
 
     &.active{
-        background-color: $color1;
+        background-color: $color0;
         color: $color2;
     }
 }

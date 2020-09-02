@@ -7,7 +7,7 @@ header{
     padding: 15px;
     @include flex(row, center, space-between);
 
-    .icon-menu{color: $color3;}
+    .icon-menu{color: $color0;}
 }
 
 .header-user{
