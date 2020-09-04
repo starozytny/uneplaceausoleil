@@ -98,10 +98,22 @@ class Rgpd
     public function getSubjectToString()
     {
         $choices = [
-            "Droit d'accès sur un traitement de données.",
-            "Droit de rectification sur un traitement de données.",
-            "Droit à l'effacement sur un traitement de données.",
-            "Autre demande concernant un traitement de données."
+            "Droit d'accès sur un traitement de données",
+            "Droit de rectification sur un traitement de données",
+            "Droit à l'effacement sur un traitement de données",
+            "Autre demande concernant un traitement de données"
+        ];
+
+        return $choices[$this->getSubject()];
+    }
+
+    public function getSubjectToStringShort()
+    {
+        $choices = [
+            "Droit d'accès",
+            "Droit rectification",
+            "Droit effacement",
+            "Autre"
         ];
 
         return $choices[$this->getSubject()];
@@ -129,6 +141,24 @@ class Rgpd
         $this->createAt = $createAt;
 
         return $this;
+    }
+
+    public function getMonthFr(){
+        $m = ['', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+        $d = date_format($this->getCreateAt(), 'n');
+
+        return $m[intval($d)];
+    }
+
+    public function getMonthShortFr(){
+        $m = ['', 'Jan', 'Fév', 'Mars', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc'];
+        $d = date_format($this->getCreateAt(), 'n');
+
+        return $m[intval($d)];
+    }
+
+    public function getCreateAtString(){
+        return date_format($this->getCreateAt(), 'd') . ' ' . $this->getMonthShortFr() . ' ' . date_format($this->getCreateAt(), 'Y');
     }
 
     public function getIsSeen(): ?bool

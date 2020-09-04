@@ -1,7 +1,7 @@
 import '../../css/pages/users.scss';
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import {Users} from './composants/Users';
+import {Users} from './composants/user/Users';
 
 
 let users = document.getElementById("users");

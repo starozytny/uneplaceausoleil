@@ -27,6 +27,15 @@
     -moz-osx-font-smoothing: grayscale;
   }
   
+.icon-chevron-up:before {
+  content: "\e965";
+}
+.icon-vision-not:before {
+  content: "\e964";
+}
+.icon-chevron-down:before {
+  content: "\e963";
+}
 .icon-align-center:before {
   content: "\e900";
 }

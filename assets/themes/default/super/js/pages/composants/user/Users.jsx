@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import toastr from 'toastr';
 import axios from 'axios/dist/axios';
-import Routing from '../../../../../../../public/bundles/fosjsrouting/js/router.min.js';
-import Loader from '../../../../react/functions/loader';
-import Validateur from '../../../../react/functions/validateur';
-import {Page} from '../../components/composants/page/Page';
-import {Aside} from '../../components/composants/page/Aside';
-import {Input, Checkbox} from '../../../../react/composants/Fields';
-import {Alert} from '../../../../react/composants/Alert';
-import {Drop} from '../../../../react/composants/Drop';
+import Routing from '../../../../../../../../public/bundles/fosjsrouting/js/router.min.js';
+import Loader from '../../../../../react/functions/loader';
+import Validateur from '../../../../../react/functions/validateur';
+import {Page} from '../../../components/composants/page/Page';
+import {Aside} from '../../../components/composants/page/Aside';
+import {Input, Checkbox} from '../../../../../react/composants/Fields';
+import {Alert} from '../../../../../react/composants/Alert';
+import {Drop} from '../../../../../react/composants/Drop';
 import Swal from 'sweetalert2';
 
 export class UsersList extends Component {
