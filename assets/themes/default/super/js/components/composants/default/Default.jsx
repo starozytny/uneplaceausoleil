@@ -18,12 +18,12 @@ export class Default extends Component {
     handleCloseMenu = (e) => this.setState({menuOpened: ''});
 
     render () {
-        const {menu, username, avatar} = this.props;
+        const {title, menu, username, avatar} = this.props;
         const {menuOpened} = this.state;
 
         return <>
             <Header username={username} avatar={avatar} onOpenMenu={this.handleOpenMenu} />
-            <Menu menu={menu} menuOpened={menuOpened} onCloseMenu={this.handleCloseMenu} />
+            <Menu title={title} menu={menu} menuOpened={menuOpened} onCloseMenu={this.handleCloseMenu} />
             <div className={"overlay " + menuOpened} onClick={this.handleCloseMenu} ></div>
         </>
     }

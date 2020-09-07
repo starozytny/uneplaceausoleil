@@ -1,7 +1,18 @@
 {% extends 'themes/default/admin/layout/layout.html.twig' %}
 
-{% block title %}Administration{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('default_super_home') }}
+{% endblock %}
 
-{% block body %}
-    Dashboard Admin
+{% block title %}Dashboard {{ parent() }}{% endblock %}
+
+{% block main_content %}
+    <h1>Dashboard</h1>
+
+    <section class="dashboard">
+        <div class="dashboard-line dashboard-line-0">
+
+        </div>
+    </section>
 {% endblock %}
