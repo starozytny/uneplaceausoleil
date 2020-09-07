@@ -9,6 +9,12 @@
     @include boxshadow();
     @include flex(row, center, space-between);
     margin-bottom: 12px;
+    color: $beta;
+    transition: all 0.2s ease-in-out;
+
+    &:hover{
+        transform: translateY(-2px);
+    }
 
     .card-header{
         width: 70%;

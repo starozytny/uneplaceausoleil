@@ -12,7 +12,7 @@
 
     <section class="dashboard">
         <div class="dashboard-line dashboard-line-0">
-            <div class="card-dash-0">
+            <a href="{{ path('super_users_index') }}" class="card-dash-0">
                 <div class="card-header">
                     <div class="number">
                         <span>{{ totalUsers }}</span> 
@@ -27,8 +27,8 @@
                         <span class="icon-user"></span>
                     </div>
                 </div>
-            </div>
-            <div class="card-dash-0">
+            </a>
+            <a href="{{ path('super_rgpd_index') }}" class="card-dash-0">
                 <div class="card-header">
                     <div class="number">
                         <span>{{ totalRgpds }}</span> 
@@ -40,7 +40,7 @@
                         <span class="icon-certificate"></span>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
         
     </section>
