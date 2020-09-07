@@ -1,0 +1,13 @@
+{% extends 'themes/default/admin/layout/layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('default_super_rgpd') }}
+    {{ encore_entry_link_tags('default_admin_contact') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('default_super_rgpd') }}
+    {{ encore_entry_script_tags('default_admin_contact') }}
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'themes/default/admin/pages/contact/template.html.twig' %}
+
+{% block title %}Liste des demandes de contacts {{ parent() }}{% endblock %}
+
+{% block main_content %}
+    <h1>Demandes de contacts</h1>
+        
+    <div id="contact" data-demandes="{{ demandes | json_encode() }}"></div>
+{% endblock %}

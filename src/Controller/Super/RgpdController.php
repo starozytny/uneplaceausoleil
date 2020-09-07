@@ -31,9 +31,9 @@ class RgpdController extends AbstractController
         ]);
     }
 
-     /**
-     * @Route("/update/seen/{rgpd}", options={"expose"=true}, name="update_seen")
-     */
+    /**
+    * @Route("/update/seen/{rgpd}", options={"expose"=true}, name="update_seen")
+    */
     public function updateIsSeen(Rgpd $rgpd)
     {
         $em = $this->getDoctrine()->getManager();
@@ -59,7 +59,7 @@ class RgpdController extends AbstractController
             return new JsonResponse(['code' => 0, 'message' => '[ERREUR] Cette demande RGPD n\'existe pas.']);
         }
 
-        if($rgpd->getIsSeen()){
+        if(!$rgpd->getIsSeen()){
             return new JsonResponse(['code' => 0, 'message' => 'Vous n\'avez pas consulté ce message.']);
         }
 

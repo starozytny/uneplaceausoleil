@@ -90,6 +90,24 @@ class Contact
         return $this;
     }
 
+    public function getMonthFr(){
+        $m = ['', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+        $d = date_format($this->getCreateAt(), 'n');
+
+        return $m[intval($d)];
+    }
+
+    public function getMonthShortFr(){
+        $m = ['', 'Jan', 'Fév', 'Mars', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc'];
+        $d = date_format($this->getCreateAt(), 'n');
+
+        return $m[intval($d)];
+    }
+
+    public function getCreateAtString(){
+        return date_format($this->getCreateAt(), 'd') . ' ' . $this->getMonthShortFr() . ' ' . date_format($this->getCreateAt(), 'Y');
+    }
+
     public function getCreateAt(): ?\DateTimeInterface
     {
         return $this->createAt;

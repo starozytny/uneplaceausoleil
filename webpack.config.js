@@ -55,6 +55,7 @@ Encore
     .addEntry('default_contact', './assets/themes/default/front/js/pages/contact.jsx')
 
     .addEntry('default_admin', './assets/themes/default/back/js/default.jsx')
+    .addEntry('default_admin_contact', './assets/themes/default/back/js/pages/contact.jsx')
 
     .addEntry('default_super', './assets/themes/default/super/js/default.jsx')
     .addEntry('default_super_home', './assets/themes/default/super/js/pages/home.jsx')
