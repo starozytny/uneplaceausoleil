@@ -27,7 +27,7 @@ class SuperAdminController extends AbstractController
         $totalUsers = count($users);
         $totalNewUsers = count($newUsers);
 
-        $rgpds = $em->getRepository(Rgpd::class)->findBy(['isSeen' => false]);
+        $rgpds = $em->getRepository(Rgpd::class)->findBy(['isSeen' => false, 'isTrash' => false]);
         $totalRgpds = count($rgpds);
 
         return $this->render('root/super/index.html.twig', [

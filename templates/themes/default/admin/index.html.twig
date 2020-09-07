@@ -12,7 +12,19 @@
 
     <section class="dashboard">
         <div class="dashboard-line dashboard-line-0">
-
+            <a href="{{ path('admin_contact_index') }}" class="card-dash-0">
+                <div class="card-header">
+                    <div class="number">
+                        <span>{{ totalContacts }}</span> 
+                    </div>
+                    <div class="label">Demandes de contact</div>
+                </div>
+                <div class="card-footer">
+                    <div class="card-illu card-illu-0">
+                        <span class="icon-email"></span>
+                    </div>
+                </div>
+            </a>
         </div>
     </section>
 {% endblock %}

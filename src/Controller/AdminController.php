@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,6 +13,13 @@ class AdminController extends AbstractController
      */
     public function index()
     {
-        return $this->render('root/admin/index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $contacts = $em->getRepository(Contact::class)->findBy(['isSeen' => false]);
+        $totalContacts = count($contacts);
+
+        return $this->render('root/admin/index.html.twig', [
+            'totalContacts' => $totalContacts
+        ]);
     }
 }
