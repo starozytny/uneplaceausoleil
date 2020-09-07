@@ -57,6 +57,7 @@ Encore
     .addEntry('default_admin', './assets/themes/default/back/js/default.jsx')
 
     .addEntry('default_super', './assets/themes/default/super/js/default.jsx')
+    .addEntry('default_super_home', './assets/themes/default/super/js/pages/home.jsx')
     .addEntry('default_super_users', './assets/themes/default/super/js/pages/users.jsx')
     .addEntry('default_super_rgpd', './assets/themes/default/super/js/pages/rgpd.jsx')
 

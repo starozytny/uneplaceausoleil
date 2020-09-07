@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Rgpd;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -19,6 +21,19 @@ class SuperAdminController extends AbstractController
      */
     public function index()
     {
-        return $this->render('root/super/index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository(User::class)->findAll();
+        $newUsers = $em->getRepository(User::class)->findBy(['is_new' => true]);
+        $totalUsers = count($users);
+        $totalNewUsers = count($newUsers);
+
+        $rgpds = $em->getRepository(Rgpd::class)->findBy(['isSeen' => false]);
+        $totalRgpds = count($rgpds);
+
+        return $this->render('root/super/index.html.twig', [
+            'totalUsers' => $totalUsers,
+            'totalNewUsers' => $totalNewUsers,
+            'totalRgpds' => $totalRgpds
+        ]);
     }
 }

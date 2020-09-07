@@ -17,7 +17,7 @@ class Mailer
         $this->mailer = $mailer;
     }
 
-    public function sendMail($title, $text, $html, $params, $email, $from = 'chanbora@logilink.fr')
+    public function sendMail($title, $text, $html, $params, $email, $from = 'no-reply@logilink.fr')
     {
         $email = (new TemplatedEmail())
             ->from($from)

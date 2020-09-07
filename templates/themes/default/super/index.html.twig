@@ -1,7 +1,47 @@
 {% extends 'themes/default/super/layout/layout.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('default_super_home') }}
+{% endblock %}
+
 {% block title %}Dashboard {{ parent() }}{% endblock %}
 
 {% block main_content %}
-    <h1>Dashboard Super</h1>
+    <h1>Administrator</h1>
+
+    <section class="dashboard">
+        <div class="dashboard-line dashboard-line-0">
+            <div class="card-dash-0">
+                <div class="card-header">
+                    <div class="number">
+                        <span>{{ totalUsers }}</span> 
+                        {% if totalNewUsers > 0 %}
+                            <span class="number-new">+ {{ totalNewUsers }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="label">Nombre d'utilisateurs</div>
+                </div>
+                <div class="card-footer">
+                    <div class="card-illu card-illu-0">
+                        <span class="icon-user"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-dash-0">
+                <div class="card-header">
+                    <div class="number">
+                        <span>{{ totalRgpds }}</span> 
+                    </div>
+                    <div class="label">Demandes RGPD</div>
+                </div>
+                <div class="card-footer">
+                    <div class="card-illu card-illu-1">
+                        <span class="icon-certificate"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </section>
 {% endblock %}
