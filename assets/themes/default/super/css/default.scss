@@ -59,6 +59,9 @@ main{
     min-height: 100vh;
 }
 
+.swal2-styled.swal2-confirm{
+    background-color: $primary !important;
+}
 
 //                      __   _  ___ ____  _  _     __
 //                     | _| / |/ _ \___ \| || |   |_ |

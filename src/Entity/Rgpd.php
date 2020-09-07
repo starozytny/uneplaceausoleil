@@ -48,10 +48,16 @@ class Rgpd
      */
     private $isSeen;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isTrash;
+
     public function __construct()
     {
         $this->setCreateAt(new DateTime());
         $this->setIsSeen(false);
+        $this->setIsTrash(false);
     }
 
     public function getId(): ?int
@@ -169,6 +175,18 @@ class Rgpd
     public function setIsSeen(bool $isSeen): self
     {
         $this->isSeen = $isSeen;
+
+        return $this;
+    }
+
+    public function getIsTrash(): ?bool
+    {
+        return $this->isTrash;
+    }
+
+    public function setIsTrash(bool $isTrash): self
+    {
+        $this->isTrash = $isTrash;
 
         return $this;
     }

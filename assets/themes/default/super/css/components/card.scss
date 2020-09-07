@@ -47,16 +47,12 @@
 
     .card1-header{
         margin-bottom: 8px;
-        display: flex;
-        align-items: stretch;
-        justify-content: space-between;
+        @include flex(row, stretch, space-between);
     }
 
     .card1-header-toggle-body{
         height: inherit;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @include flex(row, center, center);
         padding: 0 12px;
         cursor: pointer;
         
@@ -71,25 +67,41 @@
         border-top: 1px solid $colorBorder;
         padding-top: 12px;
         transition: all 0.2s ease-in-out;
+
+        /* width */
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        /* Track */
+        &::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+        
+        /* Handle on hover */
+        &::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
     }    
 
     .card1-footer{
         margin-top: 8px;
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
+        @include flex(row, flex-end, space-between);
         border-top: 1px solid $colorBorder;
         padding-top: 16px;
 
-
         .card1-footer-left, .card1-footer-right{
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
+            @include flex(row, center, flex-start);
         }
 
         .card1-footer-right{
             justify-content: flex-end;
+            margin-right: 12px;
         }
 
         .card1-footer-left{

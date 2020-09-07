@@ -4,6 +4,7 @@ import axios from 'axios/dist/axios';
 import Routing from '../../../../../../../../public/bundles/fosjsrouting/js/router.min.js';
 import Loader from '../../../../../react/functions/loader';
 import Validateur from '../../../../../react/functions/validateur';
+import ActionsArray from '../../../../../react/functions/actions_array';
 import {Page} from '../../../components/composants/page/Page';
 import {Aside} from '../../../components/composants/page/Aside';
 import {Input, Checkbox} from '../../../../../react/composants/Fields';
@@ -65,23 +66,6 @@ export class UsersList extends Component {
     }
 }
 
-function updateInArray(array, user){
-    let arr = []
-    array.map(elem => {
-        if(elem.id == user.id){ elem = user }
-        arr.push(elem)
-    })
-    return arr;
-}
-
-function deleteInArray(array, user){
-    let arr = []
-    array.map(elem => {
-        if(elem.id != user.id){ arr.push(elem) }
-    })
-    return arr;
-}
-
 export class Users extends Component {
     constructor (props) {
         super(props)
@@ -130,9 +114,9 @@ export class Users extends Component {
         this.refs.aside.handleUpdate(user.username) 
         
         this.setState({
-            usersList: updateInArray(this.state.usersList, user), 
-            users: updateInArray(this.state.users, user),
-            usersImmuable: updateInArray(this.state.usersImmuable, user)
+            usersList: ActionsArray.updateInArray(this.state.usersList, user), 
+            users: ActionsArray.updateInArray(this.state.users, user),
+            usersImmuable: ActionsArray.updateInArray(this.state.usersImmuable, user)
         })
     }
 
@@ -145,7 +129,7 @@ export class Users extends Component {
                 let user = self.state.usersImmuable.filter(v => v.id == id)
                 user[0].isNew = false;
 
-                self.setState({users: updateInArray(self.state.users, user[0])})
+                self.setState({users: ActionsArray.updateInArray(self.state.users, user[0])})
                 toastr.info('Mise à jour effectuée.')
             }else{
                 toastr.error(data.message)
@@ -159,8 +143,6 @@ export class Users extends Component {
             text: "La suppression est définitive.",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
             confirmButtonText: 'Oui, je confirme',
             cancelButtonText: 'Annuler'
           }).then((result) => {
@@ -173,9 +155,9 @@ export class Users extends Component {
                     if(code === 1){
                         let user = self.state.usersImmuable.filter(v => v.id == id)
                         self.setState({
-                            usersList: deleteInArray(self.state.usersList, user[0]), 
-                            users: deleteInArray(self.state.users, user[0]),
-                            usersImmuable: deleteInArray(self.state.usersImmuable, user[0]),
+                            usersList: ActionsArray.deleteInArray(self.state.usersList, user[0]), 
+                            users: ActionsArray.deleteInArray(self.state.users, user[0]),
+                            usersImmuable: ActionsArray.deleteInArray(self.state.usersImmuable, user[0]),
                             tailleList: parseInt(self.state.tailleList) - 1,
                         })
                         toastr.info('Suppression réussie.')
@@ -333,7 +315,7 @@ export class AsideUser extends Component {
                         user.highRole = data.highRole;
                         user.avatar = data.avatar;
     
-                        self.setState({users: updateInArray(self.state.users, user)})
+                        self.setState({users: ActionsArray.updateInArray(self.state.users, user)})
                         self.props.onUpdate(user)
     
                         toastr.info('Mise à jour effectuée.')
