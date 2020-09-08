@@ -15,3 +15,8 @@
     background-color: transparentize($color: $error, $amount: 0.89);
     color: $error;
 }
+
+.alert-primary{
+    background-color: transparentize($color: $primary, $amount: 0.89);
+    color: $primary;
+}
