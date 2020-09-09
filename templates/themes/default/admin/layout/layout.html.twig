@@ -21,7 +21,10 @@
             'icon': 'email',
             'label': 'Contact',
             'name': 'contact'
-        },
+        }
+    ] %}
+
+    {% set menuBottom = [
         {
             'path': path('app_homepage'),
             'icon': 'earth',
@@ -39,12 +42,13 @@
                 'name': 'dashboard'
             }
         ] %}
-        {% set menu = menu | merge(menuSuper) %}
+        {% set menuBottom = menuBottom | merge(menuSuper) %}
     {% endif %}
 
     <div id="default" 
         data-title="Admin"
         data-menu="{{ menu | json_encode() }}" 
+        data-menu-bottom="{{ menuBottom | json_encode() }}" 
         data-username="{{ app.user.username | capitalize }}" 
         data-avatar="{{ app.user.avatar }}"
     ></div>

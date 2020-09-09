@@ -25,7 +25,10 @@
             'icon': 'padlock',
             'label': 'RGPD',
             'name': 'rgpd'
-        },
+        }
+    ] %}
+
+    {% set menuBottom = [
         {
             'path': path('app_homepage'),
             'icon': 'earth',
@@ -43,6 +46,7 @@
     <div id="default" 
         data-title="SuperAdmin"
         data-menu="{{ menu | json_encode() }}" 
+        data-menu-bottom="{{ menuBottom | json_encode() }}"
         data-username="{{ app.user.username | capitalize }}" 
         data-avatar="{{ app.user.avatar }}"
     ></div>

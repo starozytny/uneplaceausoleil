@@ -13,7 +13,7 @@ Routing.setRoutingData(routes);
 let def = document.getElementById("default");
 if(def){
     ReactDOM.render(
-        <Default title={def.dataset.title} menu={def.dataset.menu} username={def.dataset.username} avatar={def.dataset.avatar} />, def
+        <Default title={def.dataset.title} menu={def.dataset.menu} menuBottom={def.dataset.menuBottom} username={def.dataset.username} avatar={def.dataset.avatar} />, def
     )
 }
 

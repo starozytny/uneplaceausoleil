@@ -26,11 +26,18 @@ export class Menu extends Component {
     }
 
     render () {
-        const {title, menuOpened, onCloseMenu} = this.props;
+        const {title, menuBottom, menuOpened, onCloseMenu} = this.props;
         const {menu, active} = this.state;
 
         let menuItems = menu.map((elem, index) => {
             return <a href={elem.path} className={(active == elem.name) ? "nav-item active" : "nav-item"} key={index}>
+                <span className={"icon-" + elem.icon}></span>
+                <span>{elem.label}</span>
+            </a>
+        })
+
+        let menuBot = JSON.parse(menuBottom).map((elem, index) => {
+            return <a href={elem.path} className="nav-item" key={index}>
                 <span className={"icon-" + elem.icon}></span>
                 <span>{elem.label}</span>
             </a>
@@ -43,7 +50,12 @@ export class Menu extends Component {
             </div>
             <div className="nav-body">
                 <div className="nav-items">
-                    {menuItems}
+                    <div className="nav-items-top">
+                        {menuItems}
+                    </div>
+                    <div className="nav-items-bottom">
+                        {menuBot}
+                    </div>
                 </div>
             </div>
         </nav>
