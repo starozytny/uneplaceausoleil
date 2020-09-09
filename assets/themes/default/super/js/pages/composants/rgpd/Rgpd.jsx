@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Routing from '../../../../../../../../public/bundles/fosjsrouting/js/router.min.js';
-import {Page} from '../../../components/composants/page/Page';
+import {Page} from '../../../../../react/composants/page/Page';
 import ActionsClassique from '../../../../../react/functions/actions_classique';
 
 export class RgpdList extends Component {
@@ -88,7 +88,7 @@ export class Rgpd extends Component {
             dataImmuable: data,
             data: data,
             dataList: dataList,
-            tailleList: data.length,
+            tailleList: data.length
         }
 
         this.handleUpdateList = this.handleUpdateList.bind(this);

@@ -6,7 +6,7 @@ import Routing from '../../../../../public/bundles/fosjsrouting/js/router.min.js
 
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import {Default} from './components/composants/default/Default';
+import {Default} from '../../react/composants/default/Default';
 
 Routing.setRoutingData(routes);
 

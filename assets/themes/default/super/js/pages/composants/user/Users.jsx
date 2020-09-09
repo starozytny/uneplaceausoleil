@@ -5,8 +5,8 @@ import Routing from '../../../../../../../../public/bundles/fosjsrouting/js/rout
 import Loader from '../../../../../react/functions/loader';
 import Validateur from '../../../../../react/functions/validateur';
 import ActionsArray from '../../../../../react/functions/actions_array';
-import {Page} from '../../../components/composants/page/Page';
-import {Aside} from '../../../components/composants/page/Aside';
+import {Page} from '../../../../../react/composants/page/Page';
+import {Aside} from '../../../../../react/composants/page/Aside';
 import {Input, Checkbox} from '../../../../../react/composants/Fields';
 import {Alert} from '../../../../../react/composants/Alert';
 import {Drop} from '../../../../../react/composants/Drop';
@@ -52,10 +52,10 @@ export class UsersList extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="item-user-avatar">
+                <div className="item-user-avatar" onClick={this.handleOpenAside} data-id={elem.id}>
                     <img src={"../../uploads/" + elem.avatar} alt={"avatar de " + elem.username} />
                 </div>
-                <div className="item-user-username">{elem.username}</div>
+                <div className="item-user-username" onClick={this.handleOpenAside} data-id={elem.id}>{elem.username}</div>
                 <div className="item-user-email">{elem.email}</div>   
                 {elem.highRoleCode != 0 ? <div className="item-user-roles"><div className={"user-badge user-badge-" + elem.highRoleCode}>{elem.highRole}</div></div> : null}
                 {elem.isNew ? <div className="item-user-status"><div className="user-new" onClick={this.handleConvert} data-id={elem.id}><span className="icon-certificate"></span></div></div> : null}          

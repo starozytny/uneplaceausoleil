@@ -8,7 +8,7 @@ export class Toolbar extends Component {
         return <>
             <div className="toolbar">
                 <div className="toolbar-left">
-                {haveAdd ? <div className="toolbar-item"> <button className="btn btn-primary" onClick={onAdd}>Ajouter</button> </div> : null}
+                {haveAdd ? <div className="toolbar-item"> <button className="btn btn-primary" onClick={onAdd}><span>Ajouter</span></button> </div> : null}
                 </div>
                 <div className="toolbar-right">
                     {haveSearch ? <div className="toolbar-item"> <Search onSearch={onSearch} /> </div> : null}

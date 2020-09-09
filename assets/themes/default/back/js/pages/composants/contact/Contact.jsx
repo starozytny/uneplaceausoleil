@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Routing from '../../../../../../../../public/bundles/fosjsrouting/js/router.min.js';
-import {Page} from '../../../../../super/js/components/composants/page/Page';
+import {Page} from '../../../../../react/composants/page/Page';
 import ActionsClassique from '../../../../../react/functions/actions_classique';
 
 export class ContactList extends Component {

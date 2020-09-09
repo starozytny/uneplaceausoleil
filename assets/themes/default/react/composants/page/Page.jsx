@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Pagination} from '../../../../../react/composants/Pagination';
+import {Pagination} from '../Pagination';
 import {Toolbar} from './Toolbar.jsx';
 import {Others} from './Others.jsx';
 

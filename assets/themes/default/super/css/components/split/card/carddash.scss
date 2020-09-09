@@ -84,6 +84,13 @@
         &:nth-child(even){
             margin-left: 12px;
         }
+
+        .card-header{
+            width: 75%;
+        }
+        .card-footer{
+            width: 20%;
+        }
     }
 }
 

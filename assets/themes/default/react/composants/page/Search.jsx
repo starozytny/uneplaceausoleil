@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Input} from '../../../../../react/composants/Fields';
+import {Input} from '../Fields';
 
 export class Search extends Component {
     constructor (props){

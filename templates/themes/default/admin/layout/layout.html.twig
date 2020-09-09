@@ -30,6 +30,18 @@
         }
     ] %}
 
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        {% set menuSuper = [
+            {
+                'path': path('super_dashboard'),
+                'icon': 'earth',
+                'label': 'Dashboard super',
+                'name': 'dashboard'
+            }
+        ] %}
+        {% set menu = menu | merge(menuSuper) %}
+    {% endif %}
+
     <div id="default" 
         data-title="Admin"
         data-menu="{{ menu | json_encode() }}" 

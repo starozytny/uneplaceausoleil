@@ -4,7 +4,7 @@
 
 .item-user{
     background-color: $alpha;
-    padding: 10px 10px 25px 10px;
+    padding: 10px 10px 15px 10px;
     @include flex(column, center, flex-start);
     @include boxshadow();
     margin-bottom: 30px;
@@ -82,10 +82,16 @@
 .item-user-avatar{
     overflow: hidden;
     margin-bottom: 15px;
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out;
     
     img{
         border-radius: 300px;
         width: 60px; height: 60px;
+    }
+
+    &:hover{
+        opacity: 0.9;
     }
 }
 
@@ -94,6 +100,12 @@
     font-size: 18px;
     text-transform: capitalize;
     margin-bottom: 10px;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+
+    &:hover{
+        color: $color0;
+    }
 }
 
 .item-user-email{
