@@ -8,8 +8,8 @@ DB_HOST=$3
 DB_NAME=$4
 
 # sous-chemin de destination
-OUTDIR=`date +%Y-%m-%d/%H:%M:%S`
+OUTDIR=`date +%y_%m_%d`
 # création de l'arborescence
-mkdir -p backup
+mkdir -p backup/$OUTDIR
 # boucle sur les bases pour les dumper
-MYSQL_PWD=$DB_PASS mysqldump -u $DB_USER --single-transaction --skip-lock-tables $DB_NAME -h $DB_HOST > backup/$DB_NAME.sql
+MYSQL_PWD=$DB_PASS mysqldump -u $DB_USER --single-transaction --skip-lock-tables $DB_NAME -h $DB_HOST > backup/$OUTDIR/$DB_NAME.sql
