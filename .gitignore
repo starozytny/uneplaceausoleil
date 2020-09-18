@@ -24,3 +24,5 @@ yarn-error.log
 
 /documents/*
 /documents/export/*
+
+/bin/backup/*
