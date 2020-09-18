@@ -1,11 +1,6 @@
-{% extends 'themes/default/app/layout/layout.html.twig' %}
+{% extends 'themes/default/app/pages/security/template.html.twig' %}
 
 {% block title %}Log in!{% endblock %}
-
-{% block stylesheets %}
-    {{ parent() }}
-    {{ encore_entry_link_tags('default_security') }}
-{% endblock %}
 
 {% block main_content %}
 <form method="post">
@@ -33,12 +28,5 @@
         Sign in
     </button>
 </form>
-<div id="test">test</div>
-<br><br><br>
 <div id="form-lost"></div>
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    {{ encore_entry_script_tags('default_security') }}
 {% endblock %}

@@ -1,12 +1,12 @@
-import React, {Components} from 'react';
+import React, {Component} from 'react';
 import {Input} from '../../../../../react/composants/Fields';
 import {Formulaire} from '../../../../../react/composants/Formulaire';
 import Validateur from '../../../../../react/functions/validateur';
 import AjaxSend from '../../../../../react/functions/ajax_classique';
 
-class FormReinit extends React.Component {
+class FormReinit extends Component {
     constructor(props) {
-        super(props);
+        super();
 
         this.state = {
             success: '',

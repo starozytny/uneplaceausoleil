@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
 class User implements UserInterface
-{
+{ 
     const CODE_ROLE_USER = 0;
     const CODE_ROLE_SUPER_ADMIN = 1;
     const CODE_ROLE_ADMIN = 2;
@@ -46,7 +46,7 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $token;
 
