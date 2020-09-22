@@ -5,30 +5,31 @@ namespace App\Controller\Super;
 use App\Entity\User;
 use App\Service\Export;
 use App\Service\FileUploader;
+use App\Service\SerializeData;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * @Route("/administrator/utilisateurs", name="super_users_")
  */
 class UserController extends AbstractController
 {
+    const ATTRIBUTES_USERS = ['id', 'username', 'roles', 'email', 'isNew', 'avatar', 'highRole', 'highRoleCode', 'createAtString', 'renouvTimeString'];
+
     /**
      * @Route("/", options={"expose"=true}, name="index")
      */
-    public function index(SerializerInterface $serializer)
+    public function index(SerializeData $serializer)
     {
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository(User::class)->findBy([], ['username' => 'ASC']);
 
-        $users = $serializer->serialize($users, 'json', ['attributes' => [
-            'id', 'username', 'roles', 'email', 'isNew', 'avatar', 'highRole', 'highRoleCode', 'createAtString', 'renouvTimeString'
-        ]]);
+        $users = $serializer->getSerializeData($users, self::ATTRIBUTES_USERS);
+        
         return $this->render('root/super/pages/user/index.html.twig', [
             'users' => $users
         ]);

@@ -3,28 +3,27 @@
 namespace App\Controller\Super;
 
 use App\Entity\Rgpd;
+use App\Service\SerializeData;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * @Route("/administrator/rgpd", name="super_rgpd_")
  */
 class RgpdController extends AbstractController
 {
+    const ATTRIBUTES_RGPD = ['id', 'firstname', 'email', 'subject', 'subjectToStringShort', 'message', 'createAtString', 'isSeen'];
+
     /**
      * @Route("/", name="index")
      */
-    public function index(SerializerInterface $serializer)
+    public function index(SerializeData $serializer)
     {
         $em = $this->getDoctrine()->getManager();
         $demandes = $em->getRepository(Rgpd::class)->findBy(['isTrash' => false], ['createAt' => 'DESC']);
 
-        $demandes = $serializer->serialize($demandes, 'json', ['attributes' => [
-            'id', 'firstname', 'email', 'subject', 'subjectToStringShort', 'message', 'createAtString', 'isSeen'
-        ]]);
+        $demandes = $serializer->getSerializeData($demandes, self::ATTRIBUTES_RGPD);
 
         return $this->render('root/super/pages/rgpd/index.html.twig', [
             'demandes' => $demandes

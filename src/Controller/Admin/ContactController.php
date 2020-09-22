@@ -3,27 +3,27 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Contact;
+use App\Service\SerializeData;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\SerializerInterface;
 
 /**
-     * @Route("/admin/contact", name="admin_contact_")
-     */
+ * @Route("/admin/contact", name="admin_contact_")
+ */
 class ContactController extends AbstractController
 {
+    const ATTRIBUTES_CONTACT = ['id', 'firstname', 'email', 'message', 'createAtString', 'isSeen'];
+
     /**
      * @Route("/", options={"expose"=true}, name="index")
      */
-    public function index(SerializerInterface $serializer)
+    public function index(SerializeData $serializer)
     {
         $em = $this->getDoctrine()->getManager();
         $demandes = $em->getRepository(Contact::class)->findBy([], ['createAt' => 'DESC']);
 
-        $demandes = $serializer->serialize($demandes, 'json', ['attributes' => [
-            'id', 'firstname', 'email', 'message', 'createAtString', 'isSeen'
-        ]]);
+        $demandes = $serializer->getSerializeData($demandes, self::ATTRIBUTES_CONTACT);
 
         return $this->render('root/admin/pages/contact/index.html.twig', [
             'demandes' => $demandes
