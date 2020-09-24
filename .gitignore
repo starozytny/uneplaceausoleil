@@ -26,3 +26,4 @@ yarn-error.log
 /documents/export/*
 
 /bin/backup/*
+/public/js/*

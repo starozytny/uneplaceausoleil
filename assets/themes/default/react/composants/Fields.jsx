@@ -1,11 +1,26 @@
 import React from 'react';
+import Trumbowyg from 'react-trumbowyg';
+import 'react-trumbowyg/dist/trumbowyg.min.css';
+import '../../../../../node_modules/trumbowyg/dist/plugins/base64/trumbowyg.base64';
+import '../../../../../node_modules/trumbowyg/dist/plugins/cleanpaste/trumbowyg.cleanpaste';
+import '../../../../../node_modules/trumbowyg/dist/plugins/colors/trumbowyg.colors';
+import '../../../../../node_modules/trumbowyg/dist/plugins/colors/ui/sass/trumbowyg.colors.scss';
+import '../../../../../node_modules/trumbowyg/dist/plugins/fontsize/trumbowyg.fontsize';
+import '../../../../../node_modules/trumbowyg/dist/plugins/pasteimage/trumbowyg.pasteimage';
+import '../../../../../node_modules/trumbowyg/dist/plugins/history/trumbowyg.history';
+import '../functions/textarea/plugins/trumbowyg.alert';
+import DatePicker from "react-datepicker";
+import { registerLocale, setDefaultLocale } from  "react-datepicker";
+import fr from 'date-fns/locale/fr';
+registerLocale('fr', fr)
+import "react-datepicker/dist/react-datepicker.css";
 
 export function Input({type="text", identifiant, valeur, onChange, children, placeholder}) {
     return (
         <div className={'form-group' + (valeur.error ? " form-group-error" : "")}>
             <label htmlFor={identifiant}>{children}</label>
             <input type={type} name={identifiant} id={identifiant} placeholder={placeholder} value={valeur.value} onChange={onChange}/>
-            <div className="error">{valeur.error ? <>{valeur.error}<span className='icon-warning'></span></> : null}</div>
+            <div className="error">{valeur.error ? <><span className='icon-warning'></span>{valeur.error}</> : null}</div>
         </div>
     );
 }
@@ -27,7 +42,7 @@ export function Checkbox({items, name, valeur, onChange, children}) {
             <div className="checkbox-items">
                 {itemsInputs}
             </div>
-            <div className="error">{valeur.error ? <>{valeur.error}<span className='icon-warning'></span></> : null}</div>
+            <div className="error">{valeur.error ? <><span className='icon-warning'></span>{valeur.error}</> : null}</div>
         </div>
     );
 }
@@ -37,7 +52,39 @@ export function TextArea({identifiant, valeur, onChange, children}) {
         <div className={'form-group' + (valeur.error ? " form-group-error" : "")}>
             <label htmlFor={identifiant}>{children}</label>
             <textarea name={identifiant} id={identifiant} value={valeur.value} onChange={onChange}/>
-            <div className="error">{valeur.error ? valeur.error : null}</div>
+            <div className="error">{valeur.error ? <><span className='icon-warning'></span>{valeur.error}</> : null}</div>
+        </div>
+    );
+}
+
+export function TextAreaWys({identifiant, valeur, onChange, reference, children}){
+    return (
+        <div className={'form-group' + (valeur.error ? " form-group-error" : "")}>
+            <label htmlFor={identifiant}>{children}</label>
+            <Trumbowyg id='react-trumbowyg'
+                        buttons={
+                            [
+                                ['viewHTML'],
+                                ['historyUndo', 'historyRedo'],
+                                ['formatting'],
+                                ['fontsize'],
+                                'btnGrp-semantic',
+                                ['link'],
+                                ['base64'],
+                                ['foreColor', 'backColor'],
+                                'btnGrp-justify',
+                                'btnGrp-lists',
+                                ['horizontalRule'],
+                                ['alert'],
+                                ['fullscreen']
+                            ]
+                        }
+                        data={valeur.value}
+                        placeholder=''
+                        onChange={onChange}
+                        ref={reference}
+                    />
+            <div className="error">{valeur.error ? <><span className='icon-warning'></span>{valeur.error}</> : null}</div>
         </div>
     );
 }
@@ -54,7 +101,29 @@ export function Select({identifiant, valeur, onChange, children, items}) {
                     {choices}
                 </select>
             </label>
-            <div className="error">{valeur.error ? valeur.error : null}</div>            
+            <div className="error">{valeur.error ? <><span className='icon-warning'></span>{valeur.error}</> : null}</div>            
         </div>
     );
+}
+
+export function DatePick({valeur, onChange, children, minDate="", maxDate="", format="dd/MM/yyyy", placeholder="DD/MM/YYYY"}){
+    return (
+        <div className={'form-group-date form-group' + (valeur.error ? " form-group-error" : "")}>
+            <label>{children}</label>
+            <DatePicker
+                locale="fr"
+                selected={valeur.inputVal}
+                onChange={onChange}
+                dateFormat={format}
+                peekNextMonth
+                showMonthDropdown
+                showYearDropdown
+                dropdownMode="select"
+                placeholderText={placeholder}
+                minDate={minDate}
+                maxDate={maxDate}
+                />
+            <div className='error'>{valeur.error ? valeur.error : null}</div>
+        </div>
+    )
 }

@@ -57,7 +57,24 @@
     background-color: $primary;
 
     &:hover, &:focus{
-        background-color: $primary;
+        opacity: 0.93;
+    }
+}
+
+.btn-warning{
+    color: $alpha;
+    background-color: $warning;
+
+    &:hover, &:focus{
+        opacity: 0.93;
+    }
+}
+
+.btn-danger{
+    color: $alpha;
+    background-color: $danger;
+
+    &:hover, &:focus{
         opacity: 0.93;
     }
 }

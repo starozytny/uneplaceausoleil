@@ -27,6 +27,24 @@
     -moz-osx-font-smoothing: grayscale;
   }
   
+.icon-modules:before {
+  content: "\e967";
+}
+.icon-sites-internet:before {
+  content: "\e968";
+}
+.icon-applications:before {
+  content: "\e969";
+}
+.icon-autres:before {
+  content: "\e96a";
+}
+.icon-logiciels:before {
+  content: "\e96b";
+}
+.icon-time:before {
+  content: "\e966";
+}
 .icon-chevron-up:before {
   content: "\e965";
 }

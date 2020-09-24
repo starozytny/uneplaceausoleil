@@ -1,9 +1,17 @@
 @import '../vars/vars.scss';
 
+.form-group{
+    @include flex(column, flex-start, flex-start);
+}
+
+.react-datepicker-wrapper{
+    width: 100%;
+}
+
 .form-title{
     display: block;
     @include fontSemibold();
-    margin-bottom: 15px;
+    margin-bottom: 16px;
 }
 
 .line{
@@ -26,7 +34,7 @@
     }
 }
 
-input{
+input, textarea{
     border: 1px solid $color5;
     padding: 8px 10px;
     border-radius: 3px;
@@ -75,24 +83,31 @@ input{
 
 .form-group-error{
     label{
-        color: $error;
+        color: $danger;
     }
-    input{
-        border-color: $error;
+    input, textarea{
+        border-color: $danger;
+        color: $danger;
     }
     .error{
+        color: $danger;
+        padding: 6px 4px 4px 4px;
         font-size: 14px;
-        padding: 8px 2px 2px 12px;
-        color: $error;
-        text-align: right;
 
-        .icon-warning{
-            display: inline-block;
-            margin-left: 10px;
+        [class^="icon-"]{
+            margin-right: 5px;
         }
     }
 }
 
+.form-button{
+    & > *{
+        width: 100%;
+    }
+    & > *:not(:last-child){
+        margin-bottom: 12px;
+    }
+}
 //                      __   _____ __    ___    __
 //                     | _| |___  / /_  ( _ )  |_ |
 //    _____ _____ _____| |     / / '_ \ / _ \   | |_____ _____ _____
@@ -110,6 +125,16 @@ input{
         .form-group:last-child{
             margin-left: 10px;
             width: 50%;
+        }
+    }
+
+    .form-button{
+        & > *{
+            width: auto;
+        }
+        & > *:not(:last-child){
+            margin-right: 12px;
+            margin-bottom: 0;
         }
     }
 }

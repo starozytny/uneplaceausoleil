@@ -7,6 +7,19 @@ function updateInArray(array, data){
     return arr;
 }
 
+function addOrUpdateInArray(array, data){
+    let arr = []; let findOne = false;
+    let obj = JSON.parse(data)
+    array.forEach(element => {
+        if(element.id == obj.id){
+            element = obj; findOne = true // update documentation
+        }
+        arr.push(element)
+    });
+    if(!findOne) { arr.push(obj) } // if no find doc in docs => add new doc
+    return arr;
+}
+
 function updateInArraySeen(array, id){
     let arr = []
     array.map(elem => {
@@ -27,5 +40,6 @@ function deleteInArray(array, data){
 module.exports = {
     updateInArray,
     updateInArraySeen,
-    deleteInArray
+    deleteInArray,
+    addOrUpdateInArray
 }

@@ -1,6 +1,7 @@
 @import "../vars/vars.scss";
 
 .alert{
+    display: inline-block;
     margin: 15px 0;
     padding: 10px;
     font-size: 14px;
@@ -17,7 +18,37 @@
     color: $error;
 }
 
-.alert-primary{
+.alert-primary, .alert-info{
     background-color: transparentize($color: $primary, $amount: 0.89);
     color: $primary;
+}
+
+.alert-warning{
+    background-color: transparentize($color: $warning, $amount: 0.89);
+    color: $warning;
+}
+
+.alert-success{
+    background-color: transparentize($color: $success, $amount: 0.89);
+    color: $success;
+}
+
+.alert-color{
+    padding: 0px 12px;
+    min-width: 150px;
+    display: inline-block;
+    border-radius: 10px;
+}
+
+.trumbowyg-dropdown button{
+    font-size: 14px !important;
+}
+
+.trumbowyg-alert_danger-dropdown-button,
+.trumbowyg-alert_info-dropdown-button,
+.trumbowyg-alert_primary-dropdown-button,
+.trumbowyg-alert_warning-dropdown-button,
+.trumbowyg-alert_success-dropdown-button{
+    margin-top: 4px;
+    margin-bottom: 4px;
 }
