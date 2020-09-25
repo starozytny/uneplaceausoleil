@@ -17,7 +17,10 @@
 
     <ul>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <a href="{{ path('app_logout') }}">Logout</a>
+            <li><a href="{{ path('app_logout') }}">Logout</a></li>
+            {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+                <li><a href="{{ path('super_users_index', {'_switch_user': '_exit'}) }}">Exit Impersonate</a></li>
+            {% endif %}
         {% else %}
             <li><a href="{{ path('app_login') }}">Login</a></li>
         {% endif %}
@@ -26,6 +29,7 @@
         <li><a href="{{ path('app_cookies') }}">Cookies</a></li>
         <li><a href="{{ path('app_rgpd') }}">RGPD</a></li>
         <li><a href="{{ path('app_contact') }}">Contact</a></li>
+        
     </ul>
 {% endblock %}
 

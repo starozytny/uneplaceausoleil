@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AppController extends AbstractController
 {
     /**
-     * @Route("/", name="app_homepage")
+     * @Route("/", options={"expose"=true}, name="app_homepage")
      */
     public function index()
     {

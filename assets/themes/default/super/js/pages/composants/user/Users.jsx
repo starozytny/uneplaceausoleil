@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 
 export class UsersList extends Component {
     constructor (props) {
-        super(props)
+        super()
         
         this.handleOpenAside = this.handleOpenAside.bind(this)
         this.handleConvert = this.handleConvert.bind(this)
@@ -37,6 +37,14 @@ export class UsersList extends Component {
         const {users} = this.props
 
         let items = users.map(elem => {
+
+            let impersonate = Routing.generate('super_users_index', {'_switch_user': elem.username})
+            if(elem.highRoleCode == 2){
+                impersonate = Routing.generate('admin_dashboard', {'_switch_user': elem.username})
+            }else if(elem.highRoleCode == 0){
+                impersonate = Routing.generate('app_homepage', {'_switch_user': elem.username})
+            }
+
             return <div className="item-user" key={elem.id}>
                 <div className="item-user-actions">
                     <div className="user-selector">
@@ -48,6 +56,7 @@ export class UsersList extends Component {
                             <div className="drop-items">
                                 <span className="drop-item" onClick={this.handleOpenAside} data-id={elem.id}>Modifier</span>
                                 {elem.highRoleCode != 1 ? <span className="drop-item" onClick={this.handleDelete} data-id={elem.id}>Supprimer</span> : null}
+                                <a className="drop-item" href={impersonate}>Impersonate</a>
                             </div>
                         </div>
                     </div>
@@ -68,7 +77,7 @@ export class UsersList extends Component {
 
 export class Users extends Component {
     constructor (props) {
-        super(props)
+        super()
 
         let users = JSON.parse(JSON.parse(props.users));
         let usersList = users.slice(0, 12);
@@ -197,7 +206,7 @@ export class Users extends Component {
 
 export class AsideUser extends Component {
     constructor (props) {
-        super(props)
+        super()
 
         this.state = {
             type: 'edit',
@@ -337,7 +346,6 @@ export class AsideUser extends Component {
             { 'value': 1, 'role': 'ROLE_SUPER_ADMIN', 'label': 'Super admin', 'id': 'superamdin', 'checked': false },
             { 'value': 2, 'role': 'ROLE_ADMIN', 'label': 'Admin', 'id': 'admin', 'checked': false },
             { 'value': 0, 'role': 'ROLE_USER',  'label': 'Utilisateur', 'id': 'utilisateur', 'checked': false },
-            
         ]
 
         if(roles.length != 0){
