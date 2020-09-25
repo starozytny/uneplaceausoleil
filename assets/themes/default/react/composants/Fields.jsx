@@ -1,4 +1,5 @@
 import React from 'react';
+import Routing from '../../../../../public/bundles/fosjsrouting/js/router.min.js';
 import Trumbowyg from 'react-trumbowyg';
 import 'react-trumbowyg/dist/trumbowyg.min.css';
 import '../../../../../node_modules/trumbowyg/dist/plugins/base64/trumbowyg.base64';
@@ -8,6 +9,7 @@ import '../../../../../node_modules/trumbowyg/dist/plugins/colors/ui/sass/trumbo
 import '../../../../../node_modules/trumbowyg/dist/plugins/fontsize/trumbowyg.fontsize';
 import '../../../../../node_modules/trumbowyg/dist/plugins/pasteimage/trumbowyg.pasteimage';
 import '../../../../../node_modules/trumbowyg/dist/plugins/history/trumbowyg.history';
+import '../../../../../node_modules/trumbowyg/dist/plugins/upload/trumbowyg.upload';
 import '../functions/textarea/plugins/trumbowyg.alert';
 import DatePicker from "react-datepicker";
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
@@ -70,6 +72,8 @@ export function TextAreaWys({identifiant, valeur, onChange, reference, children}
                                 ['fontsize'],
                                 'btnGrp-semantic',
                                 ['link'],
+                                ['insertImage'],
+                                ['upload'],
                                 ['base64'],
                                 ['foreColor', 'backColor'],
                                 'btnGrp-justify',
@@ -83,6 +87,13 @@ export function TextAreaWys({identifiant, valeur, onChange, reference, children}
                         placeholder=''
                         onChange={onChange}
                         ref={reference}
+                        plugins= {{
+                            upload: {
+                                serverPath: Routing.generate('admin_doc_guide_upload'),
+								fileFieldName: 'image',
+                                urlPropertyName: 'data.link'
+                            }
+                        }}
                     />
             <div className="error">{valeur.error ? <><span className='icon-warning'></span>{valeur.error}</> : null}</div>
         </div>

@@ -31,6 +31,8 @@
     opacity: 0.6;
     cursor: pointer;
     transition: opacity 0.2s ease-in-out;
+    border: none;
+    background-color: transparent;
 
     [class^="icon-"]{
         font-size: 20px;
