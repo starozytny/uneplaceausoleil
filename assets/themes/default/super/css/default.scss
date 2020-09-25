@@ -63,6 +63,11 @@ main{
     background-color: $primary !important;
 }
 
+.dashboard-line{
+    @include flex(row, stretch, flex-start);
+    flex-wrap: wrap;
+}
+
 //                      __   _  ___ ____  _  _     __
 //                     | _| / |/ _ \___ \| || |   |_ |
 //    _____ _____ _____| |  | | | | |__) | || |_   | |_____ _____ _____
@@ -94,8 +99,10 @@ main{
         margin-left: calc(17% + 20px);
         margin-right: 20px;
     }
+    .dashboard-line{
+        width: calc(100% + 22px);
+    }
 }
-
 //                      __   _  __    ___   ___    __
 //                     | _| / |/ /_  / _ \ / _ \  |_ |
 //    _____ _____ _____| |  | | '_ \| | | | | | |  | |_____ _____ _____
