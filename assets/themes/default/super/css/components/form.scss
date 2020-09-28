@@ -48,14 +48,17 @@ input, textarea{
 }
 .checkbox-items{
     @include flex(row, stretch, flex-start);
+    flex-wrap: wrap;
     & > .checkbox-item:not(:last-child){
         margin-right: 10px;
     }
 }
 .checkbox-item{
+    margin-top: 4px;
     &.checked > label{
         border: 1px solid $color6;
-        color: $color6;
+        color: $beta;
+        opacity: 1;
 
         &:hover{
             background-color: $colorFond;
@@ -66,13 +69,14 @@ input, textarea{
         padding: 5px 10px;
         text-transform: capitalize;
         border: 1px dashed $color5;
-        color: $color5;
+        opacity: 0.7;
+        color: $beta;
         cursor: pointer;
         border-radius: 3px;
         transition: all 0.2s ease-in-out;
 
         &:hover{
-            color: $color6;
+            opacity: 1;
         }
     }
 

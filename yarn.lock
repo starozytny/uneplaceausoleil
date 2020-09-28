@@ -1629,6 +1629,11 @@ babel-plugin-dynamic-import-node@^2.3.3:
   dependencies:
     object.assign "^4.1.0"
 
+babel-plugin-loop-optimizer@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/babel-plugin-loop-optimizer/-/babel-plugin-loop-optimizer-1.4.1.tgz#61b2e029a5c2157f575c7d3ae99acc63ae2b53d9"
+  integrity sha512-oI0NNU0MpzyRSluA7MCQ3nAj9gga8NIotQAPOt1P92mYnIRkkfczXGrolKaW6TDw0l0Glu9JF+AYlnTdLzTo2A==
+
 balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
