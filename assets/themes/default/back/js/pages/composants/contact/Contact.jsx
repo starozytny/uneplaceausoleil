@@ -5,7 +5,7 @@ import ActionsClassique from '../../../../../react/functions/actions_classique';
 
 export class ContactList extends Component {
     constructor (props){
-        super(props)
+        super()
 
         this.state = {
             cardOpened: null
@@ -24,10 +24,7 @@ export class ContactList extends Component {
             this.props.onUpdateSeen(id)
         }
     }
-
-    handleDelete = (e) => {
-        this.props.onDelete(e.currentTarget.dataset.id)
-    }
+    handleDelete = (e) => { this.props.onDelete(e.currentTarget.dataset.id) }
 
     render () {
         const {demandes} = this.props
@@ -78,7 +75,7 @@ export class ContactList extends Component {
 
 export class Contact extends Component {
     constructor (props){
-        super(props);
+        super();
 
         let data = JSON.parse(JSON.parse(props.demandes));
         let dataList = data.slice(0, 12);
@@ -96,14 +93,8 @@ export class Contact extends Component {
     }
 
     handleUpdateList = (dataList) => { this.setState({ dataList: dataList }) }
-
-    handleUpdateSeen = (id) => {
-        ActionsClassique.classiqueUpdateSeen(this, Routing.generate('admin_contact_update_seen', {'contact': id}), id);
-    }
-
-    handleDelete = (id) => {
-        ActionsClassique.classiqueDelete(this, Routing.generate('admin_contact_delete', {'contact': id}), id);
-    }
+    handleUpdateSeen = (id) => { ActionsClassique.classiqueUpdateSeen(this, Routing.generate('admin_contact_update_seen', {'contact': id}), id); }
+    handleDelete = (id) => {  ActionsClassique.classiqueDelete(this, Routing.generate('admin_contact_delete', {'contact': id}), id); }
 
     render (){
         const {data, dataImmuable, dataList, tailleList} = this.state;

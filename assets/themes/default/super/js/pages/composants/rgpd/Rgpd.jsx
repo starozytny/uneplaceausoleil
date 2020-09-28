@@ -5,7 +5,7 @@ import ActionsClassique from '../../../../../react/functions/actions_classique';
 
 export class RgpdList extends Component {
     constructor (props){
-        super(props)
+        super()
 
         this.state = {
             cardOpened: null
@@ -79,7 +79,7 @@ export class RgpdList extends Component {
 
 export class Rgpd extends Component {
     constructor (props){
-        super(props);
+        super();
 
         let data = JSON.parse(JSON.parse(props.demandes));
         let dataList = data.slice(0, 12);

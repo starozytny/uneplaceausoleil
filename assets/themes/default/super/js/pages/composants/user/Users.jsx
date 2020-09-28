@@ -21,17 +21,9 @@ export class UsersList extends Component {
         this.handleDelete = this.handleDelete.bind(this)
     }
 
-    handleOpenAside = (e) => {
-        this.props.onOpenAside(e.currentTarget.dataset.id)
-    }
-
-    handleConvert = (e) => {
-        this.props.onConvertIsNew(e.currentTarget.dataset.id)
-    }
-
-    handleDelete = (e) => {
-        this.props.onDelete(e.currentTarget.dataset.id)
-    }
+    handleOpenAside = (e) => { this.props.onOpenAside(e.currentTarget.dataset.id) }
+    handleConvert = (e) => { this.props.onConvertIsNew(e.currentTarget.dataset.id) }
+    handleDelete = (e) => { this.props.onDelete(e.currentTarget.dataset.id) }
 
     render () {
         const {users} = this.props
@@ -89,6 +81,9 @@ export class Users extends Component {
             tailleList: users.length,
         }
 
+        this.asideuser = React.createRef()
+        this.aside = React.createRef()
+
         this.handleUpdateList = this.handleUpdateList.bind(this)
         this.handleUpdateUser = this.handleUpdateUser.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
@@ -111,16 +106,16 @@ export class Users extends Component {
     handleOpenAside = (id) => { 
         let user = this.state.usersImmuable.filter(v => v.id == id)
         if(user.length != 0){
-            this.refs.asideuser.handleUpdate(user[0])
-            this.refs.aside.handleUpdate(user[0].username) 
+            this.asideuser.current.handleUpdate(user[0])
+            this.aside.current.handleUpdate(user[0].username) 
         }else{
             toastr.error('Cet utilisateur n\'existe pas.')
         }
     }
 
     handleUpdateUser = (user) => { 
-        this.refs.asideuser.handleUpdate(user)
-        this.refs.aside.handleUpdate(user.username) 
+        this.asideuser.current.handleUpdate(user)
+        this.aside.current.handleUpdate(user.username) 
         
         this.setState({
             usersList: ActionsArray.updateInArray(this.state.usersList, user), 
@@ -179,8 +174,8 @@ export class Users extends Component {
     }
 
     handleAdd = () => {
-        this.refs.asideuser.handleOpenAdd()
-        this.refs.aside.handleUpdate("Ajouter un utilisateur") 
+        this.asideuser.current.handleOpenAdd()
+        this.aside.current.handleUpdate("Ajouter un utilisateur") 
     }
 
     render () {
@@ -190,7 +185,7 @@ export class Users extends Component {
             <UsersList users={usersList} onOpenAside={this.handleOpenAside} onConvertIsNew={this.handleConvertIsNew} onDelete={this.handleDelete} />
         </div>
 
-        let asideContent = <AsideUser users={usersImmuable} onUpdate={this.handleUpdateUser} ref="asideuser" />
+        let asideContent = <AsideUser users={usersImmuable} onUpdate={this.handleUpdateUser} ref={this.asideuser} />
 
         return <>
             <Page content={content} 
@@ -199,7 +194,7 @@ export class Users extends Component {
                   haveAdd="true" onAdd={this.handleAdd}
                   haveExport="true" urlExportExcel={Routing.generate('super_users_export')} nameExport="utilisateurs"
                   />
-            <Aside content={asideContent} ref="aside"/>
+            <Aside content={asideContent} ref={this.aside}/>
         </>
     }
 }
@@ -239,16 +234,18 @@ export class AsideUser extends Component {
         document.getElementById("username").focus();
     }
 
-    handleOpenAdd = () => { this.setState({
-        type: 'add',
-        user: undefined,
-        users: this.props.users,
-        username: {value: "", error:''},
-        email: {value: "", error:''},
-        roles: {value: [], error:''},
-        password: {value: '', error: ''},
-        password2: {value: '', error: ''},
-    }) }
+    handleOpenAdd = () => { 
+        this.setState({
+            type: 'add',
+            user: undefined,
+            users: this.props.users,
+            username: {value: "", error:''},
+            email: {value: "", error:''},
+            roles: {value: [], error:''},
+            password: {value: '', error: ''},
+            password2: {value: '', error: ''},
+        }) 
+    }
 
     handleChange = (e) => { 
         let name = e.currentTarget.name;
@@ -262,10 +259,7 @@ export class AsideUser extends Component {
         this.setState({[name]: {value: value}}) 
     }
 
-    handleGetFile = (e) => {
-        this.setState({file: e.file})
-        
-    }
+    handleGetFile = (e) => { this.setState({file: e.file}) }
 
     handleSubmit = (e) => {
         e.preventDefault()
