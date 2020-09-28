@@ -22,6 +22,17 @@ header{
     }
 }
 
+.header-user-avatar{
+    width: 24px; height: 24px;
+    overflow: hidden;
+    border-radius: 50px;
+    @include boxshadow();
+
+    img{
+        width: 24px; height: 24px;
+    }
+}
+
 //                      __   _  ___ ____  _  _     __
 //                     | _| / |/ _ \___ \| || |   |_ |
 //    _____ _____ _____| |  | | | | |__) | || |_   | |_____ _____ _____
@@ -34,6 +45,14 @@ header{
         justify-content: flex-end;
 
         .icon-menu{display: none;}
+    }
+
+    .header-user-avatar{
+        width: 32px; height: 32px;
+    
+        img{
+            width: 32px; height: 32px;
+        }
     }
 }
 //                      __   _ ____  ___   ___    __
