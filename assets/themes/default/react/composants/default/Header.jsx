@@ -8,7 +8,7 @@ export class Header extends Component {
         return <header>
             <div className="header-user">
                 <div className="header-user-avatar">
-                    <img src={"../../uploads/" + avatar} alt={"avatar de " + username} />
+                    <img src={window.location.origin + "/uploads/" + avatar} alt={"avatar de " + username} />
                 </div>
                 <div className="header-user-username">{username}</div>
                 <a href={Routing.generate('app_logout')} title="Se déconnecter"><span className="icon-logout"></span></a>
