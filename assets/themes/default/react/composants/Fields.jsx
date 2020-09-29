@@ -30,10 +30,10 @@ export function Input({type="text", identifiant, valeur, onChange, children, pla
 export function Checkbox({items, name, valeur, onChange, children}) {
 
     let itemsInputs = items.map(elem => {
-        return <div className={"checkbox-item " + (elem.checked ? 'checked' : '')} key={elem.value}>
-            <label htmlFor={elem.id}>
+        return <div className={"checkbox-item " + (elem.checked ? 'checked' : '')} key={elem.id}>
+            <label htmlFor={elem.identifiant}>
                 {elem.label}
-                <input type="checkbox" name={name} id={elem.id} value={elem.role} checked={elem.checked ? 'checked' : ''} onChange={onChange}/>
+                <input type="checkbox" name={name} id={elem.identifiant} value={elem.value} checked={elem.checked ? 'checked' : ''} onChange={onChange}/>
             </label>
         </div>
     })

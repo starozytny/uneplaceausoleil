@@ -337,15 +337,15 @@ export class AsideUser extends Component {
         const {type, user, error, username, email, roles, password, password2} = this.state
 
         let rolesItems = [
-            { 'value': 1, 'role': 'ROLE_SUPER_ADMIN', 'label': 'Super admin', 'id': 'superamdin', 'checked': false },
-            { 'value': 2, 'role': 'ROLE_ADMIN', 'label': 'Admin', 'id': 'admin', 'checked': false },
-            { 'value': 0, 'role': 'ROLE_USER',  'label': 'Utilisateur', 'id': 'utilisateur', 'checked': false },
+            { 'id': 1, 'value': 'ROLE_SUPER_ADMIN', 'label': 'Super admin', 'identifiant': 'superamdin', 'checked': false },
+            { 'id': 2, 'value': 'ROLE_ADMIN', 'label': 'Admin', 'identifiant': 'admin', 'checked': false },
+            { 'id': 0, 'value': 'ROLE_USER',  'label': 'Utilisateur', 'identifiant': 'utilisateur', 'checked': false },
         ]
 
         if(roles.length != 0){
             rolesItems.map(el => {
                 roles.value.map(elem => {
-                    if (elem == el.role){ el.checked = true }
+                    if (elem == el.value){ el.checked = true }
                 })
             })
         }
