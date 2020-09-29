@@ -112,6 +112,63 @@ input, textarea{
         margin-bottom: 12px;
     }
 }
+
+.toggle-wrapper {
+	display: flex;
+	overflow: hidden;
+    position: relative;
+    
+    input {
+        height: 40px;
+        left: 0;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        width: 40px;
+    }
+
+    .toggle {
+        position: relative;
+        display: inline-block;
+    }
+
+    label.toggle-item {
+        width: 4em;
+        background: transparentize($color: $color0, $amount: 0.85);
+        height: 2em;
+        display: inline-block;
+        border-radius: 50px;
+        position: relative;
+        transition: all .3s ease;
+        transform-origin: 20% center;
+        cursor: pointer;
+    }
+
+    .checkcross {
+        label:before {
+            content: none;
+        }
+        .check {
+            border-radius: 50%;
+            width: 1.5em;
+            height: 1.5em;
+            position: absolute;
+            background: $primary;
+            transition: .4s ease;
+            top: 3.5px;
+            left: 3.5px;
+            opacity: 0.65;
+        }
+    }
+    
+    .input-checkcross:checked + label {
+        .check {
+            left: 32px;
+            background: $danger;
+        }
+    }
+    
+}
 //                      __   _____ __    ___    __
 //                     | _| |___  / /_  ( _ )  |_ |
 //    _____ _____ _____| |     / / '_ \ / _ \   | |_____ _____ _____

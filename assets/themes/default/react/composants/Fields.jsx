@@ -137,3 +137,20 @@ export function DatePick({valeur, onChange, children, minDate="", maxDate="", fo
         </div>
     )
 }
+
+export function Switcher({identifiant, valeur, children, isChecked, onChange}){
+    return (
+        <div className={'form-group' + (valeur.error ? " form-group-error" : "")}>
+            <label>{children}</label>
+            <div className="toggle-wrapper">
+                <div className="toggle checkcross">
+                    <input id={identifiant} name={identifiant} checked={isChecked ? 'checked' : ''} className="input-checkcross" onChange={onChange} type="checkbox"/>
+                    <label className="toggle-item" htmlFor={identifiant}>
+                        <div className="check"></div>
+                    </label>
+                </div>
+            </div>
+            <div className="error">{valeur.error ? <><span className='icon-warning'></span>{valeur.error}</> : null}</div>
+        </div>
+    )
+}
