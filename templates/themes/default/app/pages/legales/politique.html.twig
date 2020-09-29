@@ -1,0 +1,116 @@
+{% extends 'themes/default/app/pages/legales/template.html.twig' %}
+
+{% block title %}Politique de confidentialité{% endblock %}
+
+{% block main_content %}
+    <h1>Politique de confidentialité</h1>
+
+    <section class="legales">
+        <div>
+            <p>
+                Cette politique de confidentialité s'applique au site : <b>******************</b>, 
+                conformément aux articles du Règlement européen 2016/679 et de la loi Informatique et Libertés du 6 janvier 1978.
+            </p>
+        </div>
+
+
+        <div>
+            <h2>Nature et finalité des données collectées</h2>
+            <p>
+                Les données à caractère personnel collectées sur le site ***************** sont les suivantes :
+            </p>
+            <ul>
+                <li>Nom et prénom</li>
+                <li>Adresse-email</li>
+                <li>Numéro de téléphone</li>
+            </ul>
+            <p>
+                Ces données sont collectées lorsque l'utilisateur effectue l'une des opérations suivantes sur le site :
+            </p>
+            <ul>
+                <li>Réalise une demande de contact via le formulaire de contact</li>
+                <li>Réalise une demande de RGPD via le formulaire de RGPD</li>
+            </ul>
+            <p>
+                La collecte et le traitement des données répondent aux finalités suivantes :
+            </p>
+            <ul>
+                <li>Pouvoir reprendre contact avec l'utilisateur.</li>
+                <li>L'élaboration de statistiques concernant les visites du site.</li>
+            </ul>
+        </div>
+        
+        <div>
+            <h2>Durée de conservation des données</h2>
+            <p>
+               Les données seront conservées dans sls systèmes informatiques du site et dans des conditions raisonnables 
+                de sécurité l'ensemble des données collectées pour une durée maximum de 5 ans.      
+            </p>
+        </div>
+
+        <div>
+            <h2>Droits des utilisateurs du site</h2>
+            <p>
+                Conformément à la réglementation concernant le traitement des données à caractère personnel, l'utilisateur possède les droits ci-après énumérés :
+            </p>
+            <ul>
+                <li>Droit d'accès, de rectification et droit à l'effacement</li>
+                <li>Droit à la portabilité des données</li>
+                <li>Droit à la limitation et à l'opposition du traitement des données</li>
+                <li>Droit de ne pas faire l'objet d'une décision fondée exclusivement sur un procédé automatisé</li>
+                <li>Droit de déterminer le sort des données après la mort</li>
+            </ul>
+            <p>
+                <a href="{{ path('app_rgpd') }}">Formulaire de demande RGPD pour faire exercer ses droits.</a>
+            </p>
+            <p>
+                Dans le cas où le responsable du traitement des données décide de ne pas répondre à la demande de l'utilisateur, 
+                et que l'utilisateur souhaite contester cette décision, ou, s'il pense qu'il est porté atteinte à l'un des 
+                droits énumérés ci-dessus, il est en droit de saisir la CNIL (Commission Nationale de l'Informatique et des Libertés,
+                <a href="https://www.cnil.fr" target="_blank">https://www.cnil.fr</a>) ou tout juge compétent.
+            </p>
+            
+        </div>
+        
+        <div>
+            <h2>Communication des données à de tiers</h2>
+            <p>
+                Des données <u>anonymes</u> sont transmises au(x) tiers ci-après énuméré(s) :       
+            </p>
+            <ul>
+                <li>Google analytics afin d'établir des statistiques sur la fréquentation du site. Les données sont transmises à Google Inc.</li>
+            </ul>
+            <p>
+                L'utilisateur peut paramétrer les cookies utilisés par le site à l'adresse suivante :
+                <a href="{{ path('app_cookies') }}">https://***********/gestion-cookies</a>
+            </p>
+        </div>        
+
+        <div>
+            <h2>Sécurité des données</h2>
+            <p>
+                Le site Immobilièere de la paix est hébergé par : O2switch, dont le siège est situé à l'adresse ci-après :
+                <br><br>
+                222 Boulevard Gustave Flaubert, 63000 Clermont-Ferrand
+                <br>
+                L'hébergeur peut être contacté au numéro de téléphone suivant : 04 44 44 60 40 <br>
+                <br>
+                Les données collectées et traitées par le site sont exclusivement hébergées et traitées en France.
+                <br><br>
+                Le site dispose d'un certificat SSL afin de garantir que les informations et le transfert des données transitant par le site sont sécurisés.
+                <br>
+             Un certificat SSL ("Secure Socket Layer" Certificate) a pour but de sécuriser les données échangées entre l'utilisateur et le site.
+            </p>
+        </div>
+    
+        <div>
+            <h2>Demandes</h2>
+            <p>
+                Pour toute demande concernant la politique de protection des données des utilisateur du site, et pour exercer vos droits vous pouvez nous contacter :  
+            </p>  
+            <ul>
+                <li>en remplissant le <a href="{{ path('app_rgpd') }}">formulaire de demande RGPD. https://**************/demande-rgpd</a></li>
+            </ul>
+        </div>        
+    </section>
+{% endblock %}

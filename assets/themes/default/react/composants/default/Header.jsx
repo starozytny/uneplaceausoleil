@@ -11,7 +11,7 @@ export class Header extends Component {
                     <img src={window.location.origin + "/uploads/" + avatar} alt={"avatar de " + username} />
                 </div>
                 <div className="header-user-username">{username}</div>
-                <a href={Routing.generate('app_logout')} title="Se déconnecter"><span className="icon-logout"></span></a>
+                <a href={Routing.generate('app_logout')} className="btn-icon" title="Se déconnecter"><span className="icon-logout"></span><span className="tooltip tooltip-bot-right">Se déconnecter</span></a>
             </div>
             <span className="icon-menu" onClick={onOpenMenu}></span>
         </header>
