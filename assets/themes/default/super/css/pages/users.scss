@@ -103,9 +103,22 @@
     margin-bottom: 10px;
     cursor: pointer;
     transition: color 0.2s ease-in-out;
+    @include flex(row, center, center);
 
     &:hover{
         color: $color0;
+    }
+}
+
+.user-new{
+    color: $color4;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    margin-right: 4px;
+
+    &:hover{
+        color: $colorDisabled;
+        transform: scale(0.9);
     }
 }
 
@@ -129,19 +142,6 @@
         &.user-badge-1{ background-color: $nuance1; }
         &.user-badge-2{ background-color: $nuance2; }
         &.user-badge-3{ background-color: $nuanceColor4; }
-    }
-}
-
-.item-user-status{
-    .user-new{
-        color: $color4;
-        cursor: pointer;
-        transition: all 0.2s ease-in-out;
-
-        &:hover{
-            color: $colorDisabled;
-            transform: scale(0.9);
-        }
     }
 }
 

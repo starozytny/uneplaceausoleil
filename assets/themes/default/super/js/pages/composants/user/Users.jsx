@@ -40,7 +40,7 @@ export class UsersList extends Component {
             return <div className="item-user" key={elem.id}>
                 <div className="item-user-actions">
                     <div className="user-selector">
-                        {/* {elem.highRoleCode != 1 ? <label><input type="checkbox" name="user-selector" /></label> : null} */}
+                        {elem.highRoleCode != 0 ? <div className="item-user-roles"><div className={"user-badge user-badge-" + elem.highRoleCode}>{elem.highRole}</div></div> : null}
                     </div>
                     <div className="user-actions">
                         <span className="icon-more"></span>
@@ -56,10 +56,11 @@ export class UsersList extends Component {
                 <div className="item-user-avatar" onClick={this.handleOpenAside} data-id={elem.id}>
                     <img src={"../../uploads/" + elem.avatar} alt={"avatar de " + elem.username} />
                 </div>
-                <div className="item-user-username" onClick={this.handleOpenAside} data-id={elem.id}>{elem.username}</div>
+                <div className="item-user-username" onClick={this.handleOpenAside} data-id={elem.id}>
+                    {elem.isNew ? <><div className="user-new" onClick={this.handleConvert} data-id={elem.id}><span className="icon-certificate"></span></div></> : null}          
+                    <span>{elem.username}</span>
+                </div>
                 <div className="item-user-email">{elem.email}</div>   
-                {elem.highRoleCode != 0 ? <div className="item-user-roles"><div className={"user-badge user-badge-" + elem.highRoleCode}>{elem.highRole}</div></div> : null}
-                {elem.isNew ? <div className="item-user-status"><div className="user-new" onClick={this.handleConvert} data-id={elem.id}><span className="icon-certificate"></span></div></div> : null}          
             </div>
         })
 
