@@ -28,7 +28,6 @@ export function Input({type="text", identifiant, valeur, onChange, children, pla
 }
 
 export function Checkbox({items, name, valeur, onChange, children}) {
-
     let itemsInputs = items.map(elem => {
         return <div className={"checkbox-item " + (elem.checked ? 'checked' : '')} key={elem.id}>
             <label htmlFor={elem.identifiant}>
