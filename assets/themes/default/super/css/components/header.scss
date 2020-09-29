@@ -20,6 +20,12 @@ header{
     a{
         color: $color3;
     }
+
+    .btn-icon{
+        .tooltip-bot-right{
+            min-width: 96px;
+        }
+    }
 }
 
 .header-user-avatar{
