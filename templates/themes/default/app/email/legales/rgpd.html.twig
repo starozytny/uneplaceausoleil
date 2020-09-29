@@ -1,5 +1,27 @@
-<h1>RGPD {{ demande.firstname }}!</h1>
+{% extends 'themes/default/components/email/template.html.twig' %}
 
-<p>
-    {{ demande.subjectToString }}
-</p>
+{% block preheader %}Mail de demande RGPD{% endblock %}
+
+{% block title %}Demande de RGPD{% endblock %}
+
+{% block body %}
+    <div>
+        <div>
+           <h2>{{ demande.firstname }}</h2>
+        </div>
+        <br>
+        <hr>
+        <br>
+        <h3>Informations de contact</h3>
+        <div>{{ demande.email }}</div>
+        <br>
+
+        <h3>Objet</h3>
+        <div>{{ demande.subjectToString }}</div>
+        <br>
+
+        <h3>Message</h3>
+        <div>{{ demande.message | raw | nl2br }}</div>
+
+    </div>
+{% endblock %}

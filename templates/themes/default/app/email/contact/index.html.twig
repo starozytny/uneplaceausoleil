@@ -1,5 +1,23 @@
-<h1>Contact {{ contact.firstname }}!</h1>
+{% extends 'themes/default/components/email/template.html.twig' %}
 
-<p>
-    {{ contact.message | raw }}
-</p>
+{% block preheader %}Mail de demande de contact{% endblock %}
+
+{% block title %}Demande de contact{% endblock %}
+
+{% block body %}
+    <div>
+        <div>
+           <h2>{{ contact.firstname }}</h2>
+        </div>
+        <br>
+        <hr>
+        <br>
+        <h3>Informations de contact</h3>
+        <div>{{ contact.email }}</div>
+        <br>
+
+        <h3>Message</h3>
+        <div>{{ contact.message | raw | nl2br }}</div>
+
+    </div>
+{% endblock %}
