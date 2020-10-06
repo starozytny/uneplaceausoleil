@@ -1,14 +1,18 @@
 {% extends 'themes/default/app/layout/layout.html.twig' %}
 
-{% block meta_description %}{% endblock %}
-{% block meta_keywords %}{% endblock %}
+{% block meta_description %}
+    Retrouvez des annonces immobilière autour de Marseille sur Une place au soleil.
+    Trouvez votre futur appartement ou une maison en location ou en vente dans la région des Bouches-du-Rhônes. 
+    Recherchez facilement un appartement, maison, parking dans notre liste d'annonces immobilières de Une place au soleil.
+{% endblock %}
+{% block meta_keywords %}uneplaceausoleil, location, vente, location appartement, vente appartement, vente maison, annonces immobiliere, une place au soleil, marseille{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('default_homepage') }}
 {% endblock %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Une place au soleil | Annonces immobilière à Marseille, location d'appartements et vente de maison{% endblock %}
 
 {% block main_content %}
     Hello world 

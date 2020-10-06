@@ -82,44 +82,44 @@ class AppController extends AbstractController
 
         return $this->render('root/app/pages/legales/rgpd.html.twig');
     }
-    /**
-     * @Route("/nous-contacter", options={"expose"=true}, name="app_contact")
-     */
-    public function contact(Request $request, Mailer $mailer)
-    {
-        $em = $this->getDoctrine()->getManager();
+    // /**
+    //  * @Route("/nous-contacter", options={"expose"=true}, name="app_contact")
+    //  */
+    // public function contact(Request $request, Mailer $mailer)
+    // {
+    //     $em = $this->getDoctrine()->getManager();
 
-        if($request->isMethod("POST")){
-            $data = json_decode($request->getContent());
-            $firstname = $data->firstname->value;
-            $email = $data->email->value;
-            $message = $data->message->value;
+    //     if($request->isMethod("POST")){
+    //         $data = json_decode($request->getContent());
+    //         $firstname = $data->firstname->value;
+    //         $email = $data->email->value;
+    //         $message = $data->message->value;
 
-            $demande = (new Contact())
-                ->setFirstname($firstname)
-                ->setEmail($email)
-                ->setMessage($message)
-            ;
+    //         $demande = (new Contact())
+    //             ->setFirstname($firstname)
+    //             ->setEmail($email)
+    //             ->setMessage($message)
+    //         ;
 
-            // Send mail       
-            if($mailer->sendMail(
-                'Demande de contact',
-                'Demande contact via le site Logilink',
-                'root/app/email/contact/index.html.twig',
-                ['contact' => $demande],
-                'chanbora@logilink.fr'
-            ) != true){
-                return new JsonResponse([
-                    'code' => 2,
-                    'errors' => [ 'error' => 'Le service est indisponible', 'success' => '' ]
-                ]);
-            }
+    //         // Send mail       
+    //         if($mailer->sendMail(
+    //             'Demande de contact',
+    //             'Demande contact via le site Logilink',
+    //             'root/app/email/contact/index.html.twig',
+    //             ['contact' => $demande],
+    //             'chanbora@logilink.fr'
+    //         ) != true){
+    //             return new JsonResponse([
+    //                 'code' => 2,
+    //                 'errors' => [ 'error' => 'Le service est indisponible', 'success' => '' ]
+    //             ]);
+    //         }
 
-            $em->persist($demande); $em->flush();
+    //         $em->persist($demande); $em->flush();
 
-            return new JsonResponse(['code' => 1, 'message' => 'La demande a été envoyé.']);
-        }
+    //         return new JsonResponse(['code' => 1, 'message' => 'La demande a été envoyé.']);
+    //     }
 
-        return $this->render('root/app/pages/contact/index.html.twig');
-    }
+    //     return $this->render('root/app/pages/contact/index.html.twig');
+    // }
 }
