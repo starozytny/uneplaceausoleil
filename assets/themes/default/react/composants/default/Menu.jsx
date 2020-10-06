@@ -3,7 +3,7 @@ import Routing from '../../../../../../public/bundles/fosjsrouting/js/router.min
 
 export class Menu extends Component {
     constructor(props){
-        super(props);
+        super();
 
         this.state = {
             menu: JSON.parse(props.menu),
