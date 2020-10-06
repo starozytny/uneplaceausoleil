@@ -64,7 +64,7 @@ class AppController extends AbstractController
             // Send mail       
             if($mailer->sendMail(
                 'Demande RGPD',
-                'Deamnde RGPD via le site Logilink',
+                'Demande RGPD via le site Logilink',
                 'root/app/email/legales/rgpd.html.twig',
                 ['demande' => $demande],
                 'chanbora@logilink.fr'
@@ -104,7 +104,7 @@ class AppController extends AbstractController
             // Send mail       
             if($mailer->sendMail(
                 'Demande de contact',
-                'Deamnde contact via le site Logilink',
+                'Demande contact via le site Logilink',
                 'root/app/email/contact/index.html.twig',
                 ['contact' => $demande],
                 'chanbora@logilink.fr'

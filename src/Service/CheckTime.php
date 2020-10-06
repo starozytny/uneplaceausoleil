@@ -28,6 +28,18 @@ class CheckTime
         return 0;
     }
 
+    public function deleteMoreThreeYear($date_check, $entity){
+        $result = $this->moreThanThreeYear($date_check);
+
+        if($result){
+            $this->em->remove($entity);
+            $this->em->flush();
+
+            return 1;
+        }
+        return 0;
+    }
+
     public function moreThirtyMinutes(?DateTimeInterface $datetime){
         if($datetime == null){
             return true;
@@ -131,6 +143,20 @@ class CheckTime
         if($diff == 0){
             return 0;
         }elseif ($diff > 5){
+            return 1;
+        }
+    }
+
+    public function moreThanThreeYear(DateTimeInterface $dateTime)
+    {
+        $n_year = date_format(new DateTime(), 'Y');
+        $year = date_format($dateTime,'Y');
+
+        $diff = $n_year - $year;
+
+        if($diff == 0){
+            return 0;
+        }elseif ($diff > 3){
             return 1;
         }
     }
