@@ -5,11 +5,14 @@
 {% block main_content %}
     <h1>Politique de confidentialité</h1>
 
+    {% set websiteName = "WebsiteName" %}
+    {% set websiteUrl = "https://websiteName.fr" %}
+
     <section class="legales">
         <div>
             <p>
-                ******* est susceptible de recueillir des données personnelles vous concernant dans le cadre de 
-                l'utilisation du site internet <b>******************</b>, 
+                {{ websiteName }} est susceptible de recueillir des données personnelles vous concernant dans le cadre de 
+                l'utilisation du site internet <b>{{ websiteUrl }}</b>, 
                 conformément au réglement général sur la protection des données (RGPD) et à la loi Informatique et Libertés.
             </p>
         </div>
@@ -35,7 +38,7 @@
         <div>
             <h2>Destinataires des données</h2>
             <p>
-               Le responsable du traitement de ces données est ********* dont les coordonnées figurent dans la partie "Droits des utilisateurs concernés".
+               Le responsable du traitement de ces données est {{ websiteName }} dont les coordonnées figurent dans la partie "Droits des utilisateurs concernés".
                <br><br>
                Le traitement des données décrits ci-dessus, sont effectués uniquement par le personnel du site internet et les prestataires habilités. <br>
                Type de prestataires habilités : éditeur de logiciel, hébergeur, développeur. <br>
@@ -59,7 +62,7 @@
             <p>
                 Ces droits peuvent être exercés sur demande via le <a href="{{ path('app_rgpd') }}">formulaire de demande RGPD pour faire exercer ses droits.</a> ou par courrier à 
                 l'adresse suivante : <br>
-                ******************************************
+                {{ websiteName }} - - France
             </p>
             <p>
                 Dans le cas où le responsable du traitement des données décide de ne pas répondre à la demande de l'utilisateur, 
@@ -86,7 +89,7 @@
             </ul>
             <p>
                 L'utilisateur peut paramétrer les cookies utilisés par le site à l'adresse suivante :
-                <a href="{{ path('app_cookies') }}">https://***********/legales/gestion-cookies</a>
+                <a href="{{ path('app_cookies') }}">{{ websiteUrl }}/legales/gestion-cookies</a>
             </p>
         </div>
     </section>
